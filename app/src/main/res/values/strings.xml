@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Zealicon</string>
+    <string name="home_tab_string">Home</string>
+    <string name="playlist_tab_string">My Playlist</string>
+    <string name="search_string">Search</string>
+    <string name="subscription_string">Subscribe</string>
 </resources>

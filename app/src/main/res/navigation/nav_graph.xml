@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home">
+
+    <fragment
+        android:id="@+id/home"
+        android:name="tronku.project.zealicon.Fragment.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/search"
+        android:name="tronku.project.zealicon.Fragment.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/my_playlist"
+        android:name="tronku.project.zealicon.Fragment.MyPlaylistFragment"
+        android:label="my_playlist_fragment"
+        tools:layout="@layout/my_playlist_fragment" />
+    <fragment
+        android:id="@+id/subscription"
+        android:name="tronku.project.zealicon.Fragment.SubscriptionFragment"
+        android:label="subscription_fragment"
+        tools:layout="@layout/subscription_fragment" />
+</navigation>
