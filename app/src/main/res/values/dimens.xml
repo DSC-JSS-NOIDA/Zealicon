@@ -4,6 +4,12 @@
 
     <dimen name="bottom_nav_height">60dp</dimen>
 
+    <dimen name="card_dimen">160dp</dimen>
+
+    <dimen name="text_heading">22dp</dimen>
+
+    <dimen name="text_50">50dp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="input_text">18sp</dimen>

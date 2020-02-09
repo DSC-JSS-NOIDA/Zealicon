@@ -5,7 +5,9 @@
     <corners
         android:radius="@dimen/spacing_middle"/>
 
-    <solid
-        android:color="@color/white"/>
+    <gradient
+        android:startColor="@color/purple_400"
+        android:endColor="@color/purple_900"
+        android:angle="45"/>
 
 </shape>

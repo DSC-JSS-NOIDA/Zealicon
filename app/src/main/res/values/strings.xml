@@ -4,4 +4,10 @@
     <string name="playlist_tab_string">My Playlist</string>
     <string name="search_string">Search</string>
     <string name="subscription_string">Subscribe</string>
+    <string name="top_playlist">Top Playlist</string>
+    <string name="one">ONE</string>
+    <string name="day">DAY</string>
+    <string name="two">TWO</string>
+    <string name="three">THREE</string>
+    <string name="four">FOUR</string>
 </resources>
