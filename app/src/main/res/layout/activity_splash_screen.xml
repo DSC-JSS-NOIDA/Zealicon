@@ -5,10 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SplashScreenActivity"
-    android:background="@color/gray_lighter">
+    android:background="@color/grey_900">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ImageView
+        android:layout_width="226dp"
+        android:layout_height="110dp"
+        android:src="@drawable/zealicon_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lav_thumbUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="voice_recognition.json"
+        app:lottie_loop="true"
+        app:lottie_speed="0.60" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

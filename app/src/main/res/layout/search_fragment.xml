@@ -1,13 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SearchFragment">
+    android:background="@color/colorPrimaryDark">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Search" />
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".Fragment.HomeFragment">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/searchTextView"
+            android:text="Discover"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:fontFamily="@font/alata_regular"/>
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxlarge"
+            app:layout_constraintTop_toBottomOf="@id/searchTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey_40"
+            android:hint="Search for any event here"
+            android:paddingStart="@dimen/spacing_xxlarge"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:background="@drawable/curved_search" />
+
+        <ImageView
+            android:layout_width="@dimen/spacing_mlarge"
+            android:layout_height="@dimen/spacing_mlarge"
+            android:src="@drawable/ic_search"
+            android:layout_marginLeft="@dimen/spacing_middle"
+            android:tint="@color/grey_20"
+            app:layout_constraintTop_toTopOf="@id/searchEditText"
+            app:layout_constraintBottom_toBottomOf="@id/searchEditText"
+            app:layout_constraintStart_toStartOf="@id/searchEditText"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            app:layout_constraintStart_toStartOf="@id/searchEditText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchCategoryTextView"
+            android:text="Search by category"
+            android:layout_marginTop="@dimen/spacing_middle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:fontFamily="@font/alata_regular"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@drawable/curved_card_blue"
+                android:id="@+id/cat_one"
+                android:layout_marginTop="@dimen/spacing_large"
+                app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/cat_two">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@drawable/curved_card_yellow"
+                android:id="@+id/cat_two"
+                android:layout_marginTop="@dimen/spacing_large"
+                app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"
+                app:layout_constraintStart_toEndOf="@id/cat_one"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/spacing_mxlarge">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@drawable/curved_card_red"
+                android:id="@+id/cat_three"
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                app:layout_constraintTop_toBottomOf="@id/cat_one"
+                app:layout_constraintStart_toStartOf="@id/cat_one"
+                app:layout_constraintEnd_toStartOf="@id/cat_four">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@drawable/curved_card_green"
+                android:id="@+id/cat_four"
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                app:layout_constraintTop_toBottomOf="@id/cat_one"
+                app:layout_constraintStart_toEndOf="@id/cat_three"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/spacing_mxlarge">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@drawable/curved_card_purple"
+                android:id="@+id/cat_five"
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                app:layout_constraintTop_toBottomOf="@id/cat_three"
+                app:layout_constraintStart_toStartOf="@id/cat_one"
+                app:layout_constraintEnd_toEndOf="@id/cat_three">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@drawable/curved_card_blue_dark"
+                android:id="@+id/cat_six"
+                android:layout_marginTop="@dimen/spacing_mxlarge"
+                app:layout_constraintTop_toBottomOf="@id/cat_three"
+                app:layout_constraintStart_toEndOf="@id/cat_three"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/spacing_mxlarge">
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

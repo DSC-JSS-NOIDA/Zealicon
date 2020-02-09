@@ -12,23 +12,11 @@
         android:layout_height="wrap_content"
         tools:context=".Fragment.HomeFragment">
 
-        <ImageView
-            android:layout_width="@dimen/spacing_xlarge"
-            android:layout_height="@dimen/spacing_xlarge"
-            android:src="@drawable/hamburger_menu_icon"
-            android:id="@+id/nav_drawer_icon"
-            android:tint="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:layout_marginStart="@dimen/spacing_mlarge"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nav_drawer_icon"
-            app:layout_constraintStart_toStartOf="@id/nav_drawer_icon"
-            android:layout_marginTop="@dimen/spacing_middle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/top_playlist_textview"
             android:text="@string/top_playlist"
             android:textColor="@color/white"
@@ -100,8 +88,7 @@
             app:layout_constraintTop_toBottomOf="@id/top_playlist_textview"
             app:layout_constraintStart_toEndOf="@id/day_one_list"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/spacing_mxlarge"
-            android:layout_marginEnd="@dimen/spacing_mlarge">
+            android:layout_marginStart="@dimen/spacing_mxlarge">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -211,13 +198,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/zero_dimen"
             android:layout_height="@dimen/card_dimen"
+            android:background="@drawable/curved_card_yellow"
             android:id="@+id/day_four_list"
             android:layout_marginTop="@dimen/spacing_mxlarge"
             app:layout_constraintTop_toBottomOf="@id/day_one_list"
             app:layout_constraintStart_toEndOf="@id/day_three_list"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/spacing_mxlarge"
-            android:layout_marginEnd="@dimen/spacing_mlarge">
+            android:layout_marginStart="@dimen/spacing_mxlarge">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

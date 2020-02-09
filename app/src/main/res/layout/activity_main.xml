@@ -5,7 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Activity.MainActivity"
+    android:background="@color/colorPrimaryDark">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:layout_width="@dimen/spacing_xlarge"
+            android:layout_height="@dimen/spacing_xlarge"
+            android:src="@drawable/hamburger_menu_icon"
+            android:id="@+id/nav_drawer_icon"
+            android:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_mlarge"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/mainNavigationFragment"
@@ -13,11 +35,14 @@
         android:layout_width="@dimen/zero_dimen"
         android:layout_height="@dimen/zero_dimen"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/spacing_mlarge"
+        android:layout_marginStart="@dimen/spacing_mlarge"
         app:navGraph="@navigation/nav_graph" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -33,5 +58,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+<!--    <include-->
+<!--        layout="@layout/layout_nav_drawer"-->
+<!--        app:elevation="@dimen/spacing_xxxlarge"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
