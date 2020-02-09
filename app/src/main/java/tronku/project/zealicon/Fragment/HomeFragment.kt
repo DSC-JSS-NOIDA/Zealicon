@@ -1,13 +1,18 @@
 package tronku.project.zealicon.Fragment
 
+import android.animation.ObjectAnimator
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import kotlinx.android.synthetic.main.home_fragment.*
 
 import tronku.project.zealicon.R
+import tronku.project.zealicon.Utils.AnimUtils
 import tronku.project.zealicon.Viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -34,6 +39,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        AnimUtils.setTouchEffect(day_one_list)
+        AnimUtils.setTouchEffect(day_two_list)
+        AnimUtils.setTouchEffect(day_three_list)
+        AnimUtils.setTouchEffect(day_four_list)
     }
+
+
 
 }
