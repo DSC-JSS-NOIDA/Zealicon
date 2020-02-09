@@ -2,13 +2,13 @@
 <resources>
     <dimen name="zero_dimen">0dp</dimen>
 
-    <dimen name="bottom_nav_height">60dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
 
-    <dimen name="card_dimen">160dp</dimen>
+    <dimen name="card_dimen">150dp</dimen>
 
     <dimen name="text_heading">22dp</dimen>
 
-    <dimen name="text_50">50dp</dimen>
+    <dimen name="text_40">40dp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
 
