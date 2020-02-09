@@ -1,13 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.HomeFragment">
+    android:background="@color/colorPrimaryDark">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home" />
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".Fragment.HomeFragment">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="@dimen/spacing_xlarge"
+            android:layout_height="@dimen/spacing_xlarge"
+            android:src="@drawable/hamburger_menu_icon"
+            android:id="@+id/nav_drawer_icon"
+            android:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginStart="@dimen/spacing_mlarge"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nav_drawer_icon"
+            app:layout_constraintStart_toStartOf="@id/nav_drawer_icon"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:id="@+id/top_playlist_textview"
+            android:text="Top Playlist"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:fontFamily="@font/alata_regular"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:background="@drawable/curved_card"
+            android:id="@+id/day_one_list"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@id/top_playlist_textview"
+            app:layout_constraintStart_toStartOf="@id/top_playlist_textview"
+            app:layout_constraintEnd_toStartOf="@id/day_two_list">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:background="@drawable/curved_card"
+            android:id="@+id/day_two_list"
+            android:layout_marginTop="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@id/top_playlist_textview"
+            app:layout_constraintStart_toEndOf="@id/day_one_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/spacing_mxlarge"
+            android:layout_marginEnd="@dimen/spacing_mlarge">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:background="@drawable/curved_card"
+            android:id="@+id/day_three_list"
+            android:layout_marginTop="@dimen/spacing_mxlarge"
+            app:layout_constraintTop_toBottomOf="@id/day_one_list"
+            app:layout_constraintStart_toStartOf="@id/day_one_list"
+            app:layout_constraintEnd_toStartOf="@id/day_four_list">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:background="@drawable/curved_card"
+            android:id="@+id/day_four_list"
+            android:layout_marginTop="@dimen/spacing_mxlarge"
+            app:layout_constraintTop_toBottomOf="@id/day_one_list"
+            app:layout_constraintStart_toEndOf="@id/day_three_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/spacing_mxlarge"
+            android:layout_marginEnd="@dimen/spacing_mlarge">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
