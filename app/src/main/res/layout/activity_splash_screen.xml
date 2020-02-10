@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SplashScreenActivity"
-    android:background="@color/grey_900">
+    android:background="@drawable/gray_gradient">
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
 
     <ImageView
         android:layout_width="226dp"
-        android:layout_height="110dp"
+        android:layout_height="200dp"
         android:src="@drawable/zealicon_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

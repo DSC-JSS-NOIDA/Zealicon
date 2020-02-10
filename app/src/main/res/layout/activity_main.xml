@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout
+    android:id="@+id/duoDrawerLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:theme="@style/DuoTheme"
+    android:background="@color/overlay_dark_90"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/zealicon_icon"/>
+
+    <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
+        android:id="@+id/duoMenuView"
+        android:tag="@string/tag_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:marginFactor="1.0"
+        app:contentScaleClosed="1.0"
+        app:contentScaleOpen="0.5"
+        app:footer="@layout/menu_footer"
+        app:header="@layout/menu_header"/>
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity"
-    android:background="@color/overlay_dark_90">
+    android:tag="@string/tag_content"
+    android:theme="@style/AppTheme"
+    android:background="@color/colorPrimaryDark">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,11 +42,19 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/overlay_dark_90">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:elevation="0dp"
+            android:visibility="gone"
+            android:layout_height="?attr/actionBarSize"/>
+
+
         <ImageView
             android:layout_width="@dimen/spacing_xlarge"
             android:layout_height="@dimen/spacing_xlarge"
             android:src="@drawable/hamburger_menu_icon"
-            android:id="@+id/nav_drawer_icon"
+            android:id="@+id/navDrawerIcon"
             android:tint="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,3 +97,4 @@
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>

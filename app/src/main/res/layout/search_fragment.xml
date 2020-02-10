@@ -36,6 +36,10 @@
             android:textColorHint="@color/grey_40"
             android:hint="Search for any event here"
             android:paddingStart="@dimen/spacing_xxlarge"
+            android:singleLine="true"
+            android:paddingBottom="@dimen/spacing_middle"
+            android:paddingTop="@dimen/spacing_middle"
+            android:paddingEnd="@dimen/spacing_middle"
             android:layout_marginTop="@dimen/spacing_middle"
             android:background="@drawable/curved_search" />
 

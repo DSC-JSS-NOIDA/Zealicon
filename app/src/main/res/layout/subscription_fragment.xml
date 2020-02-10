@@ -30,6 +30,10 @@
         android:textColorHint="@color/grey_40"
         android:hint="Search for Zeal Information"
         android:paddingStart="@dimen/spacing_xxlarge"
+        android:imeOptions="actionSearch"
+        android:paddingEnd="@dimen/spacing_middle"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingBottom="@dimen/spacing_middle"
         android:layout_marginTop="@dimen/spacing_middle"
         android:background="@drawable/curved_search" />
 
