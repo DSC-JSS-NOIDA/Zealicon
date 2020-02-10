@@ -8,7 +8,7 @@ import tronku.project.zealicon.R
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT:Long = 2000
+    private val SPLASH_TIME_OUT:Long = 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

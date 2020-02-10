@@ -10,6 +10,8 @@
 
     <dimen name="text_40">40dp</dimen>
 
+    <dimen name="text_32">32dp</dimen>
+
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="input_text">18sp</dimen>

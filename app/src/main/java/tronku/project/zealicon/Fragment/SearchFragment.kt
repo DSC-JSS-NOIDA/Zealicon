@@ -32,6 +32,8 @@ class SearchFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
         // TODO: Use the ViewModel
 
+        textMech.isSelected = true
+
         AnimUtils.setTouchEffect(cat_one)
         AnimUtils.setTouchEffect(cat_two)
         AnimUtils.setTouchEffect(cat_three)
