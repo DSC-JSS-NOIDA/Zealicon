@@ -1,13 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SubscriptionFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.SubscriptionFragment"
+    android:background="@color/colorPrimaryDark">
+
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Subscription" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/subscriptionTextView"
+        android:text="Subscription"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        android:fontFamily="@font/alata_regular"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/subscriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_xxlarge"
+        app:layout_constraintTop_toBottomOf="@id/subscriptionTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey_40"
+        android:hint="Search for Zeal Information"
+        android:paddingStart="@dimen/spacing_xxlarge"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:background="@drawable/curved_search" />
+
+    <ImageView
+        android:layout_width="@dimen/spacing_mlarge"
+        android:layout_height="@dimen/spacing_mlarge"
+        android:src="@drawable/ic_search"
+        android:layout_marginLeft="@dimen/spacing_middle"
+        android:tint="@color/grey_20"
+        app:layout_constraintTop_toTopOf="@id/subscriptionEditText"
+        app:layout_constraintBottom_toBottomOf="@id/subscriptionEditText"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/myAccountTextView"
+        android:text="My Account"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subscriptionEditText"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:fontFamily="@font/alata_regular"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
