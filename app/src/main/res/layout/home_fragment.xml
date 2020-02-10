@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/overlay_dark_90"
+    android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".Fragment.HomeFragment">
+        tools:context=".Fragment.HomeFragment"
+        android:layout_marginStart="@dimen/spacing_mlarge"
+        android:layout_marginEnd="@dimen/spacing_mlarge">
 
         <TextView
             android:layout_width="wrap_content"
@@ -272,8 +275,9 @@
             android:layout_height="250dp"
             app:layout_constraintTop_toBottomOf="@id/upcoming"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/spacing_middle"/>
+            android:layout_marginTop="@dimen/spacing_middle"
+            tools:listitem="@layout/item_search"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

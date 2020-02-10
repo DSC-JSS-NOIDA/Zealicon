@@ -9,7 +9,11 @@
         android:id="@+id/home"
         android:name="tronku.project.zealicon.Fragment.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_home_to_playListFragment"
+            app:destination="@id/playListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/search"
         android:name="tronku.project.zealicon.Fragment.SearchFragment"
@@ -19,10 +23,19 @@
         android:id="@+id/my_playlist"
         android:name="tronku.project.zealicon.Fragment.MyPlaylistFragment"
         android:label="my_playlist_fragment"
-        tools:layout="@layout/my_playlist_fragment" />
+        tools:layout="@layout/my_playlist_fragment" >
+        <action
+            android:id="@+id/action_my_playlist_to_playListFragment"
+            app:destination="@id/playListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/subscription"
         android:name="tronku.project.zealicon.Fragment.SubscriptionFragment"
         android:label="subscription_fragment"
         tools:layout="@layout/subscription_fragment" />
+    <fragment
+        android:id="@+id/playListFragment"
+        android:name="tronku.project.zealicon.Fragment.PlayListFragment"
+        android:label="fragment_play_list"
+        tools:layout="@layout/fragment_play_list" />
 </navigation>

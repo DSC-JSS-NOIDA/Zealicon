@@ -9,6 +9,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.home_fragment.*
 
 import tronku.project.zealicon.R
@@ -39,10 +45,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimUtils.setTouchEffect(day_one_list)
+        AnimUtils.setTouchEffect(day_one_list, R.id.action_home_to_playListFragment, null)
         AnimUtils.setTouchEffect(day_two_list)
         AnimUtils.setTouchEffect(day_three_list)
         AnimUtils.setTouchEffect(day_four_list)
+
     }
 
 

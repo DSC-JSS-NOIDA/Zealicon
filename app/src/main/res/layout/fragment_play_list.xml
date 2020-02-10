@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.PlayListFragment"
+    android:background="@color/overlay_dark_90">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/card_dimen"
+        android:layout_height="@dimen/card_dimen"
+        android:id="@+id/day_list"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_mxlarge"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="@dimen/spacing_middle"
+            app:cardElevation="@dimen/zero_dimen">
+
+            <ImageView
+                android:id="@+id/day_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/day1"
+                android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/day_shade"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/curved_card_blue"
+                android:alpha="0.6"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/day_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:includeFontPadding="false"
+            android:text="@string/one"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_40"
+            android:fontFamily="@font/alata_regular"
+            android:layout_marginStart="@dimen/spacing_middle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_middle"
+            android:fontFamily="@font/alata_regular"
+            android:text="@string/day"
+            android:layout_marginBottom="50dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_heading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/playlistName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/day_list"
+        app:layout_constraintBottom_toTopOf="@id/playlistCategory"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/playlistCategory"
+        android:text="Day ONE"
+        android:textColor="@color/white"
+        android:fontFamily="@font/alata_regular"
+        android:textSize="@dimen/text_heading"/>
+
+    <TextView
+        android:id="@+id/playlistCategory"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/playlistName"
+        app:layout_constraintBottom_toTopOf="@id/playlistDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:layout_marginStart="@dimen/spacing_mxlarge"
+        android:layout_marginEnd="@dimen/spacing_middle"
+        android:text="Coloralo | Mechavoltz"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:freezesText="true"
+        android:textColor="@color/gray_lighter"
+        android:fontFamily="@font/alata_regular"
+        android:textSize="@dimen/text_small"/>
+
+    <TextView
+        android:id="@+id/playlistDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/playlistCategory"
+        app:layout_constraintBottom_toBottomOf="@id/day_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginStart="@dimen/spacing_mxlarge"
+        android:layout_marginEnd="@dimen/spacing_middle"
+        android:text="24 March, 2019"
+        android:ellipsize="end"
+        android:textColor="@color/gray_lighter"
+        android:fontFamily="@font/alata_regular"
+        android:textSize="@dimen/text_small"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

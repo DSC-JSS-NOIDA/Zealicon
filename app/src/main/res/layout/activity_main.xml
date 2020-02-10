@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/overlay_dark_90">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/overlay_dark_90">
 
         <ImageView
             android:layout_width="@dimen/spacing_xlarge"
@@ -39,10 +39,13 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/spacing_mlarge"
-        android:layout_marginStart="@dimen/spacing_mlarge"
         app:navGraph="@navigation/nav_graph" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        android:background="@color/colorPrimaryDark"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -58,9 +61,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
-<!--    <include-->
-<!--        layout="@layout/layout_nav_drawer"-->
-<!--        app:elevation="@dimen/spacing_xxxlarge"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
