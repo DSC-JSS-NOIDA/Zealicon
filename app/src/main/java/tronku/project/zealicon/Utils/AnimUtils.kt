@@ -16,7 +16,8 @@ object AnimUtils {
     fun setTouchEffect(view: View) {
         view.setOnTouchListener { v, event ->
             when (event.actionMasked) {
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_MOVE, MotionEvent.ACTION_HOVER_EXIT -> handleAnimation(v, false)
+                MotionEvent.ACTION_MOVE, MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL ->
+                    handleAnimation(v, false)
                 MotionEvent.ACTION_DOWN -> handleAnimation(v, true)
             }
             true
@@ -26,7 +27,7 @@ object AnimUtils {
     fun setTouchEffect(view: View, navId: Int, args: Bundle?) {
         view.setOnTouchListener { v, event ->
             when (event.actionMasked) {
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_MOVE, MotionEvent.ACTION_HOVER_EXIT ->
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL, MotionEvent.ACTION_MOVE ->
                     handleGrowAnimation(v, navId, args)
                 MotionEvent.ACTION_DOWN -> handleAnimation(v, true)
             }

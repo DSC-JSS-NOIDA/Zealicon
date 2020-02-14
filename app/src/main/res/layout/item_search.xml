@@ -3,14 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@color/colorPrimaryDark">
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    android:layout_height="70dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:alpha="0.8"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/itemCardView"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         app:cardCornerRadius="10dp"
+        android:layout_marginStart="@dimen/spacing_mlarge"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -27,7 +35,8 @@
         android:id="@+id/itemEventName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16dp"
         android:text="Line Up"
         android:ellipsize="end"
         android:textColor="@color/grey_20"
@@ -39,29 +48,30 @@
         android:layout_marginStart="@dimen/spacing_middle"/>
 
     <TextView
-            android:id="@+id/itemEventDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="Day 1 | 12:00"
-            android:textColor="@color/grey_20"
-            app:layout_constraintStart_toEndOf="@+id/itemCardView"
-            app:layout_constraintEnd_toStartOf="@id/itemMoreImageView"
-            app:layout_constraintTop_toBottomOf="@id/itemEventName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginStart="@dimen/spacing_middle"/>
+        android:id="@+id/itemEventDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="12dp"
+        android:text="Day 1   •   12:00"
+        android:textColor="@color/grey_40"
+        app:layout_constraintStart_toEndOf="@+id/itemCardView"
+        app:layout_constraintEnd_toStartOf="@id/itemMoreImageView"
+        app:layout_constraintTop_toBottomOf="@id/itemEventName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginStart="@dimen/spacing_middle"/>
 
     <ImageView
         android:id="@+id/itemMoreImageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:src="@drawable/ic_more_vert_black_24dp"
         android:tint="@color/grey_20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="@dimen/spacing_middle"/>
+        android:layout_marginEnd="@dimen/spacing_mlarge"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

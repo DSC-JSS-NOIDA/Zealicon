@@ -15,7 +15,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.home_fragment.*
+import tronku.project.zealicon.Adapter.TracksAdapter
+import tronku.project.zealicon.Model.EventTrack
 
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
@@ -50,8 +53,17 @@ class HomeFragment : Fragment() {
         AnimUtils.setTouchEffect(day_three_list)
         AnimUtils.setTouchEffect(day_four_list)
 
+        getUpcomingHits()
     }
 
-
+    private fun getUpcomingHits() {
+        val adapter = TracksAdapter()
+        val trackList = ArrayList<EventTrack>()
+        trackList.add(EventTrack(1, "Line up", "GPS based event", "12:00 PM", "4:00 PM", "Play it On!"))
+        trackList.add(EventTrack(2, "Doodle", "Designing event", "2:00 PM", "5:00 PM", "Play it On!"))
+        trackList.add(EventTrack(3, "Doodle", "Designing event", "2:00 PM", "5:00 PM", "Play it On!"))
+        adapter.submitList(trackList)
+        upcomingHitsRecycler.adapter = adapter
+    }
 
 }
