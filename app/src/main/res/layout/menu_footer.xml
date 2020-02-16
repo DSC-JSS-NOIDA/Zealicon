@@ -11,6 +11,7 @@
         android:id="@+id/buttonFacebook"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:clickable="true"
         android:src="@drawable/facebook_icon"
         android:layout_marginRight="25dp"/>
 
@@ -19,6 +20,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/instagram_icon"
+        android:clickable="true"
         android:layout_marginRight="25dp"/>
 
     <ImageView
@@ -27,6 +29,7 @@
        android:layout_height="25dp"
        android:src="@drawable/www_icon"
         android:tint="@color/colorAccent"
+        android:clickable="true"
        android:layout_marginRight="25dp"/>
 
 

@@ -75,6 +75,12 @@ dependencies {
     // HalfModalPresenter
     implementation "com.inandwin.halfmodalpresenter:halfmodalpresenter:$half_modal_version"
 
+    // Music Disc
+//    implementation "com.github.iammert:MusicPlayerView:e3b937c729"
+
+    // Interactive Player
+//    implementation 'com.github.iammert:InteractivePlayerView:f4f6490290'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

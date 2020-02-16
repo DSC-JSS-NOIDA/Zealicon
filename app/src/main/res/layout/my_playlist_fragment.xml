@@ -8,10 +8,13 @@
     android:background="@color/colorPrimaryDark">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/spacing_mlarge"
+        android:layout_marginStart="@dimen/spacing_mlarge"
         android:id="@+id/playlistTextView"
         android:text="My Playlist"
         android:textColor="@color/white"
@@ -20,9 +23,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlistRecyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/playlistTextView"
+        app:layout_constraintStart_toStartOf="@id/playlistTextView"
+        app:layout_constraintEnd_toEndOf="@id/playlistTextView"
         android:layout_marginTop="@dimen/spacing_middle"
         tools:itemCount="10"
         tools:listitem="@layout/item_search"/>

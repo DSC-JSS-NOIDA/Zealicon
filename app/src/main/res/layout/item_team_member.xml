@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="@dimen/spacing_xsmall">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/memberImage"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/orange_700"
+        android:src="@drawable/zealicon_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Member Name"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_xsmall"
+        android:fontFamily="@font/alata_regular"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Developer"
+        android:textSize="14dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:fontFamily="@font/alata_regular"
+        android:includeFontPadding="false"/>
+
+</LinearLayout>

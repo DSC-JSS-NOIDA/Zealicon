@@ -19,6 +19,10 @@
         <item>About</item>
     </array>
 
+    <string name="about_zealicon">
+
+Zealicon is the annual techno-cultural festival of JSSATE, Noida. Dedicated to the celebration of creativity and science, it is a stimulating event brimming with youthful dynamism. It transforms the campus into a veritable kaleidoscope of people. Involving multifarious exciting events from technical scratch to cultural zeal. A platform for all the creative minds to express their ideas in the form of events including band performances, discussions, film screenings that are spread over four days. Apart from the exuberant cultural events, Zealicon is also known for its mind boggling technical events that creates an ambience for the technocrats.\n\nZealicon 2020 will cover the aspects of hysterical face of literature along with popular arts, science and technology. This edition of Zealicon promises all the trademarks of the earlier versions. A plethora of events where academicians will vouch out their intellect and artists will showcase the best of art. Projecting the fictitious gesture onto the real world, Zealicon will act as a connecting link between the fantasy and reality. Creating an aura of avidity and togetherness, We hope that Zealicon 2020 will turn out to be a memorable experience for you !\n\n
+</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
