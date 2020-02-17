@@ -27,27 +27,27 @@
         app:footer="@layout/menu_footer"
         app:header="@layout/menu_header"/>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:tag="@string/tag_content"
-    android:theme="@style/AppTheme"
-    android:background="@color/colorPrimaryDark">
-
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/overlay_dark_90">
+        android:layout_height="match_parent"
+        android:tag="@string/tag_content"
+        android:theme="@style/AppTheme"
+        android:background="@color/colorPrimaryDark">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:elevation="0dp"
-            android:visibility="gone"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/overlay_dark_90">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:elevation="0dp"
+                android:visibility="gone"
+                android:layout_height="?attr/actionBarSize"/>
 
 
         <ImageView
@@ -64,40 +64,87 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:layout_marginStart="@dimen/spacing_mlarge"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
-        android:id="@+id/mainNavigationFragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="@dimen/zero_dimen"
-        android:layout_height="@dimen/zero_dimen"
-        app:defaultNavHost="true"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+        <fragment
+            android:id="@+id/mainNavigationFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="@dimen/zero_dimen"
+            android:layout_height="@dimen/zero_dimen"
+            app:defaultNavHost="true"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:navGraph="@navigation/nav_graph" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-        android:background="@color/colorPrimaryDark"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+            android:background="@color/colorPrimaryDark"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_nav_height"
-        android:background="@color/overlay_dark_90"
-        android:foreground="?attr/selectableItemBackground"
-        app:labelVisibilityMode="unlabeled"
-        app:itemTextColor="@drawable/bottom_tab_color"
-        app:itemIconTint="@drawable/bottom_tab_color"
-        app:elevation="@dimen/spacing_large"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_nav_height"
+            android:background="@color/overlay_dark_90"
+            android:foreground="?attr/selectableItemBackground"
+            app:labelVisibilityMode="unlabeled"
+            app:itemTextColor="@drawable/bottom_tab_color"
+            app:itemIconTint="@drawable/bottom_tab_color"
+            app:elevation="@dimen/spacing_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/loaderLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/overlay_dark_90"
+                android:alpha="0.9"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loaderImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/loaderText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:scaleType="centerCrop"
+                android:layout_width="@dimen/card_dimen"
+                android:layout_height="@dimen/card_dimen"
+                app:lottie_fileName="loading.json"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+
+            <TextView
+                android:id="@+id/loaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/loaderImage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:text="FETCHING TRACKS..."
+                android:textSize="@dimen/text_big"
+                android:textColor="@color/grey_20"
+                android:fontFamily="@font/alata_regular"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>

@@ -283,52 +283,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_search"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loaderLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="gone">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/overlay_dark_90"
-                android:alpha="0.9"/>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/loaderImage"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/loaderText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:scaleType="centerCrop"
-                android:layout_width="@dimen/card_dimen"
-                android:layout_height="@dimen/card_dimen"
-                app:lottie_fileName="loading.json"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"/>
-
-            <TextView
-                android:id="@+id/loaderText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/loaderImage"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:text="FETCHING DATA..."
-                android:textSize="@dimen/text_big"
-                android:textColor="@color/grey_20"
-                android:fontFamily="@font/alata_regular"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

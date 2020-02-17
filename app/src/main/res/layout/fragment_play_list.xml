@@ -6,18 +6,21 @@
     android:background="@color/overlay_dark_90"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <com.airbnb.lottie.LottieAnimationView
+    <com.narayanacharya.waveview.WaveView
+        android:id="@+id/waveView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:alpha="0.3"
-        app:lottie_fileName="waves.json"/>
+        android:layout_height="match_parent"
+        app:waveAmplitude="7.25"
+        app:waveBackgroundColor="@android:color/transparent"
+        app:waveColor="#7074DB"
+        app:waveDensity="20.0"
+        app:waveFrequency="2.0"
+        app:waveNumberOfWaves="3"
+        app:wavePhaseShift="-0.05"
+        app:wavePrimaryLineWidth="3.0"
+        app:waveSecondaryLineWidth="1.0"
+        app:waveXAxisPositionMultiplier="0.5"
+        android:alpha="0.4"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -44,14 +47,14 @@
                     app:cardElevation="@dimen/zero_dimen">
 
                     <ImageView
-                        android:id="@+id/day_img"
+                        android:id="@+id/dayImg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/day1"
                         android:scaleType="centerCrop"/>
 
                     <ImageView
-                        android:id="@+id/day_shade"
+                        android:id="@+id/dayShade"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/curved_card_blue"
@@ -60,7 +63,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/day_name"
+                    android:id="@+id/dayName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"

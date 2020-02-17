@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_play_list.*
-import kotlinx.android.synthetic.main.home_fragment.*
 import tronku.project.zealicon.Adapter.TracksAdapter
 import tronku.project.zealicon.Model.EventTrack
 
@@ -17,6 +16,7 @@ import tronku.project.zealicon.R
  */
 class PlayListFragment : Fragment() {
 
+    var day: Int = 1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,9 +27,44 @@ class PlayListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        day = arguments?.getInt("day", 1) ?: 1
+        updateUI()
         playlistCategory.isSelected = true
-
+        waveView.play()
         getPlaylist()
+    }
+
+    private fun updateUI() {
+        when(day) {
+            1 -> {
+                dayName.text = "ONE"
+                dayImg.setImageResource(R.drawable.day1)
+                dayShade.setImageResource(R.drawable.curved_card_blue)
+                playlistName.text = "Day ONE"
+                playlistDate.text = "24 March, 2020"
+            }
+            2 -> {
+                dayName.text = "TWO"
+                dayImg.setImageResource(R.drawable.day2)
+                dayShade.setImageResource(R.drawable.curved_card_purple)
+                playlistName.text = "Day TWO"
+                playlistDate.text = "25 March, 2020"
+            }
+            3 -> {
+                dayName.text = "THREE"
+                dayImg.setImageResource(R.drawable.day3)
+                dayShade.setImageResource(R.drawable.curved_card_green)
+                playlistName.text = "Day THREE"
+                playlistDate.text = "26 March, 2020"
+            }
+            4 -> {
+                dayName.text = "FOUR"
+                dayImg.setImageResource(R.drawable.day4)
+                dayShade.setImageResource(R.drawable.curved_card_yellow)
+                playlistName.text = "Day FOUR"
+                playlistDate.text = "27 March, 2020"
+            }
+        }
     }
 
     private fun getPlaylist() {
@@ -47,5 +82,10 @@ class PlayListFragment : Fragment() {
         trackList.add(EventTrack(10, "mangas", "Designing event", "2:00 PM", "5:00 PM", "Play it On!"))
         adapter.submitList(trackList)
         trackRecyclerView.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        waveView.pause()
     }
 }

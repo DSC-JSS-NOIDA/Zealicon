@@ -1,21 +1,11 @@
 package tronku.project.zealicon.Fragment
 
-import android.animation.ObjectAnimator
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.home_fragment.*
 import tronku.project.zealicon.Adapter.TracksAdapter
 import tronku.project.zealicon.Model.EventTrack
@@ -48,10 +38,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AnimUtils.setTouchEffect(day_one_list, R.id.action_home_to_playListFragment, null)
-        AnimUtils.setTouchEffect(day_two_list)
-        AnimUtils.setTouchEffect(day_three_list)
-        AnimUtils.setTouchEffect(day_four_list)
+        AnimUtils.setTouchEffect(day_one_list, R.id.action_home_to_playListFragment, getArgs(1))
+        AnimUtils.setTouchEffect(day_two_list, R.id.action_home_to_playListFragment, getArgs(2))
+        AnimUtils.setTouchEffect(day_three_list, R.id.action_home_to_playListFragment, getArgs(3))
+        AnimUtils.setTouchEffect(day_four_list, R.id.action_home_to_playListFragment, getArgs(4))
 
         getUpcomingHits()
     }
@@ -64,6 +54,12 @@ class HomeFragment : Fragment() {
         trackList.add(EventTrack(3, "Doodle", "Designing event", "2:00 PM", "5:00 PM", "Play it On!"))
         adapter.submitList(trackList)
         upcomingHitsRecycler.adapter = adapter
+    }
+
+    private fun getArgs(day: Int): Bundle {
+        val bundle = Bundle()
+        bundle.putInt("day", day)
+        return bundle
     }
 
 }

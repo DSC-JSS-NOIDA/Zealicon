@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -58,6 +59,7 @@ dependencies {
     //UI related
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     implementation "com.google.android.material:material:$material_design_version"
+    implementation 'com.narayanacharya:WaveView:0.9.4'
 
     //Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
