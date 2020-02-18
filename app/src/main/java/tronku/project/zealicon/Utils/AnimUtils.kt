@@ -52,7 +52,23 @@ object AnimUtils {
         v.startAnimation(growAnim)
     }
 
-    private fun handleAnimation(v: View, pressed: Boolean) {
+    fun setClickAnimation(v: View, navId: Int, args: Bundle?) {
+        val shrinkAnim = AnimationUtils.loadAnimation(v.context, R.anim.shrink_view)
+        shrinkAnim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+                v.findNavController().navigate(navId, args, null, null)
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+        })
+        v.startAnimation(shrinkAnim)
+    }
+
+    fun handleAnimation(v: View, pressed: Boolean) {
         val shrinkAnim = AnimationUtils.loadAnimation(v.context, R.anim.shrink_view)
         val growAnim = AnimationUtils.loadAnimation(v.context, R.anim.grow_view)
 
@@ -86,18 +102,6 @@ object AnimUtils {
             })
             v.startAnimation(growAnim)
         }
-    }
-
-    fun enterTransition(): Transition? {
-        val bounds = ChangeBounds()
-        bounds.duration = 400
-        return bounds
-    }
-
-    fun exitTransition(): Transition? {
-        val bounds = ChangeBounds()
-        bounds.duration = 400
-        return bounds
     }
 
 }

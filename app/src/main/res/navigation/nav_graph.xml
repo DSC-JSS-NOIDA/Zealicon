@@ -37,5 +37,15 @@
         android:id="@+id/playListFragment"
         android:name="tronku.project.zealicon.Fragment.PlayListFragment"
         android:label="fragment_play_list"
-        tools:layout="@layout/fragment_play_list" />
+        tools:layout="@layout/fragment_play_list" >
+        <action
+            android:id="@+id/action_playlist_fragment_to_player_activity"
+            app:destination="@id/playerActivity"/>
+    </fragment>
+    <activity
+        android:id="@+id/playerActivity"
+        android:name="tronku.project.zealicon.Activity.PlayerActivity"
+        android:label="player_activity"
+        tools:layout="@layout/activity_player"/>
+
 </navigation>

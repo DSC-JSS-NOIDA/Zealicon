@@ -82,7 +82,7 @@
             android:fontFamily="@font/alata_regular"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:id="@+id/cat_one"
                 android:layout_marginTop="@dimen/spacing_large"
@@ -99,14 +99,13 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/game_otp"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="fitXY"/>
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_blue"
-                        android:alpha="0.6"/>
+<!--                    <ImageView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:src="@drawable/curved_card_blue"-->
+<!--                        android:alpha="0.4"/>-->
 
                 </androidx.cardview.widget.CardView>
 
@@ -126,23 +125,23 @@
 <!--                    android:layout_marginStart="@dimen/spacing_middle"/>-->
 
 
-                <TextView
-                    android:id="@+id/one_events"
-                    android:layout_width="wrap_content"
-                    android:gravity="start"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="Play it on"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_32"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:rotation="270"
-                    android:fontFamily="@font/alata_regular"
-                    android:layout_marginStart="@dimen/spacing_middle"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/one_events"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:gravity="start"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:includeFontPadding="false"-->
+<!--                    android:text="Play it on"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_32"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:ellipsize="marquee"-->
+<!--                    android:rotation="270"-->
+<!--                    android:fontFamily="@font/alata_regular"-->
+<!--                    android:layout_marginStart="@dimen/spacing_middle"/>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -194,7 +193,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:id="@+id/cat_three"
                 android:layout_marginTop="@dimen/spacing_mxlarge"
@@ -211,34 +210,33 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/mech_opt"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="fitXY"/>
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_red"
-                        android:alpha="0.6"/>
+                        android:src="@drawable/curved_card_blue"
+                        android:alpha="0.4"/>
 
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/textMech"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:includeFontPadding="false"
-                    android:text="Mechavoltz"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_32"
-                    android:singleLine="true"
-                    android:scrollHorizontally="true"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:freezesText="true"
-                    android:ellipsize="marquee"
-                    android:fontFamily="@font/alata_regular"
-                    android:layout_marginStart="@dimen/spacing_middle"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/textMech"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    android:includeFontPadding="false"-->
+<!--                    android:text="Mechavoltz"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_32"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:scrollHorizontally="true"-->
+<!--                    android:marqueeRepeatLimit="marquee_forever"-->
+<!--                    android:freezesText="true"-->
+<!--                    android:ellipsize="marquee"-->
+<!--                    android:fontFamily="@font/alata_regular"-->
+<!--                    android:layout_marginStart="@dimen/spacing_middle"/>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

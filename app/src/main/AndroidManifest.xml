@@ -4,13 +4,15 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/zealicon_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="true">
-        <activity android:name=".Activity.SplashScreenActivity"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity.PlayerActivity"></activity>
+        <activity
+            android:name=".Activity.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
