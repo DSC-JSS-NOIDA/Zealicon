@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_home_to_playListFragment"
             app:destination="@id/playListFragment" />
+        <action
+            android:id="@+id/action_home_self"
+            app:destination="@id/home" />
     </fragment>
     <fragment
         android:id="@+id/search"
@@ -29,6 +32,15 @@
             app:destination="@id/playListFragment" />
     </fragment>
     <fragment
+        android:id="@+id/about"
+        android:name="tronku.project.zealicon.Fragment.MyPlaylistFragment"
+        android:label="about_fragment"
+        tools:layout="@layout/my_playlist_fragment" >
+        <action
+            android:id="@+id/action_my_playlist_to_playListFragment"
+            app:destination="@id/playListFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/subscription"
         android:name="tronku.project.zealicon.Fragment.SubscriptionFragment"
         android:label="subscription_fragment"
@@ -38,14 +50,50 @@
         android:name="tronku.project.zealicon.Fragment.PlayListFragment"
         android:label="fragment_play_list"
         tools:layout="@layout/fragment_play_list" >
-        <action
-            android:id="@+id/action_playlist_fragment_to_player_activity"
-            app:destination="@id/playerActivity"/>
+            <action
+                android:id="@+id/action_playlist_fragment_to_player_activity"
+                app:destination="@id/playerActivity"/>
     </fragment>
     <activity
         android:id="@+id/playerActivity"
         android:name="tronku.project.zealicon.Activity.PlayerActivity"
         android:label="player_activity"
         tools:layout="@layout/activity_player"/>
+    <fragment
+        android:id="@+id/fragmentAbout"
+        android:name="tronku.project.zealicon.Fragment.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_fragmentAbout_to_home"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRoute"
+        android:name="tronku.project.zealicon.Fragment.RouteFragment"
+        android:label="fragment_route"
+        tools:layout="@layout/fragment_route" >
+        <action
+            android:id="@+id/action_fragmentRoute_to_home"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSponsor"
+        android:name="tronku.project.zealicon.Fragment.SponsorsFragment"
+        android:label="fragment_sponsor"
+        tools:layout="@layout/fragment_sponsors" >
+        <action
+            android:id="@+id/action_fragmentSponsor_to_home"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTeam"
+        android:name="tronku.project.zealicon.Fragment.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team" >
+        <action
+            android:id="@+id/action_fragmentTeam_to_home"
+            app:destination="@id/home" />
+    </fragment>
 
 </navigation>

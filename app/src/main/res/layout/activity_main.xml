@@ -25,7 +25,7 @@
         app:contentScaleClosed="1.0"
         app:contentScaleOpen="0.5"
         app:footer="@layout/menu_footer"
-        app:header="@layout/menu_header"/>
+        app:header="@layout/menu_header" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
