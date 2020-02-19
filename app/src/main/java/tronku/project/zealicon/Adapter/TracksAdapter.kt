@@ -1,6 +1,7 @@
 package tronku.project.zealicon.Adapter
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,16 +12,17 @@ import kotlinx.android.synthetic.main.item_search.view.*
 import tronku.project.zealicon.Model.EventTrack
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
+import java.util.ArrayList
 
 class TracksAdapter: ListAdapter<EventTrack, TracksAdapter.ViewHolder>(EventDiffCallback){
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(eventTrack: EventTrack) {
-            itemView.itemEventName.text = eventTrack.name
-            itemView.itemEventDate.text = eventTrack.startDateTime
+        fun bind(position: Int, tracks: ArrayList<EventTrack>) {
+            itemView.itemEventName.text = tracks[position].name
+            itemView.itemEventDate.text = tracks[position].startDateTime
             val bundle = Bundle()
-            bundle.putString("name", eventTrack.name)
-            bundle.putString("dateTime", eventTrack.startDateTime)
+            bundle.putInt("position", position)
+            bundle.putParcelableArrayList("tracks", tracks)
             itemView.setOnClickListener {
                 AnimUtils.setClickAnimation(itemView, R.id.action_playlist_fragment_to_player_activity, bundle)
             }
@@ -43,7 +45,7 @@ class TracksAdapter: ListAdapter<EventTrack, TracksAdapter.ViewHolder>(EventDiff
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(position, ArrayList(currentList))
     }
 
 }

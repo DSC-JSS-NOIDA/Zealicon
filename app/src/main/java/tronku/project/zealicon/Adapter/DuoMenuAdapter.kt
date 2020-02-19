@@ -1,4 +1,4 @@
-package tronku.project.zealicon
+package tronku.project.zealicon.Adapter
 
 import android.view.View
 import android.view.ViewGroup

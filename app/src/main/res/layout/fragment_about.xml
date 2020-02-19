@@ -22,21 +22,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="About"
-            android:fontFamily="@font/alata_regular"
-            android:textColor="@color/grey_10"
-            android:textSize="@dimen/text_32"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/about_zealicon"
-        android:fontFamily="@font/roboto_regular"
-        android:textColor="@color/grey_10"
-        android:textSize="16dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:fontFamily="@font/alata_regular"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_32"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_zealicon"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/grey_10"
+                android:textSize="16dp"/>
+
         </LinearLayout>
 
 

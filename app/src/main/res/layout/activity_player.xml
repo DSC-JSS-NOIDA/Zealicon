@@ -22,7 +22,7 @@
     <com.narayanacharya.waveview.WaveView
         android:id="@+id/waveView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:waveAmplitude="7.00"
         app:waveBackgroundColor="@android:color/transparent"
@@ -48,7 +48,7 @@
 
 
         <ImageView
-            android:id="@+id/buttonMute"
+            android:id="@+id/buttonMuteUnmute"
             android:clickable="true"
             android:layout_width="26dp"
             android:layout_height="26dp"
@@ -57,18 +57,6 @@
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/spacing_xlarge"
             android:focusable="true"/>
-
-        <ImageView
-            android:id="@+id/buttonUnmute"
-            android:clickable="true"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@drawable/ic_unmute"
-            android:tint="@color/white"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_xlarge"
-            android:focusable="true"
-            android:visibility="gone"/>
 
         <View
             android:layout_height="0dp"
@@ -88,19 +76,7 @@
             android:focusable="true" />
 
         <ImageView
-            android:id="@+id/buttonPlay"
-            android:clickable="true"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:visibility="gone"
-            android:src="@drawable/play_button"
-            android:tint="@color/white"
-            android:layout_margin="2dp"
-            android:layout_gravity="center"
-            android:focusable="true" />
-
-        <ImageView
-            android:id="@+id/buttonPause"
+            android:id="@+id/buttonPlayPause"
             android:clickable="true"
             android:layout_width="64dp"
             android:layout_height="64dp"
@@ -140,6 +116,50 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeLayout"
+        app:layout_constraintBottom_toTopOf="@id/layoutButtons"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/seekbar_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/spacing_mxlarge"
+            android:layout_marginEnd="@dimen/spacing_mxlarge"/>
+
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/seekbar"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/spacing_mxlarge"
+            android:text="2:30 PM"
+            android:textColor="@color/grey_20"
+            android:layout_marginBottom="10dp"
+            android:textSize="16dp"
+            android:fontFamily="@font/roboto_regular"/>
+
+        <TextView
+            android:id="@+id/endTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/seekbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/spacing_mxlarge"
+            android:text="4:30 PM"
+            android:textColor="@color/grey_20"
+            android:layout_marginBottom="10dp"
+            android:textSize="16dp"
+            android:fontFamily="@font/roboto_regular"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/eventName"
         android:layout_width="wrap_content"
@@ -163,10 +183,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/layoutButtons"
+        app:layout_constraintBottom_toTopOf="@id/timeLayout"
         app:layout_constraintTop_toBottomOf="@id/eventName"
         app:layout_constraintVertical_chainStyle="packed"
-        android:text="Play It On"
+        android:text="Day 1  |  Play It On"
         android:layout_marginTop="@dimen/spacing_middle"
         android:textColor="@color/grey_40"
         android:includeFontPadding="false"
@@ -175,8 +195,8 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         app:layout_constraintBottom_toTopOf="@id/option_layout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

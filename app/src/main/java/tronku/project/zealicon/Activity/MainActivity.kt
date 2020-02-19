@@ -4,12 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Adapter
-import android.widget.Switch
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuAdapter
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -17,10 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_footer.*
 import kotlinx.android.synthetic.main.menu_footer.view.*
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-import tronku.project.zealicon.DuoMenuAdapter
-import tronku.project.zealicon.Fragment.*
+import tronku.project.zealicon.Adapter.DuoMenuAdapter
 import tronku.project.zealicon.R
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -114,6 +107,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             else -> super.onBackPressed()
         }
         bottomNavigation.visibility = View.VISIBLE
+        duoAdapter.setViewSelected(0, true)
     }
 
 

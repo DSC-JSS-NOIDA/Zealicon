@@ -68,6 +68,21 @@ object AnimUtils {
         v.startAnimation(shrinkAnim)
     }
 
+    fun setClickAnimation(v: View) {
+        val shrinkAnim = AnimationUtils.loadAnimation(v.context, R.anim.shrink_view)
+        shrinkAnim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+        })
+        v.startAnimation(shrinkAnim)
+    }
+
     fun handleAnimation(v: View, pressed: Boolean) {
         val shrinkAnim = AnimationUtils.loadAnimation(v.context, R.anim.shrink_view)
         val growAnim = AnimationUtils.loadAnimation(v.context, R.anim.grow_view)
