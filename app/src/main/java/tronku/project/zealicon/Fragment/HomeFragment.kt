@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        AnimUtils.setClickAnimation(day_one_list, R.id.action_home_to_playListFragment, getArgs(1))
         AnimUtils.setTouchEffect(day_one_list, R.id.action_home_to_playListFragment, getArgs(1))
         AnimUtils.setTouchEffect(day_two_list, R.id.action_home_to_playListFragment, getArgs(2))
         AnimUtils.setTouchEffect(day_three_list, R.id.action_home_to_playListFragment, getArgs(3))

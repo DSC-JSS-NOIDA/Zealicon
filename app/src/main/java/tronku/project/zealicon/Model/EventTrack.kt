@@ -2,14 +2,21 @@ package tronku.project.zealicon.Model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 data class EventTrack(
-    val id: Int,
-    val name: String?,
-    val description: String?,
-    val startDateTime: String?,
-    val endDateTime: String?,
-    val category: String?
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String?,
+    @SerializedName("description") val description: String?,
+    @SerializedName("date") val date: String?,
+    @SerializedName("rule") val rule: String?,
+    @SerializedName("category_id") val categoryId: Int,
+    @SerializedName("winner1") val firstPrize: Int,
+    @SerializedName("winner2") val secondPrize: Int?,
+    @SerializedName("contact_name") val contactName: String?,
+    @SerializedName("contact_no") val contactNo: String?,
+    @SerializedName("is_active") val isActive: Boolean? = true,
+    @SerializedName("society_id") val societyId: Int
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -17,16 +24,28 @@ data class EventTrack(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(description)
-        parcel.writeString(startDateTime)
-        parcel.writeString(endDateTime)
-        parcel.writeString(category)
+        parcel.writeString(date)
+        parcel.writeString(rule)
+        parcel.writeInt(categoryId)
+        parcel.writeInt(firstPrize)
+        parcel.writeValue(secondPrize)
+        parcel.writeString(contactName)
+        parcel.writeString(contactNo)
+        parcel.writeValue(isActive)
+        parcel.writeInt(societyId)
     }
 
     override fun describeContents(): Int {

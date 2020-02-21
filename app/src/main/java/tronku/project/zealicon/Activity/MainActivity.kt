@@ -4,16 +4,24 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_footer.*
 import kotlinx.android.synthetic.main.menu_footer.view.*
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
+import org.json.JSONObject
 import tronku.project.zealicon.Adapter.DuoMenuAdapter
+import tronku.project.zealicon.Model.EventTrack
+import tronku.project.zealicon.Model.Status
 import tronku.project.zealicon.R
+import tronku.project.zealicon.Viewmodel.MainViewModel
 import kotlin.collections.ArrayList
 
 
@@ -21,6 +29,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private lateinit var navController: NavController
     private lateinit var duoAdapter: DuoMenuAdapter
+    private val viewModel by lazy { MainViewModel() }
+    private val gson by lazy { Gson() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +40,28 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         setupNavigation()
         setNavButtons()
         handleMenu()
-        navDrawerIcon.setOnClickListener {
-            duoDrawerLayout.openDrawer()
+        fetchData()
+    }
+
+    private fun fetchData() {
+        viewModel.loadData().observe(this, Observer { res ->
+            when(res.status) {
+                Status.LOADING -> loaderLayout.visibility = View.VISIBLE
+                Status.ERROR -> { }
+                Status.SUCCESS -> parse(res.data)
+            }
+        })
+
+    }
+
+    private fun parse(res: String?) {
+        if (res.isNullOrEmpty()) {
+            //show error message
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+        } else {
+            val jsonObject = JSONObject(res)
+            val trackList: ArrayList<EventTrack> = gson.fromJson(jsonObject.get("data").toString(),
+                object : TypeToken<ArrayList<EventTrack>>() {}.type)
         }
     }
 
@@ -60,9 +90,13 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     private fun setNavButtons() {
 
+        navDrawerIcon.setOnClickListener {
+            duoDrawerLayout.openDrawer()
+        }
+
         this.buttonFacebook.setOnClickListener {
             try {
-                applicationContext.getPackageManager().getPackageInfo("com.facebook.katana", 0)
+                applicationContext.packageManager.getPackageInfo("com.facebook.katana", 0)
                 Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/zealicon"))
             } catch (e: Exception) {
                 Intent(
@@ -74,7 +108,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
         duoDrawerLayout.buttonInstagram.setOnClickListener {
             try {
-                applicationContext.getPackageManager().getPackageInfo("com.instagram.android", 0)
+                applicationContext.packageManager.getPackageInfo("com.instagram.android", 0)
                 Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/zealicon"))
             } catch (e: Exception) {
                 Intent(
@@ -117,31 +151,26 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
         when (position){
             0 -> {
-//                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.home)
                 bottomNavigation.visibility = View.VISIBLE
                 duoAdapter.setViewSelected(0, true)
             }
             1 -> {
-//                Toast.makeText(this, "Route", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.fragmentRoute)
                 bottomNavigation.visibility = View.GONE
                 duoAdapter.setViewSelected(1, true)
             }
             2 -> {
-//                Toast.makeText(this, "Sponsors", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.fragmentSponsor)
                 bottomNavigation.visibility = View.GONE
                 duoAdapter.setViewSelected(2, true)
             }
             3 -> {
-//                Toast.makeText(this, "Team", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.fragmentTeam)
                 bottomNavigation.visibility = View.GONE
                 duoAdapter.setViewSelected(3, true)
             }
             4 -> {
-//                Toast.makeText(this, "About", Toast.LENGTH_SHORT).show()
                 navController.navigate(R.id.fragmentAbout)
                 bottomNavigation.visibility = View.GONE
                 duoAdapter.setViewSelected(4, true)

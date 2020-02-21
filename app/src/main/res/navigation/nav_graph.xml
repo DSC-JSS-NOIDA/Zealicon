@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_home_self"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_home_to_playerActivity"
+            app:destination="@id/playerActivity" />
     </fragment>
     <fragment
         android:id="@+id/search"
