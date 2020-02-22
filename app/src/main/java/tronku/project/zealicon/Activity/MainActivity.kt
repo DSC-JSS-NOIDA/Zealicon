@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.menu_footer.view.*
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import org.json.JSONObject
 import tronku.project.zealicon.Adapter.DuoMenuAdapter
+import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.EventTrack
 import tronku.project.zealicon.Model.Status
 import tronku.project.zealicon.R
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     private lateinit var duoAdapter: DuoMenuAdapter
     private val viewModel by lazy { MainViewModel() }
     private val gson by lazy { Gson() }
+    private val db by lazy { RoomDB(this) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,28 +43,31 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         setNavButtons()
         handleMenu()
         fetchData()
+        setObservers()
     }
 
     private fun fetchData() {
         viewModel.loadData().observe(this, Observer { res ->
             when(res.status) {
                 Status.LOADING -> loaderLayout.visibility = View.VISIBLE
-                Status.ERROR -> { }
-                Status.SUCCESS -> parse(res.data)
+                Status.ERROR -> { loaderLayout.visibility = View.GONE }
+                Status.SUCCESS -> viewModel.parse(res.data.toString())
             }
         })
 
     }
 
-    private fun parse(res: String?) {
-        if (res.isNullOrEmpty()) {
-            //show error message
-            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-        } else {
-            val jsonObject = JSONObject(res)
-            val trackList: ArrayList<EventTrack> = gson.fromJson(jsonObject.get("data").toString(),
-                object : TypeToken<ArrayList<EventTrack>>() {}.type)
-        }
+    private fun setObservers() {
+
+        viewModel.isParsed.observe(this, Observer {
+            if (!it) {
+                //error message
+                Toast.makeText(this@MainActivity, "Error in parsing data...", Toast.LENGTH_SHORT).show()
+                loaderLayout.visibility = View.GONE
+            } else {
+                loaderLayout.visibility = View.GONE
+            }
+        })
     }
 
     private fun setupNavigation() {

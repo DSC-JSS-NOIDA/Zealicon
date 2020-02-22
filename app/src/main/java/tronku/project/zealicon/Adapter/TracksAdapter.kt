@@ -19,7 +19,7 @@ class TracksAdapter: ListAdapter<EventTrack, TracksAdapter.ViewHolder>(EventDiff
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(position: Int, tracks: ArrayList<EventTrack>) {
             itemView.itemEventName.text = tracks[position].name
-            itemView.itemEventDate.text = tracks[position].startDateTime
+            itemView.itemEventDate.text = tracks[position].day.toString()
             val bundle = Bundle()
             bundle.putInt("position", position)
             bundle.putParcelableArrayList("tracks", tracks)

@@ -8,28 +8,28 @@ data class EventTrack(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String?,
     @SerializedName("description") val description: String?,
-    @SerializedName("date") val date: String?,
+    @SerializedName("day") val day: Int,
     @SerializedName("rule") val rule: String?,
     @SerializedName("category_id") val categoryId: Int,
     @SerializedName("winner1") val firstPrize: Int,
     @SerializedName("winner2") val secondPrize: Int?,
     @SerializedName("contact_name") val contactName: String?,
     @SerializedName("contact_no") val contactNo: String?,
-    @SerializedName("is_active") val isActive: Boolean? = true,
+    @SerializedName("is_active") val isActive: Int? = 0,
     @SerializedName("society_id") val societyId: Int
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readInt(),
         parcel.readString(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readInt(),
         parcel.readInt()
     )
 
@@ -37,14 +37,14 @@ data class EventTrack(
         parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(description)
-        parcel.writeString(date)
+        parcel.writeInt(day)
         parcel.writeString(rule)
         parcel.writeInt(categoryId)
         parcel.writeInt(firstPrize)
         parcel.writeValue(secondPrize)
         parcel.writeString(contactName)
         parcel.writeString(contactNo)
-        parcel.writeValue(isActive)
+        parcel.writeInt(isActive ?: 0)
         parcel.writeInt(societyId)
     }
 

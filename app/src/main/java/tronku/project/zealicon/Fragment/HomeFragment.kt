@@ -50,9 +50,32 @@ class HomeFragment : Fragment() {
     private fun getUpcomingHits() {
         val adapter = TracksAdapter()
         val trackList = ArrayList<EventTrack>()
-        trackList.add(EventTrack(1, "Line up", "GPS based event", "12:00 PM", "4:00 PM", "Play it On!"))
-        trackList.add(EventTrack(2, "Doodle", "Designing event", "2:00 PM", "5:00 PM", "Play it On!"))
-        trackList.add(EventTrack(3, "Doodle", "Designing event", "2:00 PM", "5:00 PM", "Play it On!"))
+        trackList.add(
+            EventTrack(1,
+            "Line-up",
+            "GPS based event",
+            2, "Upcoming", 5, 2000, 1000,
+            "Shubham Pathak",
+            "8005709570",
+            1, 2)
+        )
+
+        trackList.add(EventTrack(1,
+            "Line-up",
+            "GPS based event",
+            2, "Upcoming", 5, 2000, 1000,
+            "Shubham Pathak",
+            "8005709570",
+            1, 2))
+
+        trackList.add(EventTrack(1,
+            "Line-up",
+            "GPS based event",
+            2, "Upcoming", 5, 2000, 1000,
+            "Shubham Pathak",
+            "8005709570",
+            1, 2))
+
         adapter.submitList(trackList)
         upcomingHitsRecycler.adapter = adapter
     }

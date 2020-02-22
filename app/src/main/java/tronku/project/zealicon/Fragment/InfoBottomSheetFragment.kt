@@ -48,7 +48,7 @@ class InfoBottomSheetFragment(val currentTrack: EventTrack) : BottomSheetDialogF
 
     private fun inflateUI(v: View) {
         v.eventName.text = currentTrack.name
-        v.eventType.text = currentTrack.category
+        v.eventType.text = currentTrack.categoryId.toString()
         v.eventDescription.text = currentTrack.description
     }
 }

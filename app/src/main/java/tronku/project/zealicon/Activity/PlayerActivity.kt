@@ -34,7 +34,7 @@ class PlayerActivity : AppCompatActivity() {
     fun inflateUI() {
         currentTrack = tracks[currentPos]
         eventName.text = currentTrack.name
-        eventType.text = currentTrack.category
+        eventType.text = currentTrack.categoryId.toString()
     }
 
     fun addClickEvents() {
