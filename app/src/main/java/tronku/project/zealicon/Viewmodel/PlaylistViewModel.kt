@@ -8,18 +8,18 @@ import kotlinx.coroutines.launch
 import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.EventTrackDB
 
-class HomeViewModel : ViewModel() {
+class PlaylistViewModel : ViewModel() {
 
-    private var mutableUpcomingList = MutableLiveData<ArrayList<EventTrackDB>>()
-    val upcomingList: LiveData<ArrayList<EventTrackDB>>
+    private var mutablePlayist = MutableLiveData<ArrayList<EventTrackDB>>()
+    val playlist: LiveData<ArrayList<EventTrackDB>>
 
     init {
-        upcomingList = mutableUpcomingList
+        playlist = mutablePlayist
     }
 
     fun getUpcomingHits(db: RoomDB, day: Int = 1) {
         viewModelScope.launch {
-            mutableUpcomingList.postValue(db.EventDao().getDayEvents(day) as ArrayList<EventTrackDB>)
+            mutablePlayist.postValue(db.EventDao().getDayEvents(day) as ArrayList<EventTrackDB>)
         }
     }
 

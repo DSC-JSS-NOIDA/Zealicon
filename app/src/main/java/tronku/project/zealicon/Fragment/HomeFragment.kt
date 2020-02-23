@@ -37,7 +37,9 @@ class HomeFragment : Fragment() {
 
         setClickListeners()
         setObserver()
-        viewModel.getUpcomingHits(db)
+
+        //TODO - Add dynamic day here IMPORTANT
+        viewModel.getUpcomingHits(db, 1)
     }
 
     private fun setClickListeners() {

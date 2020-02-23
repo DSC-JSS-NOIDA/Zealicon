@@ -55,7 +55,7 @@ class MainViewModel: ViewModel() {
                     it.name ?: "",
                     it.description ?: "",
                     it.rule ?: "",
-                    it.day + 23,
+                    it.day,
                     category,
                     it.firstPrize,
                     it.secondPrize ?: 0,

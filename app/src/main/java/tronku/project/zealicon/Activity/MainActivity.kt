@@ -63,8 +63,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
         viewModel.isParsed.observe(this, Observer {
             if (!it) {
-                //error message
-                Toast.makeText(this@MainActivity, "Error in parsing data...", Toast.LENGTH_SHORT).show()
+                if (ExtraUtils.isConnected(this@MainActivity))
+                    Toast.makeText(this@MainActivity, "Error in parsing data...", Toast.LENGTH_SHORT).show()
                 loaderLayout.visibility = View.GONE
             } else {
                 loaderLayout.visibility = View.GONE

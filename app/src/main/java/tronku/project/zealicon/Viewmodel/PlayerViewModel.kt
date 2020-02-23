@@ -1,4 +1,4 @@
-package tronku.project.zealicon.Fragment
+package tronku.project.zealicon.Viewmodel
 
 import androidx.lifecycle.ViewModel
 

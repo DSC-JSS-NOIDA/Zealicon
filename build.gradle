@@ -5,9 +5,9 @@ buildscript {
     ext.glide_version = '4.11.0'
     ext.retrofit_version = '2.7.1'
     ext.stetho_version = '1.5.1'
-    ext.room_version = '2.2.3'
+    ext.room_version = '2.2.4'
     ext.recyclerview_version = '1.1.0'
-    ext.nav_version = "2.3.0-alpha01"
+    ext.nav_version = "2.3.0-alpha02"
     ext.material_design_version = '1.1.0'
     ext.lottie_version = '3.3.1'
     ext.circle_image_view_version = '3.1.0'

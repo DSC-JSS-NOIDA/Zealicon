@@ -5,12 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_play_list.*
 import tronku.project.zealicon.Adapter.PlayerTarget
 import tronku.project.zealicon.Adapter.TracksAdapter
-import tronku.project.zealicon.Model.EventTrack
+import tronku.project.zealicon.Database.RoomDB
+import tronku.project.zealicon.Model.EventTrackDB
 
 import tronku.project.zealicon.R
+import tronku.project.zealicon.Viewmodel.PlaylistViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * A simple [Fragment] subclass.
@@ -18,6 +24,9 @@ import tronku.project.zealicon.R
 class PlayListFragment : Fragment() {
 
     var day: Int = 1
+    private val viewModel by lazy { PlaylistViewModel() }
+    private val db by lazy { RoomDB(context!!) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +41,33 @@ class PlayListFragment : Fragment() {
         updateUI()
         playlistCategory.isSelected = true
         waveView.play()
-        getPlaylist()
+
+        viewModel.getUpcomingHits(db, day)
+        setObserver()
+    }
+
+    private fun setObserver() {
+        val adapter = TracksAdapter(PlayerTarget.PLAYLIST)
+        trackRecyclerView.adapter = adapter
+        viewModel.playlist.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+                Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
+            } else {
+                adapter.submitList(it.shuffled())
+                updateSummary(it)
+            }
+        })
+    }
+
+    private fun updateSummary(list: ArrayList<EventTrackDB>) {
+        val categories = TreeSet<String>()
+        list.forEach {
+            categories.add(it.category!!)
+        }
+        daySummary.text = "${list.size} tracks   •   ${categories.size} categories"
+        var categ = ""
+        categories.forEach { categ += "$it | " }
+        playlistCategory.text = categ
     }
 
     private fun updateUI() {
@@ -66,41 +101,6 @@ class PlayListFragment : Fragment() {
                 playlistDate.text = "27 March, 2020"
             }
         }
-    }
-
-    private fun getPlaylist() {
-        val adapter = TracksAdapter(PlayerTarget.PLAYLIST)
-        val trackList = ArrayList<EventTrack>()
-        trackList.add(EventTrack(1,
-            "Line-up",
-            "GPS based event",
-            2, "Upcoming", 5, 2000, 1000,
-            "Shubham Pathak",
-            "8005709570",
-            1, 2))
-        trackList.add(EventTrack(1,
-            "Line-up",
-            "GPS based event",
-            2, "Upcoming", 5, 2000, 1000,
-            "Shubham Pathak",
-            "8005709570",
-            1, 2))
-        trackList.add(EventTrack(1,
-            "Line-up",
-            "GPS based event",
-            2, "Upcoming", 5, 2000, 1000,
-            "Shubham Pathak",
-            "8005709570",
-            1, 2))
-        trackList.add(EventTrack(1,
-            "Line-up",
-            "GPS based event",
-            2, "Upcoming", 5, 2000, 1000,
-            "Shubham Pathak",
-            "8005709570",
-            1, 2))
-//        adapter.submitList(trackList)
-        trackRecyclerView.adapter = adapter
     }
 
     override fun onDestroyView() {

@@ -32,13 +32,14 @@ class PlayerActivity : AppCompatActivity() {
         addClickEvents()
     }
 
-    fun inflateUI() {
+    private fun inflateUI() {
+        eventName.isSelected = true
         currentTrack = tracks[currentPos]
         eventName.text = currentTrack.name
         eventType.text = currentTrack.category
     }
 
-    fun addClickEvents() {
+    private fun addClickEvents() {
         val rotator = ObjectAnimator.ofFloat(trackImage, View.ROTATION, 0f, 360f)
         rotator.duration = 6000
         rotator.repeatCount = ObjectAnimator.INFINITE

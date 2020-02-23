@@ -24,7 +24,15 @@ class TracksAdapter(private val target: PlayerTarget): ListAdapter<EventTrackDB,
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(position: Int, tracks: ArrayList<EventTrackDB>, target: PlayerTarget) {
             itemView.itemEventName.text = tracks[position].name?.capitalize()
-            itemView.itemEventDate.text = "${tracks[position].day}th March  |  ${tracks[position].category}"
+            itemView.itemEventDate.text = "${tracks[position].day + 23}th March  •  ${tracks[position].category}"
+
+            when(tracks[position].day) {
+                1 -> itemView.itemEventImageView.setImageResource(R.drawable.curved_card_blue)
+                2 -> itemView.itemEventImageView.setImageResource(R.drawable.curved_card_purple)
+                3 -> itemView.itemEventImageView.setImageResource(R.drawable.curved_card_green)
+                4 -> itemView.itemEventImageView.setImageResource(R.drawable.curved_card_yellow)
+            }
+
             val bundle = Bundle()
             bundle.putInt("position", position)
             bundle.putParcelableArrayList("tracks", tracks)
