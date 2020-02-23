@@ -19,7 +19,7 @@ class HomeViewModel : ViewModel() {
 
     fun getUpcomingHits(db: RoomDB, day: Int = 1) {
         viewModelScope.launch {
-            mutableUpcomingList.postValue(db.EventDao().getDayEvents(day) as ArrayList<EventTrackDB>)
+            mutableUpcomingList.postValue(db.EventDao().getDayEvents(day) as ArrayList)
         }
     }
 

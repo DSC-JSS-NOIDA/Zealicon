@@ -7,23 +7,27 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_player.*
+import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Fragment.InfoBottomSheetFragment
 import tronku.project.zealicon.Model.EventTrack
 import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
+import tronku.project.zealicon.Viewmodel.PlayerViewModel
 
 class PlayerActivity : AppCompatActivity() {
 
     private lateinit var media: MediaPlayer
-
-    private var isAdded = false
     private var isMute = false
     private var isPlaying = true
     private var tracks = ArrayList<EventTrackDB>()
     private lateinit var currentTrack: EventTrackDB
     private var currentPos = 0
+
+    private val db by lazy { RoomDB(this) }
+    private val viewModel by lazy { PlayerViewModel(db) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +39,8 @@ class PlayerActivity : AppCompatActivity() {
         media =  MediaPlayer.create(this, R.raw.gurbax_boom_shankar)
         media.isLooping = true
         media.start()
-//        addEffects()
         addClickEvents()
+        setObservers()
     }
 
     private fun inflateUI() {
@@ -44,6 +48,13 @@ class PlayerActivity : AppCompatActivity() {
         currentTrack = tracks[currentPos]
         eventName.text = currentTrack.name
         eventType.text = currentTrack.category
+        viewModel.checkAdded(currentTrack.id)
+    }
+
+    private fun setObservers() {
+        viewModel.isAdded.observe(this, Observer {
+            addRemoveButton.setImageResource(if (it) R.drawable.ic_playlist_added else R.drawable.ic_playlist_add)
+        })
     }
 
     private fun addClickEvents() {
@@ -98,12 +109,10 @@ class PlayerActivity : AppCompatActivity() {
 
         addRemoveButton.setOnClickListener {
             AnimUtils.setClickAnimation(addRemoveButton)
-            if (isAdded) {
-                isAdded = false
-                addRemoveButton.setImageResource(R.drawable.ic_playlist_add)
+            if (viewModel.isAdded.value == true) {
+                viewModel.removeFromPlaylist(currentTrack.id)
             } else {
-                isAdded = true
-                addRemoveButton.setImageResource(R.drawable.ic_playlist_added)
+                viewModel.addToPlaylist(currentTrack.id)
             }
         }
 

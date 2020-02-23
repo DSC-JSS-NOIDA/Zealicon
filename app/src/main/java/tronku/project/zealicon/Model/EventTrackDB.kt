@@ -19,8 +19,7 @@ data class EventTrackDB (
     @ColumnInfo(name = "contactName") var contactName: String?,
     @ColumnInfo(name = "contactNo") var contactNo: String?,
     @ColumnInfo(name = "isActive") var isActive: Boolean,
-    @ColumnInfo(name = "societyId") var societyId: Int,
-    @ColumnInfo(name = "isAdded") var isAdded: Boolean = false
+    @ColumnInfo(name = "societyId") var societyId: Int
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

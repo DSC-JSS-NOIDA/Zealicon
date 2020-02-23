@@ -37,8 +37,7 @@ class HomeFragment : Fragment() {
 
         setClickListeners()
         setObserver()
-
-        //TODO - Add dynamic day here IMPORTANT
+        //TODO SET DYNAMIC DAY
         viewModel.getUpcomingHits(db, 1)
     }
 
@@ -63,12 +62,14 @@ class HomeFragment : Fragment() {
     private fun setObserver() {
         val adapter = TracksAdapter(PlayerTarget.HOME)
         upcomingHitsRecycler.adapter = adapter
+
+        //TODO ADD DYNAMIC DAY
         viewModel.upcomingList.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
-                Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
             } else {
                 it.shuffle()
-                adapter.submitList(it.subList(0, 5))
+                adapter.submitList(it.subList(0, if (it.size < 5) it.size else 5))
             }
         })
     }

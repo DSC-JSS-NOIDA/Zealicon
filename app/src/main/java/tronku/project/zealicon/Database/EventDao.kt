@@ -21,12 +21,6 @@ interface EventDao {
     @Query("DELETE from event_tracks")
     suspend fun deleteEvents()
 
-    @Query("SELECT * from event_tracks where isAdded = 1")
+    @Query("SELECT * from event_tracks e, playlist p where e.id = p.eventId")
     suspend fun getMyPlaylist(): List<EventTrackDB>
-
-    @Query("UPDATE event_tracks SET isAdded = 1 where id = :eventId")
-    suspend fun addToPlaylist(eventId: Int)
-
-    @Query("UPDATE event_tracks SET isAdded = 0 where id = :eventId")
-    suspend fun removeFromPlaylist(eventId: Int)
 }

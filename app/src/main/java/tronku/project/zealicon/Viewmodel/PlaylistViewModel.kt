@@ -10,16 +10,16 @@ import tronku.project.zealicon.Model.EventTrackDB
 
 class PlaylistViewModel : ViewModel() {
 
-    private var mutablePlayist = MutableLiveData<ArrayList<EventTrackDB>>()
+    private var mutablePlaylist = MutableLiveData<ArrayList<EventTrackDB>>()
     val playlist: LiveData<ArrayList<EventTrackDB>>
 
     init {
-        playlist = mutablePlayist
+        playlist = mutablePlaylist
     }
 
-    fun getUpcomingHits(db: RoomDB, day: Int = 1) {
+    fun getPlaylist(db: RoomDB, day: Int = 1) {
         viewModelScope.launch {
-            mutablePlayist.postValue(db.EventDao().getDayEvents(day) as ArrayList<EventTrackDB>)
+            mutablePlaylist.postValue(db.EventDao().getDayEvents(day) as ArrayList)
         }
     }
 

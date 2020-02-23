@@ -42,8 +42,8 @@ class PlayListFragment : Fragment() {
         playlistCategory.isSelected = true
         waveView.play()
 
-        viewModel.getUpcomingHits(db, day)
         setObserver()
+        viewModel.getPlaylist(db, day)
     }
 
     private fun setObserver() {

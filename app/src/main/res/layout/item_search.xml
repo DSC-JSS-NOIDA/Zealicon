@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        android:alpha="0.75"/>
+        android:alpha="0.7"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/itemCardView"
@@ -64,6 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/itemEventName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="@dimen/spacing_middle"
         android:layout_marginEnd="@dimen/spacing_mlarge"/>
 
