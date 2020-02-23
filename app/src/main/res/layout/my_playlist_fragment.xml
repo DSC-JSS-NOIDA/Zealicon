@@ -51,18 +51,19 @@
         app:layout_constraintTop_toBottomOf="@id/playlistTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/myPlaylistItems"
+        android:id="@+id/playlistSummary"
         android:textAlignment="center"
         android:text="11 Items   •   2 Days"
         android:textColor="@color/overlay_light_70"
         android:textSize="16dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/alata_regular"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlistRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/myPlaylistItems"
+        app:layout_constraintTop_toBottomOf="@id/playlistSummary"
         app:layout_constraintStart_toStartOf="@id/playlistTextView"
         app:layout_constraintEnd_toEndOf="@id/playlistTextView"
         android:layout_marginTop="@dimen/spacing_middle"

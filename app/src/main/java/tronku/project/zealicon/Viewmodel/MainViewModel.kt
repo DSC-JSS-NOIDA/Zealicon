@@ -47,7 +47,7 @@ class MainViewModel: ViewModel() {
 
     private fun saveToDB(db: RoomDB, trackList: ArrayList<EventTrack>) {
         viewModelScope.launch {
-            db.EventDao().deleteEvents()
+            db.EventDao().deleteAllEvents()
             trackList.forEach {
                 val category: String = getCategory(it.categoryId)
                 val eventTrackDB = EventTrackDB(

@@ -1,5 +1,6 @@
 package tronku.project.zealicon.Database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import tronku.project.zealicon.Model.EventTrackDB
 
@@ -19,8 +20,8 @@ interface EventDao {
     suspend fun getCategEvents(category: String): List<EventTrackDB>
 
     @Query("DELETE from event_tracks")
-    suspend fun deleteEvents()
+    suspend fun deleteAllEvents()
 
     @Query("SELECT * from event_tracks e, playlist p where e.id = p.eventId")
-    suspend fun getMyPlaylist(): List<EventTrackDB>
+    fun getMyPlaylist(): LiveData<List<EventTrackDB>>
 }
