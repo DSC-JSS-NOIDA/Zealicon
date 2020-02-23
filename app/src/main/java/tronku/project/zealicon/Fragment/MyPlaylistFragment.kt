@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.my_playlist_fragment.*
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Viewmodel.MyPlaylistViewModel
 
@@ -27,6 +28,8 @@ class MyPlaylistFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MyPlaylistViewModel::class.java)
+
+
 
     }
 

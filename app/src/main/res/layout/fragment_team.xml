@@ -1,92 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/overlay_dark_90">
 
-    <TextView
-        android:id="@+id/textManagementCommitee"
-        android:layout_width="@dimen/zero_dimen"
-        android:layout_height="wrap_content"
-        android:text="Management Commitee"
-        android:textColor="@color/grey_10"
-        android:textSize="22dp"
-        android:layout_margin="16dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/alata_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/zealicon_icon"
+        android:alpha="0.2"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewManagementCommitee"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
-        app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
-        app:layout_constraintTop_toBottomOf="@id/textManagementCommitee"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_team_member"/>
-
-    <TextView
-        android:id="@+id/textCoreCommitee"
-        android:layout_width="@dimen/zero_dimen"
-        android:layout_height="wrap_content"
-        android:text="Core Team Commitee"
-        android:textColor="@color/grey_10"
-        android:textSize="22dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/alata_regular"
-        app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
-        app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewManagementCommitee"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCoreTeamCommitee"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
-        app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
-        app:layout_constraintTop_toBottomOf="@id/textCoreCommitee"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_team_member"/>
-
-    <TextView
-        android:id="@+id/textTechCommitee"
-        android:layout_width="@dimen/zero_dimen"
-        android:layout_height="wrap_content"
-        android:text="Website and App Team"
-        android:textColor="@color/grey_10"
-        android:textSize="22dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/alata_regular"
-        app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
-        app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
-        app:layout_constraintTop_toBottomOf="@id/recyclerCoreTeamCommitee"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerTechTeamCommitee"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
-        app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
-        app:layout_constraintTop_toBottomOf="@id/textTechCommitee"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_team_member"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/textManagementCommitee"
+                android:layout_width="@dimen/zero_dimen"
+                android:layout_height="wrap_content"
+                android:text="Management Commitee"
+                android:textColor="@color/grey_10"
+                android:textSize="22dp"
+                android:layout_margin="16dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alata_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewManagementCommitee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
+                app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
+                app:layout_constraintTop_toBottomOf="@id/textManagementCommitee"
+                tools:itemCount="2"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_team_member"/>
+
+            <TextView
+                android:id="@+id/textCoreCommitee"
+                android:layout_width="@dimen/zero_dimen"
+                android:layout_height="wrap_content"
+                android:text="Core Team Commitee"
+                android:textColor="@color/grey_10"
+                android:textSize="22dp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alata_regular"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
+                app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
+                app:layout_constraintTop_toBottomOf="@id/recyclerViewManagementCommitee"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCoreTeamCommitee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
+                app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
+                app:layout_constraintTop_toBottomOf="@id/textCoreCommitee"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_team_member"/>
+
+            <TextView
+                android:id="@+id/textTechCommitee"
+                android:layout_width="@dimen/zero_dimen"
+                android:layout_height="wrap_content"
+                android:text="Website and App Team"
+                android:textColor="@color/grey_10"
+                android:textSize="22dp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/alata_regular"
+                app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
+                app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
+                app:layout_constraintTop_toBottomOf="@id/recyclerCoreTeamCommitee"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerTechTeamCommitee"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                app:layout_constraintStart_toStartOf="@id/textManagementCommitee"
+                app:layout_constraintEnd_toEndOf="@id/textManagementCommitee"
+                app:layout_constraintTop_toBottomOf="@id/textTechCommitee"
+                tools:itemCount="2"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_team_member"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

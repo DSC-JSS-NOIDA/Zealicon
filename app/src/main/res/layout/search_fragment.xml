@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -70,319 +70,32 @@
             app:layout_constraintStart_toStartOf="@id/searchEditText">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/searchCategoryTextView"
             android:text="Search by category"
             android:layout_marginTop="@dimen/spacing_middle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white"
             android:textSize="22dp"
             android:fontFamily="@font/alata_regular"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:id="@+id/cat_one"
-                android:layout_marginTop="@dimen/spacing_large"
-                app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cat_two">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="@dimen/spacing_middle"
-                    app:cardElevation="@dimen/zero_dimen">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"/>
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:src="@drawable/curved_card_blue"-->
-<!--                        android:alpha="0.4"/>-->
-
-                </androidx.cardview.widget.CardView>
-
-<!--                <TextView-->
-<!--                    android:id="@+id/one"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    android:includeFontPadding="false"-->
-<!--                    android:text="Play it on"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="@dimen/text_32"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:ellipsize="marquee"-->
-<!--                    android:fontFamily="@font/alata_regular"-->
-<!--                    android:layout_marginStart="@dimen/spacing_middle"/>-->
-
-
-<!--                <TextView-->
-<!--                    android:id="@+id/one_events"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:gravity="start"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:includeFontPadding="false"-->
-<!--                    android:text="Play it on"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="@dimen/text_32"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:ellipsize="marquee"-->
-<!--                    android:rotation="270"-->
-<!--                    android:fontFamily="@font/alata_regular"-->
-<!--                    android:layout_marginStart="@dimen/spacing_middle"/>-->
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:id="@+id/cat_two"
-                android:layout_marginTop="@dimen/spacing_large"
-                app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"
-                app:layout_constraintStart_toEndOf="@id/cat_one"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="@dimen/spacing_mxlarge">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="@dimen/spacing_middle"
-                    app:cardElevation="@dimen/zero_dimen">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/cult_otp"
-                        android:scaleType="centerCrop"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_yellow"
-                        android:alpha="0.6"/>
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:includeFontPadding="false"
-                    android:text="Coloralo"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_32"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:fontFamily="@font/alata_regular"
-                    android:layout_marginStart="@dimen/spacing_middle"/>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:id="@+id/cat_three"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                app:layout_constraintTop_toBottomOf="@id/cat_one"
-                app:layout_constraintStart_toStartOf="@id/cat_one"
-                app:layout_constraintEnd_toStartOf="@id/cat_four">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="@dimen/spacing_middle"
-                    app:cardElevation="@dimen/zero_dimen">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_blue"
-                        android:alpha="0.4"/>
-
-                </androidx.cardview.widget.CardView>
-
-<!--                <TextView-->
-<!--                    android:id="@+id/textMech"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    android:includeFontPadding="false"-->
-<!--                    android:text="Mechavoltz"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="@dimen/text_32"-->
-<!--                    android:singleLine="true"-->
-<!--                    android:scrollHorizontally="true"-->
-<!--                    android:marqueeRepeatLimit="marquee_forever"-->
-<!--                    android:freezesText="true"-->
-<!--                    android:ellipsize="marquee"-->
-<!--                    android:fontFamily="@font/alata_regular"-->
-<!--                    android:layout_marginStart="@dimen/spacing_middle"/>-->
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:id="@+id/cat_four"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                app:layout_constraintTop_toBottomOf="@id/cat_one"
-                app:layout_constraintStart_toEndOf="@id/cat_three"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="@dimen/spacing_mxlarge">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="@dimen/spacing_middle"
-                    app:cardElevation="@dimen/zero_dimen">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/dev_opt"
-                        android:scaleType="centerCrop"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_green"
-                        android:alpha="0.6"/>
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:includeFontPadding="false"
-                    android:text="Coderz"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_32"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:fontFamily="@font/alata_regular"
-                    android:layout_marginStart="@dimen/spacing_middle"/>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:id="@+id/cat_five"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                app:layout_constraintTop_toBottomOf="@id/cat_three"
-                app:layout_constraintStart_toStartOf="@id/cat_one"
-                app:layout_constraintEnd_toEndOf="@id/cat_three">
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="@dimen/spacing_middle"
-                    app:cardElevation="@dimen/zero_dimen">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/robo_opt"
-                        android:scaleType="centerCrop"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_purple"
-                        android:alpha="0.6"/>
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:includeFontPadding="false"
-                    android:text="Robotiles"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_32"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:fontFamily="@font/alata_regular"
-                    android:layout_marginStart="@dimen/spacing_middle"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:id="@+id/cat_six"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
-                app:layout_constraintTop_toBottomOf="@id/cat_three"
-                app:layout_constraintStart_toEndOf="@id/cat_three"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="@dimen/spacing_mxlarge">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="@dimen/spacing_middle"
-                    app:cardElevation="@dimen/zero_dimen">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/zwar_opt"
-                        android:scaleType="centerCrop"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/curved_card_blue_dark"
-                        android:alpha="0.6"/>
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:includeFontPadding="false"
-                    android:text="Z-Wars"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_32"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:fontFamily="@font/alata_regular"
-                    android:layout_marginStart="@dimen/spacing_middle"/>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/categoryRecyclerView"
+               android:layout_width="@dimen/zero_dimen"
+               android:layout_height="wrap_content"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               tools:itemCount="6"
+               android:scrollbars="none"
+               tools:listitem="@layout/item_category"
+               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+               app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
