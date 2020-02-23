@@ -31,8 +31,8 @@
         android:label="my_playlist_fragment"
         tools:layout="@layout/my_playlist_fragment" >
         <action
-            android:id="@+id/action_my_playlist_to_playListFragment"
-            app:destination="@id/playListFragment" />
+            android:id="@+id/action_my_playlist_to_playerActivity"
+            app:destination="@id/playerActivity" />
     </fragment>
     <fragment
         android:id="@+id/about"

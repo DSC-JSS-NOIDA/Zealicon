@@ -1,15 +1,14 @@
 package tronku.project.zealicon.Viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONObject
+import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.EventTrack
+import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.Network.ApiClient
 import tronku.project.zealicon.Network.EventsApi
 import tronku.project.zealicon.Model.Resource
@@ -34,7 +33,7 @@ class MainViewModel: ViewModel() {
         }
     }
 
-    fun parse(res: String?) {
+    fun parse(db: RoomDB, res: String?) {
         if (res.isNullOrEmpty()) {
             //show error message
             mutableIsParsed.postValue(false)
@@ -42,8 +41,43 @@ class MainViewModel: ViewModel() {
             val jsonObject = JSONObject(res)
             val trackList: ArrayList<EventTrack> = gson.fromJson(jsonObject.get("data").toString(),
                 object : TypeToken<ArrayList<EventTrack>>() {}.type)
-            Log.e("TRACKLIST", gson.toJson(trackList))
+            saveToDB(db, trackList)
+        }
+    }
+
+    private fun saveToDB(db: RoomDB, trackList: ArrayList<EventTrack>) {
+        viewModelScope.launch {
+            db.EventDao().deleteEvents()
+            trackList.forEach {
+                val category: String = getCategory(it.categoryId)
+                val eventTrackDB = EventTrackDB(
+                    it.id,
+                    it.name ?: "",
+                    it.description ?: "",
+                    it.rule ?: "",
+                    it.day + 23,
+                    category,
+                    it.firstPrize,
+                    it.secondPrize ?: 0,
+                    it.contactName ?: "",
+                    it.contactNo ?: "",
+                    it.isActive == 1,
+                    it.societyId
+                )
+                db.EventDao().insertEvent(eventTrackDB)
+            }
             mutableIsParsed.postValue(true)
+        }
+    }
+
+    private fun getCategory(id: Int): String {
+        return when(id) {
+            1 -> "Colorado"
+            2 -> "Mechavoltz"
+            3 -> "Play-it-on"
+            4 -> "Robotiles"
+            5 -> "Coderz"
+            else -> "Z-wars"
         }
     }
 

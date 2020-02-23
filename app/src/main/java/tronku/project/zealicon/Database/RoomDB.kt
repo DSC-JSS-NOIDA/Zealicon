@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import tronku.project.zealicon.Model.EventTrackDB
 
-@Database(entities = [EventTrackDB::class], version = 1)
+@Database(entities = [EventTrackDB::class], version = 2)
 abstract class RoomDB: RoomDatabase() {
 
     abstract fun EventDao(): EventDao
@@ -20,7 +20,8 @@ abstract class RoomDB: RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context, RoomDB::class.java, "events.db").build()
+            Room.databaseBuilder(context, RoomDB::class.java, "events.db")
+                .fallbackToDestructiveMigration().build()
     }
 
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_play_list.*
+import tronku.project.zealicon.Adapter.PlayerTarget
 import tronku.project.zealicon.Adapter.TracksAdapter
 import tronku.project.zealicon.Model.EventTrack
 
@@ -68,7 +69,7 @@ class PlayListFragment : Fragment() {
     }
 
     private fun getPlaylist() {
-        val adapter = TracksAdapter()
+        val adapter = TracksAdapter(PlayerTarget.PLAYLIST)
         val trackList = ArrayList<EventTrack>()
         trackList.add(EventTrack(1,
             "Line-up",
@@ -98,7 +99,7 @@ class PlayListFragment : Fragment() {
             "Shubham Pathak",
             "8005709570",
             1, 2))
-        adapter.submitList(trackList)
+//        adapter.submitList(trackList)
         trackRecyclerView.adapter = adapter
     }
 

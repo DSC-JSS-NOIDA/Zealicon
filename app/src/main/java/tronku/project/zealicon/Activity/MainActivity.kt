@@ -10,18 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_footer.*
 import kotlinx.android.synthetic.main.menu_footer.view.*
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-import org.json.JSONObject
 import tronku.project.zealicon.Adapter.DuoMenuAdapter
 import tronku.project.zealicon.Database.RoomDB
-import tronku.project.zealicon.Model.EventTrack
 import tronku.project.zealicon.Model.Status
 import tronku.project.zealicon.R
+import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.MainViewModel
 import kotlin.collections.ArrayList
 
@@ -31,7 +28,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     private lateinit var navController: NavController
     private lateinit var duoAdapter: DuoMenuAdapter
     private val viewModel by lazy { MainViewModel() }
-    private val gson by lazy { Gson() }
     private val db by lazy { RoomDB(this) }
 
 
@@ -47,14 +43,20 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     }
 
     private fun fetchData() {
-        viewModel.loadData().observe(this, Observer { res ->
-            when(res.status) {
-                Status.LOADING -> loaderLayout.visibility = View.VISIBLE
-                Status.ERROR -> { loaderLayout.visibility = View.GONE }
-                Status.SUCCESS -> viewModel.parse(res.data.toString())
-            }
-        })
-
+        if (ExtraUtils.isConnected(this)) {
+            viewModel.loadData().observe(this, Observer { res ->
+                when (res.status) {
+                    Status.LOADING -> {
+                        loaderLayout.visibility = View.VISIBLE
+                        bottomNavigation.visibility = View.GONE
+                    }
+                    Status.ERROR -> {
+                        loaderLayout.visibility = View.GONE
+                    }
+                    Status.SUCCESS -> viewModel.parse(db, res.data.toString())
+                }
+            })
+        }
     }
 
     private fun setObservers() {
@@ -66,6 +68,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 loaderLayout.visibility = View.GONE
             } else {
                 loaderLayout.visibility = View.GONE
+                bottomNavigation.visibility = View.VISIBLE
+                navController.navigate(R.id.home)
             }
         })
     }
@@ -123,14 +127,12 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             }
         }
 
-
         buttonWebsie.setOnClickListener {
                 Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("https://www.zealicon.in")
                 )
         }
-
 
     }
 
@@ -185,13 +187,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
     }
 
-    override fun onHeaderClicked() {
-    }
+    override fun onHeaderClicked() {}
 
-    override fun onFooterClicked() {
-
-    }
-
-
+    override fun onFooterClicked() {}
 
 }

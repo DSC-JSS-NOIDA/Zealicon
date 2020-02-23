@@ -15,17 +15,18 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_info_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_info_bottom_sheet.view.*
 import tronku.project.zealicon.Model.EventTrack
+import tronku.project.zealicon.Model.EventTrackDB
 
 import tronku.project.zealicon.R
 
 /**
  * A simple [Fragment] subclass.
  */
-class InfoBottomSheetFragment(val currentTrack: EventTrack) : BottomSheetDialogFragment() {
+class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSheetDialogFragment() {
 
     private lateinit var sheet: BottomSheetDialog
     companion object {
-        fun newInstance(track: EventTrack) = InfoBottomSheetFragment(track)
+        fun newInstance(track: EventTrackDB) = InfoBottomSheetFragment(track)
         const val TAG = "infoBottomSheet"
     }
 
@@ -48,7 +49,7 @@ class InfoBottomSheetFragment(val currentTrack: EventTrack) : BottomSheetDialogF
 
     private fun inflateUI(v: View) {
         v.eventName.text = currentTrack.name
-        v.eventType.text = currentTrack.categoryId.toString()
+        v.eventType.text = currentTrack.category
         v.eventDescription.text = currentTrack.description
     }
 }

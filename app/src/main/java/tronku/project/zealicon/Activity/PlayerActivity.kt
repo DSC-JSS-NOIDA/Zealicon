@@ -9,6 +9,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_player.*
 import tronku.project.zealicon.Fragment.InfoBottomSheetFragment
 import tronku.project.zealicon.Model.EventTrack
+import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
 
@@ -17,8 +18,8 @@ class PlayerActivity : AppCompatActivity() {
     private var isAdded = false
     private var isMute = false
     private var isPlaying = true
-    private var tracks = ArrayList<EventTrack>()
-    private lateinit var currentTrack: EventTrack
+    private var tracks = ArrayList<EventTrackDB>()
+    private lateinit var currentTrack: EventTrackDB
     private var currentPos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class PlayerActivity : AppCompatActivity() {
     fun inflateUI() {
         currentTrack = tracks[currentPos]
         eventName.text = currentTrack.name
-        eventType.text = currentTrack.categoryId.toString()
+        eventType.text = currentTrack.category
     }
 
     fun addClickEvents() {
