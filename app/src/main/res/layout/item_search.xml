@@ -25,12 +25,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:alpha="0.9"
-            android:id="@+id/itemEventImageView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/curved_card_blue"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:alpha="0.9"
+                android:id="@+id/itemEventImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/curved_card_blue"/>
+
+            <ImageView
+                android:id="@+id/noteImg"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_note_one"
+                android:tint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

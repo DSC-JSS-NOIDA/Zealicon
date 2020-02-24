@@ -25,6 +25,7 @@ class TracksAdapter(private val target: PlayerTarget): ListAdapter<EventTrackDB,
         fun bind(position: Int, tracks: ArrayList<EventTrackDB>, target: PlayerTarget) {
             itemView.itemEventName.text = tracks[position].name?.capitalize()
             itemView.itemEventDate.text = "${tracks[position].day + 23}th March  •  ${tracks[position].category}"
+            itemView.noteImg.setImageResource(getNote(position))
 
             when(tracks[position].day) {
                 1 -> itemView.itemEventImageView.setImageResource(R.drawable.curved_card_blue)
@@ -39,6 +40,16 @@ class TracksAdapter(private val target: PlayerTarget): ListAdapter<EventTrackDB,
             val navId = getNavId(target)
             itemView.setOnClickListener {
                 AnimUtils.setClickAnimation(itemView, navId, bundle)
+            }
+        }
+
+        private fun getNote(pos: Int) : Int {
+            return when(pos%5) {
+                0 -> R.drawable.ic_note_one
+                1 -> R.drawable.ic_note_two
+                2 -> R.drawable.ic_note_three
+                3 -> R.drawable.ic_note_four
+                else -> R.drawable.ic_note_five
             }
         }
 
