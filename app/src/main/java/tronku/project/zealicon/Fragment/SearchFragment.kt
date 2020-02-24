@@ -72,12 +72,6 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun updateSummary(list: ArrayList<EventTrackDB>) {
-        val categories = TreeSet<String>()
-        list.forEach {
-            categories.add(it.category!!)
-        }
-    }
 
     private fun searchTextChangeListner() {
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -105,8 +99,8 @@ class SearchFragment : Fragment() {
                         if (it.isNullOrEmpty()) {
                             Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
                         } else {
-                            //TODO: Add filter with editText
-                            adapter.submitList(it)
+                            adapter.submitList(it.filter{(EventTrackDB, name, category) ->
+                                name!!.startsWith(editable.toString(), ignoreCase = true)})
                             adapter.notifyDataSetChanged()
                         }
                     })
