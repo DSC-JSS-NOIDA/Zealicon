@@ -20,6 +20,7 @@
         app:wavePrimaryLineWidth="3.0"
         app:waveSecondaryLineWidth="1.0"
         app:waveXAxisPositionMultiplier="0.5"
+        android:visibility="gone"
         android:alpha="0.4"/>
 
     <androidx.core.widget.NestedScrollView

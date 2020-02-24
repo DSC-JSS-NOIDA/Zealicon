@@ -17,18 +17,41 @@
         app:cardCornerRadius="@dimen/spacing_middle"
         app:cardElevation="@dimen/zero_dimen">
 
-        <ImageView
-            android:id="@+id/categoryImage"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/cultural_category"/>
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/categoryGradient"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/curved_card_purple"
-            android:alpha="0.6"/>
+            <ImageView
+                android:id="@+id/categoryGradient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/curved_card_purple"/>
+
+            <ImageView
+                android:id="@+id/musicNotes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/music_notes"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="120dp"
+                android:tint="@color/purple_900"/>
+
+            <ImageView
+                android:id="@+id/categoryImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:tint="@color/white"
+                android:alpha="0.5"
+                android:src="@drawable/ic_guitar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="@dimen/spacing_mxlarge"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -45,6 +68,7 @@
         android:singleLine="true"
         android:ellipsize="marquee"
         android:fontFamily="@font/alata_regular"
-        android:layout_marginStart="@dimen/spacing_middle"/>
+        android:layout_marginStart="@dimen/spacing_mxlarge"
+        android:layout_marginBottom="@dimen/spacing_mxlarge"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

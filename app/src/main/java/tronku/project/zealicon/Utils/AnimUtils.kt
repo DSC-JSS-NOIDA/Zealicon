@@ -36,7 +36,6 @@ object AnimUtils {
 
     private fun handleGrowAnimation(v: View) {
         val growAnim = AnimationUtils.loadAnimation(v.context, R.anim.grow_view)
-        growAnim.fillAfter = true
         growAnim.duration = 400
         v.startAnimation(growAnim)
     }
@@ -46,14 +45,14 @@ object AnimUtils {
         v.startAnimation(shrinkAnim)
     }
 
-    fun setClickAnimation(v: View, navId: Int, args: Bundle?) {
+    fun setClickAnimation(v: View, navId: Int, args: Bundle?, duration: Long = 150) {
         val shrinkAnim = AnimationUtils.loadAnimation(v.context, R.anim.shrink_view)
         shrinkAnim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
             override fun onAnimationEnd(animation: Animation?) {
                 handleGrowAnimation(v)
-                Handler().postDelayed({ v.findNavController().navigate(navId, args, null, null) }, 100)
+                Handler().postDelayed({ v.findNavController().navigate(navId, args, null, null) }, duration)
             }
 
             override fun onAnimationStart(animation: Animation?) {

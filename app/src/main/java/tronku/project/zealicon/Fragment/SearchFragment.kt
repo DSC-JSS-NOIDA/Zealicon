@@ -1,19 +1,15 @@
 package tronku.project.zealicon.Fragment
 
-import android.app.Application
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.search_fragment.*
-import tronku.project.zealicon.Activity.MainActivity
 import tronku.project.zealicon.Adapter.CategoryAdapter
 import tronku.project.zealicon.Model.CategoryModel
 
 import tronku.project.zealicon.R
-import tronku.project.zealicon.Utils.AnimUtils
 import tronku.project.zealicon.Viewmodel.SearchViewModel
 
 class SearchFragment : Fragment() {
@@ -22,7 +18,7 @@ class SearchFragment : Fragment() {
         fun newInstance() = SearchFragment()
     }
 
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel by lazy { SearchViewModel() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,20 +29,17 @@ class SearchFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
-        // TODO: Use the ViewModel
 
         val categories: ArrayList<CategoryModel> = ArrayList()
-        categories.add(CategoryModel("Colaro", R.drawable.cultural_category, R.drawable.curved_card_yellow))
-        categories.add(CategoryModel("Coderz", R.drawable.coder_category, R.drawable.curved_card_blue))
-        categories.add(CategoryModel("Mechavoltz", R.drawable.mecha_category, R.drawable.curved_card_purple))
-        categories.add(CategoryModel("Play it On", R.drawable.gaming_category, R.drawable.curved_card_red))
-        categories.add(CategoryModel("Robotiles", R.drawable.robots_category, R.drawable.curved_card_blue_dark))
-        categories.add(CategoryModel("Z-Wars", R.drawable.war_category, R.drawable.curved_card_green))
+        categories.add(CategoryModel(1, "Colorodo", R.drawable.ic_guitar, R.drawable.curved_card_black, R.color.blue_black_darker))
+        categories.add(CategoryModel(2, "Mechavoltz", R.drawable.ic_violin, R.drawable.curved_card_blue, R.color.light_blue_900))
+        categories.add(CategoryModel(3, "Play-it-on", R.drawable.ic_saxophone, R.drawable.curved_card_brown, R.color.brown_900))
+        categories.add(CategoryModel(4, "Robotiles", R.drawable.ic_drumset, R.drawable.curved_card_red, R.color.red_900))
+        categories.add(CategoryModel(5, "Coderz", R.drawable.ic_piano, R.drawable.curved_card_purple, R.color.purple_900))
+        categories.add(CategoryModel(6, "Z-Wars", R.drawable.ic_accordion, R.drawable.curved_card_green, R.color.green_900))
 
-        val categoryAdapter: CategoryAdapter = CategoryAdapter(categories)
+        val categoryAdapter = CategoryAdapter(categories)
         categoryRecyclerView.adapter = categoryAdapter
-//        categoryRecyclerView.a
     }
 
 }

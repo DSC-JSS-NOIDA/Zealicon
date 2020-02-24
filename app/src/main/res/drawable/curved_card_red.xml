@@ -6,8 +6,8 @@
         android:radius="@dimen/spacing_middle"/>
 
     <gradient
-        android:startColor="@color/red_800"
-        android:endColor="@color/red_400"
+        android:startColor="@color/red_400"
+        android:endColor="@color/red_900"
         android:angle="45"/>
 
 </shape>

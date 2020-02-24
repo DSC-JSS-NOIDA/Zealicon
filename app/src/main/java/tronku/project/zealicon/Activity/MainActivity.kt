@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             } else {
                 loaderLayout.visibility = View.GONE
                 bottomNavigation.visibility = View.VISIBLE
-                navController.navigate(R.id.home)
             }
         })
     }

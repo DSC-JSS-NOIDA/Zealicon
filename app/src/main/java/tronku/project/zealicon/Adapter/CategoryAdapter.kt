@@ -5,42 +5,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.item_category.view.*
 import tronku.project.zealicon.Model.CategoryModel
 import tronku.project.zealicon.R
 
 class CategoryAdapter( val category : List<CategoryModel>)  : RecyclerView.Adapter<CategoryViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-
-        val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_category, parent, false)
-        val viewHolder = CategoryViewHolder(view)
-
-        return viewHolder
-
-
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
+        return CategoryViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-
-        return category.size
-
-    }
+    override fun getItemCount() = category.size
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-
-        holder.name.setText(category.get(position).name)
-        holder.image.setImageResource(category.get(position).image)
-        holder.gradient.setImageResource(category.get(position).gradientDrawable)
-
+        holder.bind(category[position])
     }
 }
 
 class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-    val image = itemView.findViewById<ImageView>(R.id.categoryImage)
-    val gradient = itemView.findViewById<ImageView>(R.id.categoryGradient)
-    val name = itemView.findViewById<TextView>(R.id.categoryName)
-
+    fun bind(category: CategoryModel) {
+        itemView.categoryName.text = category.name
+        itemView.categoryGradient.setImageResource(category.gradientDrawable)
+        itemView.categoryImage.setImageResource(category.image)
+        itemView.musicNotes.setColorFilter(ContextCompat.getColor(itemView.context, category.color), android.graphics.PorterDuff.Mode.SRC_IN)
+    }
 }

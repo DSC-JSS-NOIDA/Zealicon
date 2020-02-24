@@ -42,20 +42,21 @@ class HomeFragment : Fragment() {
     }
 
     private fun setClickListeners() {
+        val duration = 300L
         day_one_list.setOnClickListener {
-            AnimUtils.setClickAnimation(day_one_list, R.id.action_home_to_playListFragment, getArgs(1))
+            AnimUtils.setClickAnimation(day_one_list, R.id.action_home_to_playListFragment, getArgs(1), duration)
         }
 
         day_two_list.setOnClickListener {
-            AnimUtils.setClickAnimation(day_two_list, R.id.action_home_to_playListFragment, getArgs(2))
+            AnimUtils.setClickAnimation(day_two_list, R.id.action_home_to_playListFragment, getArgs(2), duration)
         }
 
         day_three_list.setOnClickListener {
-            AnimUtils.setClickAnimation(day_three_list, R.id.action_home_to_playListFragment, getArgs(3))
+            AnimUtils.setClickAnimation(day_three_list, R.id.action_home_to_playListFragment, getArgs(3), duration)
         }
 
         day_four_list.setOnClickListener {
-            AnimUtils.setClickAnimation(day_four_list, R.id.action_home_to_playListFragment, getArgs(4))
+            AnimUtils.setClickAnimation(day_four_list, R.id.action_home_to_playListFragment, getArgs(4), duration)
         }
     }
 

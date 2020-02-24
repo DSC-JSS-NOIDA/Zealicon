@@ -36,11 +36,16 @@ class PlayerActivity : AppCompatActivity() {
         tracks = intent.getParcelableArrayListExtra("tracks")
         currentPos = intent.getIntExtra("position", 0)
         inflateUI()
-        media =  MediaPlayer.create(this, R.raw.gurbax_boom_shankar)
-        media.isLooping = true
-        media.start()
         addClickEvents()
         setObservers()
+
+        media =  MediaPlayer.create(this, R.raw.gurbax_boom_shankar)
+        media.isLooping = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        media.start()
     }
 
     private fun inflateUI() {
@@ -120,11 +125,11 @@ class PlayerActivity : AppCompatActivity() {
             AnimUtils.setClickAnimation(buttonMuteUnmute)
             if (isMute) {
                 isMute = false
-                buttonMuteUnmute.setImageResource(R.drawable.ic_mute)
+                buttonMuteUnmute.setImageResource(R.drawable.ic_unmute)
                 playPauseMusic()
             } else {
                 isMute = true
-                buttonMuteUnmute.setImageResource(R.drawable.ic_unmute)
+                buttonMuteUnmute.setImageResource(R.drawable.ic_mute)
                 playPauseMusic()
             }
         }
