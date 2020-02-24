@@ -23,26 +23,26 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/memberName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="Member Name"
-        android:textSize="16dp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/alata_regular"/>
+        <TextView
+            android:id="@+id/memberName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Member Name"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/alata_regular"/>
 
-    <TextView
-        android:id="@+id/memberDesignation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="Developer"
-        android:textSize="14dp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/alata_regular"
-        android:includeFontPadding="false"/>
+        <TextView
+            android:id="@+id/memberDesignation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Developer"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/alata_regular"
+            android:includeFontPadding="false"/>
 
         <TextView
             android:id="@+id/memberContact"

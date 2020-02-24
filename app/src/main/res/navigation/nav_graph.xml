@@ -24,7 +24,17 @@
         android:id="@+id/search"
         android:name="tronku.project.zealicon.Fragment.SearchFragment"
         android:label="search_fragment"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_search_to_playerActivity"
+            app:destination="@id/playerActivity" />
+        <action
+            android:id="@+id/action_search_to_home"
+            app:destination="@id/home" />
+        <action
+            android:id="@+id/action_search_to_about"
+            app:destination="@id/about" />
+    </fragment>
     <fragment
         android:id="@+id/my_playlist"
         android:name="tronku.project.zealicon.Fragment.MyPlaylistFragment"

@@ -10,28 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".Fragment.HomeFragment"
-        android:layout_marginStart="@dimen/spacing_mlarge"
-        android:layout_marginEnd="@dimen/spacing_mlarge">
+        tools:context=".Fragment.HomeFragment">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/searchTextView"
             android:text="Discover"
+            android:textAlignment="textStart"
             android:textColor="@color/white"
             android:textSize="22dp"
+            android:layout_marginStart="@dimen/spacing_mlarge"
+            android:layout_marginEnd="@dimen/spacing_mlarge"
             android:fontFamily="@font/alata_regular"/>
 
         <EditText
             android:id="@+id/searchEditText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/spacing_xxlarge"
             app:layout_constraintTop_toBottomOf="@id/searchTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/searchTextView"
+            app:layout_constraintStart_toStartOf="@id/searchTextView"
             android:textColor="@color/white"
             android:textColorHint="@color/grey_40"
             android:hint="Search for any event here"
@@ -41,6 +43,7 @@
             android:paddingTop="@dimen/spacing_middle"
             android:paddingEnd="@dimen/spacing_middle"
             android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/curved_search" />
 
         <ImageView
@@ -56,23 +59,34 @@
         <LinearLayout
             android:id="@+id/clipLinearLayout"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/searchEditText"
             app:layout_constraintTop_toBottomOf="@id/searchEditText"
             app:layout_constraintBottom_toTopOf="@id/searchRecyclerView"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
-            android:visibility="visible">
+            android:layout_marginTop="10dp"
+            android:padding="4dp"
+            android:background="@drawable/search_click_background">
 
             <TextView
+                android:id="@+id/filterCategoryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Colorado"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:fontFamily="@font/alata_regular"/>
 
             <ImageView
+                android:id="@+id/cancelFilter"
                 android:layout_width="15dp"
-                android:layout_height="15dp"/>
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:src="@drawable/ic_cancel_black_24dp"
+                android:tint="@color/white"/>
 
 
 
@@ -83,41 +97,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@id/clipLinearLayout"
-            android:layout_marginTop="@dimen/spacing_middle"
             tools:itemCount="5"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_search"/>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/searchRecyclerView"
-            app:layout_constraintStart_toStartOf="@id/searchEditText">
-
-        <TextView
+            android:id="@+id/categoryLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/searchCategoryTextView"
-            android:text="Search by category"
-            android:layout_marginTop="@dimen/spacing_middle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/white"
-            android:textSize="22dp"
-            android:fontFamily="@font/alata_regular"/>
+            app:layout_constraintTop_toBottomOf="@id/searchRecyclerView"
+            app:layout_constraintStart_toStartOf="@id/searchEditText"
+            app:layout_constraintEnd_toEndOf="@id/searchTextView">
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/categoryRecyclerView"
-               android:layout_width="@dimen/zero_dimen"
-               android:layout_height="wrap_content"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               tools:itemCount="6"
-               android:scrollbars="none"
-               tools:listitem="@layout/item_category"
-               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-               app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchCategoryTextView"
+                android:text="Search by category"
+                android:layout_marginTop="@dimen/spacing_middle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                android:fontFamily="@font/alata_regular"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRecyclerView"
+                android:layout_width="@dimen/zero_dimen"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:itemCount="6"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_category"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/searchCategoryTextView"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

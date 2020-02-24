@@ -6,88 +6,88 @@
     android:layout_width="match_parent"
     android:background="@color/overlay_dark_90">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <TextView
-        android:id="@+id/routeTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Route"
-        android:fontFamily="@font/alata_regular"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_32"/>
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/routeMap"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/routeTextView"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:src="@drawable/college_map"
-        android:scaleType="centerCrop"/>
-
-    <View
-        android:id="@+id/lineView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="20dp"
-        app:layout_constraintTop_toBottomOf="@id/routeMap"
-        android:background="@color/grey_800"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/routeRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/lineView"
-        android:layout_marginTop="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/routeRecyclerView"
-        app:layout_constraintStart_toStartOf="@id/routeRecyclerView"
-        app:layout_constraintEnd_toEndOf="@id/routeRecyclerView"
-        android:layout_marginTop="@dimen/margin_large">
+        <TextView
+            android:id="@+id/routeTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Route"
+            android:fontFamily="@font/alata_regular"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_32"/>
 
         <ImageView
-            android:id="@+id/buttonFacebook"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:clickable="true"
-            android:src="@drawable/facebook_icon"
-            android:layout_marginRight="25dp"/>
+            android:id="@+id/routeMap"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/routeTextView"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:src="@drawable/college_map"
+            android:scaleType="centerCrop"/>
 
-        <ImageView
-            android:id="@+id/buttonInstagram"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/instagram_icon"
-            android:clickable="true"
-            android:layout_marginRight="25dp"/>
+        <View
+            android:id="@+id/lineView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="20dp"
+            app:layout_constraintTop_toBottomOf="@id/routeMap"
+            android:background="@color/grey_800"/>
 
-        <ImageView
-            android:id="@+id/buttonWebsie"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/www_icon"
-            android:tint="@color/colorAccent"
-            android:clickable="true"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/routeRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/lineView"
+            android:layout_marginTop="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/routeRecyclerView"
+            app:layout_constraintStart_toStartOf="@id/routeRecyclerView"
+            app:layout_constraintEnd_toEndOf="@id/routeRecyclerView"
+            android:layout_marginTop="@dimen/margin_large">
+
+            <ImageView
+                android:id="@+id/buttonFacebook"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:clickable="true"
+                android:src="@drawable/facebook_icon"
+                android:layout_marginRight="25dp"/>
+
+            <ImageView
+                android:id="@+id/buttonInstagram"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/instagram_icon"
+                android:clickable="true"
+                android:layout_marginRight="25dp"/>
+
+            <ImageView
+                android:id="@+id/buttonWebsie"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/www_icon"
+                android:tint="@color/colorAccent"
+                android:clickable="true"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
