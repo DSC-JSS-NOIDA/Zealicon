@@ -53,11 +53,36 @@
             app:layout_constraintBottom_toBottomOf="@id/searchEditText"
             app:layout_constraintStart_toStartOf="@id/searchEditText"/>
 
+        <LinearLayout
+            android:id="@+id/clipLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintStart_toStartOf="@id/searchEditText"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            app:layout_constraintBottom_toTopOf="@id/searchRecyclerView"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Colorado"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"/>
+
+
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            app:layout_constraintTop_toBottomOf="@id/clipLinearLayout"
             android:layout_marginTop="@dimen/spacing_middle"
             tools:itemCount="5"
             tools:listitem="@layout/item_search"/>

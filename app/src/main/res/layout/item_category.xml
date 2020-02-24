@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/music_notes"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

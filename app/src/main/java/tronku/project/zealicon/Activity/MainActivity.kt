@@ -102,35 +102,35 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             duoDrawerLayout.openDrawer()
         }
 
-        this.buttonFacebook.setOnClickListener {
+        buttonFacebook.setOnClickListener {
             try {
                 applicationContext.packageManager.getPackageInfo("com.facebook.katana", 0)
-                Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/zealicon"))
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/zealicon")))
             } catch (e: Exception) {
-                Intent(
+                startActivity(Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("https://www.facebook.com/zealicon")
-                )
+                ))
             }
         }
 
-        duoDrawerLayout.buttonInstagram.setOnClickListener {
+        buttonInstagram.setOnClickListener {
             try {
                 applicationContext.packageManager.getPackageInfo("com.instagram.android", 0)
-                Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/zealicon"))
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/zealicon")))
             } catch (e: Exception) {
-                Intent(
+                startActivity(Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("https://www.instagram.com/zealicon")
-                )
+                ))
             }
         }
 
         buttonWebsie.setOnClickListener {
-                Intent(
+                startActivity(Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("https://www.zealicon.in")
-                )
+                ))
         }
 
     }
