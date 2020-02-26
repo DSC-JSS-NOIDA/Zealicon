@@ -7,68 +7,75 @@
     tools:context=".Fragment.MyPlaylistFragment"
     android:background="@color/colorPrimaryDark">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/myPlaylistImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:cardCornerRadius="@dimen/spacing_middle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/margin_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:cardElevation="@dimen/zero_dimen">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/myPlaylistLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/playlist_image"
-            android:scaleType="centerCrop"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/myPlaylistImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="@dimen/spacing_middle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardElevation="@dimen/zero_dimen">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/gray_gradient"
-            android:alpha="0.4"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/playlist_image"
+                android:scaleType="centerCrop"/>
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gray_gradient"
+                android:alpha="0.4"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/myPlaylistImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/playlistTextView"
-        android:textAlignment="center"
-        android:text="My Playlist"
-        android:textColor="@color/white"
-        android:textSize="22dp"
-        android:fontFamily="@font/alata_regular"/>
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/playlistTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/playlistSummary"
-        android:textAlignment="center"
-        android:text="11 Items   •   2 Days"
-        android:textColor="@color/overlay_light_70"
-        android:textSize="16dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/alata_regular"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/myPlaylistImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/playlistTextView"
+            android:textAlignment="center"
+            android:text="My Playlist"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:fontFamily="@font/alata_regular"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlistRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/playlistSummary"
-        app:layout_constraintStart_toStartOf="@id/playlistTextView"
-        app:layout_constraintEnd_toEndOf="@id/playlistTextView"
-        android:layout_marginTop="@dimen/spacing_middle"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="10"
-        tools:listitem="@layout/item_search"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/playlistTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/playlistSummary"
+            android:textAlignment="center"
+            android:text="11 Items   •   2 Days"
+            android:textColor="@color/overlay_light_70"
+            android:textSize="16dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/alata_regular"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/playlistRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/playlistSummary"
+            app:layout_constraintStart_toStartOf="@id/playlistTextView"
+            app:layout_constraintEnd_toEndOf="@id/playlistTextView"
+            android:layout_marginTop="@dimen/spacing_middle"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_search"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,4 +22,10 @@ class SearchViewModel : ViewModel() {
             mutablePlaylist.postValue(db.EventDao().getAll() as ArrayList)
         }
     }
+
+    fun getCategoryBasedList(db: RoomDB, categ: String) {
+        viewModelScope.launch {
+            mutablePlaylist.postValue(db.EventDao().getCategEvents(categ) as ArrayList)
+        }
+    }
 }

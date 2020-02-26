@@ -82,4 +82,6 @@ class SearchAdapter(private val target: SearchTarget): ListAdapter<EventTrackDB,
         holder.bind(position, ArrayList(currentList), target)
     }
 
+
+
 }

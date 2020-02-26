@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#000000">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
             android:singleLine="true"
             android:paddingBottom="@dimen/spacing_middle"
             android:paddingTop="@dimen/spacing_middle"
-            android:paddingEnd="@dimen/spacing_middle"
+            android:paddingEnd="@dimen/spacing_xxlarge"
             android:layout_marginTop="@dimen/spacing_middle"
             android:layout_marginBottom="10dp"
             android:background="@drawable/curved_search" />
@@ -56,6 +56,20 @@
             app:layout_constraintBottom_toBottomOf="@id/searchEditText"
             app:layout_constraintStart_toStartOf="@id/searchEditText"/>
 
+        <ImageView
+            android:id="@+id/cancelSearch"
+            android:layout_width="@dimen/spacing_mlarge"
+            android:layout_height="@dimen/spacing_mlarge"
+            android:src="@drawable/ic_cancel_black_24dp"
+            android:layout_marginRight="@dimen/spacing_middle"
+            android:tint="@color/grey_20"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/searchEditText"
+            app:layout_constraintBottom_toBottomOf="@id/searchEditText"
+            app:layout_constraintEnd_toEndOf="@id/searchEditText"/>
+
+
+
         <LinearLayout
             android:id="@+id/clipLinearLayout"
             android:layout_width="wrap_content"
@@ -66,13 +80,14 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
             android:padding="4dp"
+            android:visibility="gone"
             android:background="@drawable/search_click_background">
 
             <TextView
                 android:id="@+id/filterCategoryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Colorado"
+                android:text="Coloralo"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:layout_gravity="center"

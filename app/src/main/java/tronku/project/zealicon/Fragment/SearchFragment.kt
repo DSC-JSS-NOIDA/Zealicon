@@ -12,6 +12,7 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import kotlinx.android.synthetic.main.fragment_play_list.*
+import kotlinx.android.synthetic.main.item_category.*
 import kotlinx.android.synthetic.main.search_fragment.*
 import tronku.project.zealicon.Adapter.*
 import tronku.project.zealicon.Database.RoomDB
@@ -26,11 +27,12 @@ import java.util.function.Predicate
 import kotlin.collections.ArrayList
 
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), CategoryViewHolder.onClickListener {
 
     private val viewModel by lazy { SearchViewModel() }
     private val db by lazy { RoomDB(context!!) }
     private val adapter = SearchAdapter(SearchTarget.PLAYLIST)
+    private var eventCategory: String? = null
 
 
     companion object {
@@ -54,6 +56,7 @@ class SearchFragment : Fragment() {
             filterCategoryText.text = ""
             clipLinearLayout.visibility = View.GONE
             categoryLayout.visibility = View.VISIBLE
+            eventCategory = null
         }
 
         setObserver()
@@ -71,7 +74,6 @@ class SearchFragment : Fragment() {
             }
         })
     }
-
 
     private fun searchTextChangeListner() {
         searchEditText.addTextChangedListener(object : TextWatcher {
@@ -94,19 +96,33 @@ class SearchFragment : Fragment() {
             override fun afterTextChanged(editable: Editable) {
 
                 if (editable.toString().isNotEmpty()) {
+                    cancelSearch.visibility = View.VISIBLE
                     searchRecyclerView.visibility = View.VISIBLE
                     viewModel.playlist.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                         if (it.isNullOrEmpty()) {
                             Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
                         } else {
-                            adapter.submitList(it.filter{(EventTrackDB, name, category) ->
-                                name!!.startsWith(editable.toString(), ignoreCase = true)})
+                            if (eventCategory.isNullOrBlank())
+                                adapter.submitList(it
+                                    .filter{(EventTrackDB, name) ->
+                                        name!!.contains(editable.toString(), ignoreCase = true)})
+                            else
+                                adapter.submitList(it
+                                    .filter{(EventTrackDB, name,a,b,c, category) ->
+                                        name!!.contains(editable.toString(), ignoreCase = true) &&
+                                            category!!.contains(eventCategory.toString(), ignoreCase = true)}
+//                                .filter { (EventTrackDB, category) ->
+//                                    category!!.contains(eventCategory.toString(), ignoreCase = true) }
+//
+                                    )
                             adapter.notifyDataSetChanged()
                         }
                     })
 
-                } else
+                } else {
                     searchRecyclerView.visibility = View.GONE
+                    cancelSearch.visibility = View.GONE
+                }
             }
         })
     }
@@ -168,19 +184,19 @@ class SearchFragment : Fragment() {
             )
         )
 
-        val categoryAdapter = CategoryAdapter(categories)
+        val categoryAdapter = CategoryAdapter(categories, this)
         categoryRecyclerView.adapter = categoryAdapter
 
+    }
 
-
-//        categoryRecyclerView.get(index = 0).setOnClickListener {
-//            Toast.makeText(context, "item 1", Toast.LENGTH_SHORT).show()
-//        }
+    override fun onClick(category: String?) {
+//        viewModel.playlist.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 //
-//        categoryRecyclerView.get(index = 1).setOnClickListener {
-//            Toast.makeText(context, "item 2", Toast.LENGTH_SHORT).show()
-//
-//        }
+//        })
+        eventCategory = category
+        filterCategoryText.text = eventCategory
+        clipLinearLayout.visibility = View.VISIBLE
+        searchEditText.requestFocus()
     }
 
 }

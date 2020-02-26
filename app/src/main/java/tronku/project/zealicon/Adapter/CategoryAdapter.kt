@@ -1,6 +1,7 @@
 package tronku.project.zealicon.Adapter
 
 import android.view.LayoutInflater
+import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.item_category.view.*
 import tronku.project.zealicon.Model.CategoryModel
 import tronku.project.zealicon.R
 
-class CategoryAdapter( val category : List<CategoryModel>)  : RecyclerView.Adapter<CategoryViewHolder>(){
+class CategoryAdapter( val category : List<CategoryModel>, val listener: CategoryViewHolder.onClickListener)  : RecyclerView.Adapter<CategoryViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
@@ -22,6 +23,9 @@ class CategoryAdapter( val category : List<CategoryModel>)  : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.bind(category[position])
+        holder.itemView.setOnClickListener {
+            listener.onClick(category[position].name)
+        }
     }
 }
 
@@ -31,5 +35,9 @@ class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.categoryGradient.setImageResource(category.gradientDrawable)
         itemView.categoryImage.setImageResource(category.image)
         itemView.musicNotes.setColorFilter(ContextCompat.getColor(itemView.context, category.color), android.graphics.PorterDuff.Mode.SRC_IN)
+    }
+
+    public interface onClickListener{
+        fun onClick(category: String?)
     }
 }
