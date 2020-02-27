@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_footer.*
 import kotlinx.android.synthetic.main.menu_footer.view.*
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                     }
                     Status.ERROR -> {
                         loaderLayout.visibility = View.GONE
+                        errorLayout.visibility = View.GONE
                         Log.e("ERROR", res.msg.toString())
                     }
                     Status.SUCCESS -> viewModel.parse(db, res.data.toString())
@@ -67,7 +69,8 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         viewModel.isParsed.observe(this, Observer {
             if (!it) {
                 if (ExtraUtils.isConnected(this@MainActivity))
-                    Toast.makeText(this@MainActivity, "Error in parsing data...", Toast.LENGTH_SHORT).show()
+//                    errorLayout.visibility = View.VISIBLE
+//                    Toast.makeText(this@MainActivity, "Error in parsing data...", Toast.LENGTH_SHORT).show()
                 loaderLayout.visibility = View.GONE
             } else {
                 loaderLayout.visibility = View.GONE
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
         val menuOptions: ArrayList<String> = ArrayList()
         menuOptions.add("Home")
         menuOptions.add("Route")
-        menuOptions.add("Sponsors")
+//        menuOptions.add("Sponsors")
         menuOptions.add("Team")
         menuOptions.add("About")
 
@@ -147,6 +150,12 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             "fragment_team" -> navController.navigate(R.id.action_fragmentTeam_to_home)
             "fragment_sponsor" -> navController.navigate(R.id.action_fragmentSponsor_to_home)
             "fragment_route" -> navController.navigate(R.id.action_fragmentRoute_to_home)
+            "home_fragment" -> {
+                val snackbar = Snackbar.make(duoDrawerLayout, "Do you want to exit?", Snackbar.LENGTH_SHORT)
+                snackbar.setAction("Yes", View.OnClickListener {
+                    finishAffinity()
+                }).show()
+            }
             else -> super.onBackPressed()
         }
         bottomNavigation.visibility = View.VISIBLE
@@ -169,20 +178,20 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 bottomNavigation.visibility = View.GONE
                 duoAdapter.setViewSelected(1, true)
             }
-            2 -> {
+            10 -> {
                 navController.navigate(R.id.fragmentSponsor)
                 bottomNavigation.visibility = View.GONE
                 duoAdapter.setViewSelected(2, true)
             }
-            3 -> {
+            2 -> {
                 navController.navigate(R.id.fragmentTeam)
                 bottomNavigation.visibility = View.GONE
-                duoAdapter.setViewSelected(3, true)
+                duoAdapter.setViewSelected(2, true)
             }
-            4 -> {
+            3 -> {
                 navController.navigate(R.id.fragmentAbout)
                 bottomNavigation.visibility = View.GONE
-                duoAdapter.setViewSelected(4, true)
+                duoAdapter.setViewSelected(2, true)
             }
 
         }

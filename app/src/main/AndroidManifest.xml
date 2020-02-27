@@ -17,7 +17,8 @@
         android:largeHeap="true"
         android:name=".Utils.ZealiconApp">
         <activity android:name=".Activity.PlayerActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activity.SplashScreenActivity"
             android:screenOrientation="portrait">

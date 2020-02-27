@@ -42,11 +42,16 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
 
         addCategoryCards()
         searchTextChangeListner()
+
         cancelFilter.setOnClickListener {
             filterCategoryText.text = ""
             clipLinearLayout.visibility = View.GONE
             categoryLayout.visibility = View.VISIBLE
             eventCategory = null
+        }
+
+        cancelSearch.setOnClickListener {
+            searchEditText.setText("")
         }
 
         setObserver()
@@ -122,7 +127,7 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
         categories.add(
             CategoryModel(
                 1,
-                "Colorodo",
+                "Colorado",
                 R.drawable.ic_guitar,
                 R.drawable.curved_card_black,
                 R.color.blue_black_darker
@@ -180,9 +185,6 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
     }
 
     override fun onClick(category: String?) {
-//        viewModel.playlist.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-//
-//        })
         eventCategory = category
         filterCategoryText.text = eventCategory
         clipLinearLayout.visibility = View.VISIBLE

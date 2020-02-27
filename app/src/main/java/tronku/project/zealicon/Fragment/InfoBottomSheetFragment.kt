@@ -51,5 +51,17 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
         v.eventName.text = currentTrack.name
         v.eventType.text = currentTrack.category
         v.eventDescription.text = currentTrack.description
+        v.eventRules.text = currentTrack.rule
+        if (currentTrack.rule.isNullOrBlank()){
+            v.eventRules.visibility = View.GONE
+            v.rulesText.visibility
+        }
+        v.eventprize1.text = currentTrack.firstPrize.toString()
+        v.eventprize2.text = currentTrack.secondPrize.toString()
+        if (currentTrack.secondPrize == 0)
+            layoutPrize2.visibility = View.GONE
+        v.eventContactName.text = currentTrack.contactName
+        v.eventContact.text = currentTrack.contactNo
+
     }
 }

@@ -9,7 +9,7 @@ data class EventTrack(
     @SerializedName("name") val name: String?,
     @SerializedName("description") val description: String?,
     @SerializedName("day") val day: Int,
-    @SerializedName("rule") val rule: String?,
+    @SerializedName("rules") val rule: String?,
     @SerializedName("category_id") val categoryId: Int,
     @SerializedName("winner1") val firstPrize: Int,
     @SerializedName("winner2") val secondPrize: Int?,

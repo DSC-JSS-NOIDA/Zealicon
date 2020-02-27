@@ -1,8 +1,8 @@
 package tronku.project.zealicon.Activity
 
 import android.animation.ObjectAnimator
-import android.content.res.AssetFileDescriptor
 import android.media.AudioManager
+import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -44,7 +44,12 @@ class PlayerActivity : AppCompatActivity() {
 
     private fun initMediaPlayer() {
         media =  MediaPlayer.create(this, R.raw.gurbax_boom_shankar)
-            .apply { AudioManager.STREAM_MUSIC }
+            .apply {
+                AudioManager.STREAM_MUSIC
+                AudioManager.AUDIOFOCUS_REQUEST_GRANTED
+            }
+
+
         media.isLooping = true
         media.start()
     }
@@ -122,8 +127,10 @@ class PlayerActivity : AppCompatActivity() {
             AnimUtils.setClickAnimation(addRemoveButton)
             if (viewModel.isAdded.value == true) {
                 viewModel.removeFromPlaylist(currentTrack.id)
+                Toast.makeText(this@PlayerActivity, "Removed from Playlist", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.addToPlaylist(currentTrack.id)
+                Toast.makeText(this@PlayerActivity, "Added to Playlist", Toast.LENGTH_SHORT).show()
             }
         }
 

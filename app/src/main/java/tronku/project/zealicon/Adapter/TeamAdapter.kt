@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import tronku.project.zealicon.Model.CategoryModel
 import tronku.project.zealicon.Model.TeamModel
 import tronku.project.zealicon.R
@@ -20,7 +21,6 @@ class TeamAdapter( val member : List<TeamModel>)  : RecyclerView.Adapter<TeamVie
 
         return viewHolder
 
-
     }
 
     override fun getItemCount(): Int {
@@ -32,7 +32,10 @@ class TeamAdapter( val member : List<TeamModel>)  : RecyclerView.Adapter<TeamVie
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
 
         holder.name.setText(member.get(position).name)
-        holder.image.setImageResource(member.get(position).image)
+//        holder.image.setImageResource(member.get(position).image)
+        Glide.with(holder.image)
+            .load(member[position].image)
+            .into(holder.image)
         holder.designation.setText(member.get(position).designation)
 
     }

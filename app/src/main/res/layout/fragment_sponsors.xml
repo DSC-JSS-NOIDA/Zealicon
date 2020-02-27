@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/overlay_dark_90"
     android:padding="16dp">
@@ -13,6 +14,20 @@
         android:fontFamily="@font/alata_regular"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/text_32"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/errorText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/errorImage"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintVertical_chainStyle="packed"-->
+<!--        android:text="To be updated soon"-->
+<!--        android:textSize="@dimen/text_big"-->
+<!--        android:textColor="@color/grey_20"-->
+<!--        android:fontFamily="@font/alata_regular"/>-->
 
 
 </LinearLayout>

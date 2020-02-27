@@ -48,9 +48,11 @@ class MyPlaylistFragment : Fragment() {
             val tracks = ArrayList<EventTrackDB>(it)
             if (tracks.isNullOrEmpty()) {
                 Toast.makeText(context, "No tracks", Toast.LENGTH_SHORT).show()
+                noPlaylist.visibility = View.VISIBLE
                 myPlaylistLayout.visibility = View.GONE
             } else {
                 myPlaylistLayout.visibility = View.VISIBLE
+                noPlaylist.visibility = View.GONE
                 adapter.submitList(tracks)
                 updateSummary(tracks)
             }
