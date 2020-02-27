@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.navigation.findNavController
 import tronku.project.zealicon.R
+import java.lang.Exception
 
 
 object AnimUtils {
@@ -52,7 +53,13 @@ object AnimUtils {
 
             override fun onAnimationEnd(animation: Animation?) {
                 handleGrowAnimation(v)
-                Handler().postDelayed({ v.findNavController().navigate(navId, args, null, null) }, duration)
+                try {
+                    Handler().postDelayed({
+                        v.findNavController().navigate(navId, args, null, null)
+                    }, duration)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
 
             override fun onAnimationStart(animation: Animation?) {

@@ -1,6 +1,8 @@
 package tronku.project.zealicon.Activity
 
 import android.animation.ObjectAnimator
+import android.content.res.AssetFileDescriptor
+import android.media.AudioManager
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -38,14 +40,18 @@ class PlayerActivity : AppCompatActivity() {
         inflateUI()
         addClickEvents()
         setObservers()
+    }
 
+    private fun initMediaPlayer() {
         media =  MediaPlayer.create(this, R.raw.gurbax_boom_shankar)
+            .apply { AudioManager.STREAM_MUSIC }
         media.isLooping = true
+        media.start()
     }
 
     override fun onResume() {
         super.onResume()
-        media.start()
+        initMediaPlayer()
     }
 
     private fun inflateUI() {
@@ -143,7 +149,7 @@ class PlayerActivity : AppCompatActivity() {
 
     fun playPauseMusic(){
         if (!isMute and isPlaying)
-                media.start()
+            media.start()
         else
             media.pause()
     }

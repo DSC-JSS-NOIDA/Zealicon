@@ -12,6 +12,7 @@ import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.Network.ApiClient
 import tronku.project.zealicon.Network.EventsApi
 import tronku.project.zealicon.Model.Resource
+import java.lang.Exception
 
 class MainViewModel: ViewModel() {
 
@@ -26,16 +27,21 @@ class MainViewModel: ViewModel() {
 
     fun loadData() = liveData(Dispatchers.IO) {
         emit(Resource.loading())
-        val api = ApiClient.createService(EventsApi::class.java)
-        val response = api.getEventsAsync(1)
-        if(response.isSuccessful) {
-            emit(Resource.success(response.body()))
+        try {
+            val api = ApiClient.createService(EventsApi::class.java)
+            val response = api.getEventsAsync(1)
+            if (response.isSuccessful) {
+                emit(Resource.success(response.body()))
+            } else {
+                emit(Resource.error("Something went wrong!"))
+            }
+        } catch (e: Exception) {
+            emit(Resource.error("Something went wrong!"))
         }
     }
 
     fun parse(db: RoomDB, res: String?) {
         if (res.isNullOrEmpty()) {
-            //show error message
             mutableIsParsed.postValue(false)
         } else {
             val jsonObject = JSONObject(res)

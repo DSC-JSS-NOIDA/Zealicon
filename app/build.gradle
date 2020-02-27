@@ -8,18 +8,24 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+def keysFile = rootProject.file("local.properties")
+def keys = new Properties()
+keys.load(new FileInputStream(keysFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "tronku.project.zealicon"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
+
+        buildConfigField("String", "SITE_KEY", keys['SITE_KEY'])
     }
     buildTypes {
         release {
@@ -44,10 +50,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation "androidx.preference:preference-ktx:1.1.0"
 
     //Glide - image loading library
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     //Retrofit - networking library
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -68,6 +75,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     implementation "com.google.android.material:material:$material_design_version"
     implementation 'com.narayanacharya:WaveView:0.9.4'
+    implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
 
     //Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

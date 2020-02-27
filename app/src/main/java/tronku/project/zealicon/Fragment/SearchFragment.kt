@@ -1,33 +1,23 @@
 package tronku.project.zealicon.Fragment
 
 import android.os.Bundle
-import android.os.PatternMatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
-import kotlinx.android.synthetic.main.fragment_play_list.*
-import kotlinx.android.synthetic.main.item_category.*
 import kotlinx.android.synthetic.main.search_fragment.*
 import tronku.project.zealicon.Adapter.*
 import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.CategoryModel
-import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.R
-import tronku.project.zealicon.Viewmodel.PlaylistViewModel
 import tronku.project.zealicon.Viewmodel.SearchViewModel
-import java.util.*
-import java.util.Locale.filter
-import java.util.function.Predicate
 import kotlin.collections.ArrayList
 
 
-class SearchFragment : Fragment(), CategoryViewHolder.onClickListener {
+class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
 
     private val viewModel by lazy { SearchViewModel() }
     private val db by lazy { RoomDB(context!!) }
