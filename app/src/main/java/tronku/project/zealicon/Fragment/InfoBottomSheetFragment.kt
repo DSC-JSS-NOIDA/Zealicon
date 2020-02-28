@@ -100,24 +100,32 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
     private fun regEvent(v: View) {
         if (ExtraUtils.getUser(context!!) != null) {
             ExtraUtils.getUser(context!!)?.let {
-                viewModel.registerForEvent(it, currentTrack.id).observe(this, Observer { res ->
-                    when (res.status) {
-                        Status.LOADING -> {
-                            v.registerButton.visibility = View.INVISIBLE
-                            v.loader.visibility = View.VISIBLE
+                if (it.zealID == null) {
+                    Toast.makeText(context, "Please submit the registration amount first!", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.registerForEvent(it, currentTrack.id).observe(this, Observer { res ->
+                        when (res.status) {
+                            Status.LOADING -> {
+                                v.registerButton.visibility = View.INVISIBLE
+                                v.loader.visibility = View.VISIBLE
+                            }
+                            Status.ERROR -> {
+                                Log.e("REG_ERROR", res.msg.toString())
+                            }
+                            Status.SUCCESS -> {
+                                Log.e("REGISTERED", res.data.toString())
+                                Toast.makeText(
+                                    context,
+                                    "You have been registered!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                viewModel.addAsRegistered(currentTrack.id, db)
+                                v.loader.visibility = View.INVISIBLE
+                                v.registeredButton.visibility = View.VISIBLE
+                            }
                         }
-                        Status.ERROR -> {
-                            Log.e("REG_ERROR", res.msg.toString())
-                        }
-                        Status.SUCCESS -> {
-                            Log.e("REGISTERED", res.data.toString())
-                            Toast.makeText(context, "You have been registered!", Toast.LENGTH_SHORT).show()
-                            viewModel.addAsRegistered(currentTrack.id, db)
-                            v.loader.visibility = View.INVISIBLE
-                            v.registeredButton.visibility = View.VISIBLE
-                        }
-                    }
-                })
+                    })
+                }
             }
         } else {
             showSearchDialog()

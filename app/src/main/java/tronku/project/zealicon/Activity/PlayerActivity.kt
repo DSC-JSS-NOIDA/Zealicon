@@ -1,19 +1,18 @@
 package tronku.project.zealicon.Activity
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.media.AudioManager
-import android.content.res.AssetFileDescriptor
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_player.*
 import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Fragment.InfoBottomSheetFragment
-import tronku.project.zealicon.Model.EventTrack
 import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
@@ -162,6 +161,24 @@ class PlayerActivity : AppCompatActivity() {
             val bottomSheet = InfoBottomSheetFragment.newInstance(currentTrack)
             bottomSheet.show(supportFragmentManager, InfoBottomSheetFragment.TAG)
         }
+
+        buttonShare.setOnClickListener {
+            AnimUtils.setClickAnimation(it)
+            shareEvent()
+        }
+    }
+
+    private fun shareEvent() {
+        val message = "Hey! I just explored *${currentTrack.name}* on Zealicon app. It's going to be" +
+                " happen on *day ${currentTrack.day}* of the fest. Here's the event's detail -\n${currentTrack.description}" +
+                "\n\nYou can register for the event on the app and website. " +
+                "\nDownload now - https://play.google.com/store/apps/details?id=tronku.project.zealicon"
+
+        val share = Intent()
+        share.action = Intent.ACTION_SEND
+        share.putExtra(Intent.EXTRA_TEXT, message)
+        share.type = "text/plain"
+        startActivity(Intent.createChooser(share, "Share via: "))
     }
 
     private fun playPauseMusic(){
