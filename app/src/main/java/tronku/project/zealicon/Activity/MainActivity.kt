@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             3 -> {
                 navController.navigate(R.id.fragmentAbout)
                 bottomNavigation.visibility = View.GONE
-                duoAdapter.setViewSelected(2, true)
+                duoAdapter.setViewSelected(3, true)
             }
 
         }
