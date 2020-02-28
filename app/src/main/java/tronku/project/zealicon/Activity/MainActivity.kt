@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                     }
                     Status.ERROR -> {
                         loaderLayout.visibility = View.GONE
-                        errorLayout.visibility = View.GONE
+                        errorLayout.visibility = View.VISIBLE
                         Log.e("ERROR", res.msg.toString())
                     }
                     Status.SUCCESS -> viewModel.parse(db, res.data.toString())
@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
         navDrawerIcon.setOnClickListener {
             duoDrawerLayout.openDrawer()
+            ExtraUtils.hideKeyboard(this)
         }
 
         buttonFacebook.setOnClickListener {

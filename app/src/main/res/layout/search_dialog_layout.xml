@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:layout_gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/overlay_dark_90">
+
+    <TextView
+        android:id="@+id/searchText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/alata_regular"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_marginStart="@dimen/spacing_smlarge"
+        android:layout_marginTop="@dimen/spacing_mxlarge"/>
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toBottomOf="@id/searchText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/white"
+        android:textColorHint="@color/grey_40"
+        android:hint="Search with mobile, email id"
+        android:paddingStart="@dimen/spacing_xxlarge"
+        android:singleLine="true"
+        android:layout_marginStart="@dimen/spacing_smlarge"
+        android:layout_marginEnd="@dimen/spacing_smlarge"
+        android:paddingBottom="@dimen/spacing_middle"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingEnd="@dimen/text_40"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/curved_search" />
+
+    <ImageView
+        android:layout_width="@dimen/spacing_mlarge"
+        android:layout_height="@dimen/spacing_mlarge"
+        android:src="@drawable/ic_search"
+        android:layout_marginStart="@dimen/spacing_middle"
+        android:tint="@color/grey_20"
+        app:layout_constraintTop_toTopOf="@id/searchEditText"
+        app:layout_constraintBottom_toBottomOf="@id/searchEditText"
+        app:layout_constraintStart_toStartOf="@id/searchEditText"/>
+
+    <ImageView
+        android:id="@+id/cancelSearch"
+        android:layout_width="@dimen/spacing_mxlarge"
+        android:layout_height="@dimen/spacing_mxlarge"
+        android:src="@drawable/ic_cancel_black_24dp"
+        android:layout_marginEnd="@dimen/spacing_middle"
+        android:tint="@color/grey_20"
+        android:visibility="gone"
+        android:padding="@dimen/spacing_small"
+        app:layout_constraintTop_toTopOf="@id/searchEditText"
+        app:layout_constraintBottom_toBottomOf="@id/searchEditText"
+        app:layout_constraintEnd_toEndOf="@id/searchEditText"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchBtn"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/searchEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/spacing_mxlarge">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/curved_card_purple"/>
+
+            <TextView
+                android:id="@+id/regText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:fontFamily="@font/alata_regular"
+                android:textSize="20dp"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/regLoader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Searching..."
+                android:fontFamily="@font/alata_regular"
+                android:scrollbarSize="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

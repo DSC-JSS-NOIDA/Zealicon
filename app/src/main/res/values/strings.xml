@@ -26,4 +26,5 @@ Zealicon is the annual techno-cultural festival of JSSATE, Noida. Dedicated to t
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="payment_text">Please submit the registration amount on\n the nearest helpdesk.</string>
 </resources>
