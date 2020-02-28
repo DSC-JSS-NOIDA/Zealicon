@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/playlistSummary"
             android:textAlignment="center"
-            android:text="11 Items   •   2 Days"
+            android:text="-- tracks   •   - categories"
             android:textColor="@color/overlay_light_70"
             android:textSize="16dp"
             android:layout_marginTop="4dp"

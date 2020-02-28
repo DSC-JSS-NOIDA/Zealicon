@@ -27,6 +27,7 @@ class PlayerActivity : AppCompatActivity() {
     private var tracks = ArrayList<EventTrackDB>()
     private lateinit var currentTrack: EventTrackDB
     private var currentPos = 0
+    private var isRegistered = false
 
     private val db by lazy { RoomDB(this) }
     private val viewModel by lazy { PlayerViewModel(db) }
@@ -49,9 +50,8 @@ class PlayerActivity : AppCompatActivity() {
                 AudioManager.AUDIOFOCUS_REQUEST_GRANTED
             }
 
-
         media.isLooping = true
-        media.start()
+        playPauseMusic()
     }
 
     override fun onResume() {
@@ -65,11 +65,16 @@ class PlayerActivity : AppCompatActivity() {
         eventName.text = currentTrack.name
         eventType.text = currentTrack.category
         viewModel.checkAdded(currentTrack.id)
+        viewModel.checkIfReg(currentTrack.id)
     }
 
     private fun setObservers() {
         viewModel.isAdded.observe(this, Observer {
             addRemoveButton.setImageResource(if (it) R.drawable.ic_playlist_added else R.drawable.ic_playlist_add)
+        })
+
+        viewModel.isRegistered.observe(this, Observer {
+            isRegistered = it
         })
     }
 
@@ -125,12 +130,18 @@ class PlayerActivity : AppCompatActivity() {
 
         addRemoveButton.setOnClickListener {
             AnimUtils.setClickAnimation(addRemoveButton)
-            if (viewModel.isAdded.value == true) {
-                viewModel.removeFromPlaylist(currentTrack.id)
-                Toast.makeText(this@PlayerActivity, "Removed from Playlist", Toast.LENGTH_SHORT).show()
-            } else {
-                viewModel.addToPlaylist(currentTrack.id)
-                Toast.makeText(this@PlayerActivity, "Added to Playlist", Toast.LENGTH_SHORT).show()
+            when {
+                isRegistered -> {
+                    Toast.makeText(this@PlayerActivity, "You have registered for this event!", Toast.LENGTH_SHORT).show()
+                }
+                viewModel.isAdded.value == true -> {
+                    viewModel.removeFromPlaylist(currentTrack.id)
+                    Toast.makeText(this@PlayerActivity, "Removed from Playlist", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    viewModel.addToPlaylist(currentTrack.id)
+                    Toast.makeText(this@PlayerActivity, "Added to Playlist", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -139,12 +150,11 @@ class PlayerActivity : AppCompatActivity() {
             if (isMute) {
                 isMute = false
                 buttonMuteUnmute.setImageResource(R.drawable.ic_unmute)
-                playPauseMusic()
             } else {
                 isMute = true
                 buttonMuteUnmute.setImageResource(R.drawable.ic_mute)
-                playPauseMusic()
             }
+            playPauseMusic()
         }
 
         infoButton.setOnClickListener {
@@ -154,7 +164,7 @@ class PlayerActivity : AppCompatActivity() {
         }
     }
 
-    fun playPauseMusic(){
+    private fun playPauseMusic(){
         if (!isMute and isPlaying)
             media.start()
         else

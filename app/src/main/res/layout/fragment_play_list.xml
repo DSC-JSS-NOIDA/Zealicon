@@ -98,7 +98,7 @@
                 app:layout_constraintBottom_toTopOf="@id/playlistCategory"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/playlistCategory"
-                android:text="Day ONE"
+                android:text="Day ---"
                 android:textColor="@color/white"
                 android:fontFamily="@font/alata_regular"
                 android:textSize="@dimen/text_heading"/>
@@ -114,7 +114,7 @@
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:layout_marginStart="@dimen/spacing_mxlarge"
                 android:layout_marginEnd="@dimen/spacing_middle"
-                android:text="Coloralo | Mechavoltz"
+                android:text="--- | ---"
                 android:ellipsize="marquee"
                 android:singleLine="true"
                 android:scrollHorizontally="true"
@@ -134,7 +134,7 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 android:layout_marginStart="@dimen/spacing_mxlarge"
                 android:layout_marginEnd="@dimen/spacing_middle"
-                android:text="24 March, 2019"
+                android:text="-- March, 2019"
                 android:ellipsize="end"
                 android:textColor="@color/gray_lighter"
                 android:fontFamily="@font/alata_regular"
@@ -150,7 +150,7 @@
                 android:layout_marginTop="@dimen/spacing_mlarge"
                 android:textColor="@color/overlay_light_70"
                 android:textSize="@dimen/text_normal"
-                android:text="11 tracks  •  3 categories"
+                android:text="-- tracks  •  - categories"
                 android:fontFamily="@font/alata_regular"/>
 
             <androidx.recyclerview.widget.RecyclerView

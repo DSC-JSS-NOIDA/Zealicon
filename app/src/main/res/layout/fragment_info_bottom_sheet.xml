@@ -41,8 +41,13 @@
                 android:text="Line-up"
                 android:textColor="@color/colorAccent"
                 android:textSize="28dp"
+                android:singleLine="true"
+                android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                android:layout_marginEnd="@dimen/spacing_mxlarge"/>
 
             <TextView
                 android:id="@+id/eventType"
@@ -55,23 +60,69 @@
                 app:layout_constraintStart_toStartOf="@id/eventName"
                 app:layout_constraintTop_toBottomOf="@id/eventName" />
 
-            <Button
-                android:id="@+id/registerButton"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_middle"
-                android:text="Register Now"
-                android:paddingStart="@dimen/spacing_mlarge"
-                android:paddingEnd="@dimen/spacing_mlarge"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/eventType"
                 app:layout_constraintTop_toBottomOf="@id/eventType"
                 app:layout_constraintVertical_bias="0"
-                android:background="@drawable/orange_gradient"
-                android:clickable="true"
-                android:elevation="10dp"
-                android:focusable="true"/>
+                android:id="@+id/registerLayout">
 
+                <Button
+                    android:id="@+id/registerButton"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:text="Register Now"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    android:background="@drawable/orange_gradient"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="visible"
+                    android:fontFamily="@font/alata_regular"/>
+
+                <Button
+                    android:id="@+id/registeredButton"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:text="Registered"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    android:background="@drawable/curved_card_green"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    android:fontFamily="@font/alata_regular"/>
+
+                <Button
+                    android:visibility="gone"
+                    android:enabled="false"
+                    android:id="@+id/loader"
+                    android:alpha="0.7"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:text="Wait..."
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    android:textColor="@color/white"
+                    android:background="@drawable/orange_gradient"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/alata_regular"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -81,7 +132,7 @@
                 android:layout_marginBottom="@dimen/spacing_mlarge"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/eventType"
-                app:layout_constraintTop_toBottomOf="@id/registerButton"
+                app:layout_constraintTop_toBottomOf="@id/registerLayout"
                 app:layout_constraintVertical_bias="0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,7 +157,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_medium"
                         android:alpha="0.8"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/alata_regular"
                         android:text="Rules"
                         android:textColor="@color/colorAccent"
                         android:textSize="16dp"
@@ -130,7 +181,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_medium"
                         android:alpha="0.8"
-                        android:fontFamily="@font/roboto_regular"
+                        android:fontFamily="@font/alata_regular"
                         android:text="Prizes"
                         android:textColor="@color/colorAccent"
                         android:textSize="16dp"
@@ -151,7 +202,7 @@
                             android:layout_height="match_parent"
                             android:alpha="0.8"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Winner 1: "
+                            android:text="Winner : "
                             android:textColor="@color/white"
                             android:textSize="14dp" />
 
@@ -181,7 +232,7 @@
                             android:layout_height="match_parent"
                             android:alpha="0.8"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Winner 2: "
+                            android:text="Runner up : "
                             android:textColor="@color/white"
                             android:textSize="14dp" />
 
@@ -206,6 +257,7 @@
                         android:text="Contact"
                         android:textColor="@color/colorAccent"
                         android:textSize="16dp"
+                        android:fontFamily="@font/alata_regular"
                         app:layout_constraintTop_toBottomOf="@id/layoutPrize2" />
 
                     <LinearLayout

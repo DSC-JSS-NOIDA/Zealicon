@@ -264,6 +264,7 @@ class SubscriptionFragment : Fragment() {
     private fun changeVerifyBtn(state: ButtonState) {
         when(state) {
             ButtonState.LOADING -> {
+                verifiedBtn.visibility = View.INVISIBLE
                 areYouHumanBtn.apply {
                     isEnabled = false
                     isClickable = false
@@ -274,6 +275,7 @@ class SubscriptionFragment : Fragment() {
             }
 
             ButtonState.RESET -> {
+                verifiedBtn.visibility = View.INVISIBLE
                 areYouHumanBtn.apply {
                     isEnabled = true
                     isClickable = true
