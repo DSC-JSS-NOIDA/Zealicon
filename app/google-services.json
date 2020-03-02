@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "413983267214",
+    "firebase_url": "https://zealicon-2020.firebaseio.com",
+    "project_id": "zealicon-2020",
+    "storage_bucket": "zealicon-2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413983267214:android:bce173ee4220353ee16cdf",
+        "android_client_info": {
+          "package_name": "tronku.project.zealicon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413983267214-qj3sis07eqasc7gfb1gpijithkiu4929.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tronku.project.zealicon",
+            "certificate_hash": "2f0868c9313af436dd59cf8694e2b8de019a369b"
+          }
+        },
+        {
+          "client_id": "413983267214-qdfiq3caj92epfenucuvh0igehvc408q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuE17tsikyQ7wJvrnKzWnPKTY7iJ5OcoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413983267214-qdfiq3caj92epfenucuvh0igehvc408q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

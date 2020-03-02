@@ -9,7 +9,7 @@ import tronku.project.zealicon.Model.PlaylistDB
 @Dao
 interface PlaylistDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addToPlaylist(playlistDB: PlaylistDB)
 
     @Query("DELETE from playlist where eventId = :eventId and isRegistered = 0")

@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.search_dialog_layout.*
 import kotlinx.android.synthetic.main.subscription_fragment.*
 import kotlinx.android.synthetic.main.subscription_fragment.regLoader
 import kotlinx.android.synthetic.main.subscription_fragment.regText
+import org.json.JSONObject
 import tronku.project.zealicon.BuildConfig
 import tronku.project.zealicon.Model.Status
 import tronku.project.zealicon.Model.User
@@ -101,11 +102,17 @@ class SubscriptionFragment : Fragment() {
         window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
         dialog.searchBtn.setOnClickListener {
             val queryStr = dialog.searchEditText.text.toString()
-            if (queryStr.isEmpty()) {
-                dialog.searchEditText.error = "Enter a query"
-            } else {
-                AnimUtils.setClickAnimation(it)
-                searchUser(queryStr, dialog)
+            when {
+                queryStr.isEmpty() -> {
+                    dialog.searchEditText.error = "Enter your number"
+                }
+                queryStr.length != 10 -> {
+                    dialog.searchEditText.error = "Enter a valid number"
+                }
+                else -> {
+                    AnimUtils.setClickAnimation(it)
+                    searchUser(queryStr, dialog)
+                }
             }
         }
         dialog.show()
@@ -132,7 +139,7 @@ class SubscriptionFragment : Fragment() {
                     dialog.regText.visibility = View.VISIBLE
                     dialog.searchEditText.isEnabled = true
                     dialog.searchEditText.text.clear()
-                    parse(it.data, true)
+                    parse(it.data, true, query)
                     dialog.dismiss()
                 }
             }
@@ -172,6 +179,7 @@ class SubscriptionFragment : Fragment() {
         emailEditText.text.clear()
         phoneEditText.text.clear()
         admnoEditText.text.clear()
+        areYouHumanBtn.visibility = View.VISIBLE
         isVerified = false
         token = ""
         changeVerifyBtn(ButtonState.RESET)
@@ -244,15 +252,27 @@ class SubscriptionFragment : Fragment() {
         })
     }
 
-    private fun parse(data: JsonObject?, isSearch: Boolean = false) {
+    private fun parse(data: JsonObject?, isSearch: Boolean = false, query: String? = null) {
         if (data == null) {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
         } else {
-            val user: User = Gson().fromJson(data.get("data").toString(),
-                object : TypeToken<User>() {}.type)
-            ExtraUtils.saveToPrefs(context!!, Gson().toJson(user))
-            if (!isSearch)
+            Log.e("PARSE", data.toString())
+            val user: User
+            if (!isSearch) {
+                user = Gson().fromJson(data.get("data").toString(),
+                    object : TypeToken<User>() {}.type)
                 resetData()
+            } else {
+                val resObject = data.get("data").asJsonObject.get("registraions").asJsonArray.get(0).asJsonObject
+                user = User(resObject.get("zealID").toString().isEmpty(),
+                    resObject.get("name").toString().replace("\"", ""),
+                    resObject.get("email").toString().replace("\"", ""),
+                    resObject.get("admissionNo").toString().replace("\"", ""),
+                    query.toString(),
+                    resObject.get("tempID").toString().replace("\"", ""),
+                    resObject.get("zealID").toString().replace("\"", ""))
+            }
+            ExtraUtils.saveToPrefs(context!!, "user", Gson().toJson(user))
             showUserDetails()
         }
     }
@@ -279,6 +299,7 @@ class SubscriptionFragment : Fragment() {
                 areYouHumanBtn.apply {
                     isEnabled = true
                     isClickable = true
+                    visibility = View.VISIBLE
                 }
                 areYouHumanImg.visibility = View.VISIBLE
                 areYouHumanText.visibility = View.VISIBLE
@@ -314,7 +335,7 @@ class SubscriptionFragment : Fragment() {
                 } else {
                     Log.d("Subscription", "Error: ${it.message}")
                 }
-                Toast.makeText(context, "You entered wrong answers. Please try again.", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Please try again.", Toast.LENGTH_LONG).show()
                 changeVerifyBtn(ButtonState.RESET)
             }
     }

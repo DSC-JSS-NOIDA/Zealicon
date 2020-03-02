@@ -111,9 +111,11 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
                             }
                             Status.ERROR -> {
                                 Log.e("REG_ERROR", res.msg.toString())
+                                v.registeredButton.visibility = View.VISIBLE
+                                v.loader.visibility = View.INVISIBLE
+                                Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
                             }
                             Status.SUCCESS -> {
-                                Log.e("REGISTERED", res.data.toString())
                                 Toast.makeText(
                                     context,
                                     "You have been registered!",

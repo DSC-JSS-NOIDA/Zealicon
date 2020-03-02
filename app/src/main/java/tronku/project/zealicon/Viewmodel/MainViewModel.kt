@@ -17,11 +17,14 @@ import java.lang.Exception
 class MainViewModel: ViewModel() {
 
     private val gson by lazy { Gson() }
+    private var mutableHasLocalData = MutableLiveData<Boolean>()
     private var mutableIsParsed = MutableLiveData<Boolean>()
     val isParsed: LiveData<Boolean>
+    val hasLocalData: LiveData<Boolean>
 
     init {
         isParsed = mutableIsParsed
+        hasLocalData = mutableHasLocalData
         mutableIsParsed.postValue(false)
     }
 
@@ -29,7 +32,7 @@ class MainViewModel: ViewModel() {
         emit(Resource.loading())
         try {
             val api = ApiClient.createService(EventsApi::class.java)
-            val response = api.getEventsAsync(1)
+            val response = api.getEventsAsync()
             if (response.isSuccessful) {
                 emit(Resource.success(response.body()))
             } else {
@@ -73,6 +76,15 @@ class MainViewModel: ViewModel() {
                 db.EventDao().insertEvent(eventTrackDB)
             }
             mutableIsParsed.postValue(true)
+        }
+    }
+
+    private fun checkForLocalData(db: RoomDB) {
+        viewModelScope.launch {
+            if (db.EventDao().getEventsCount() != 0)
+                mutableHasLocalData.postValue(true)
+            else
+                mutableHasLocalData.postValue(false)
         }
     }
 

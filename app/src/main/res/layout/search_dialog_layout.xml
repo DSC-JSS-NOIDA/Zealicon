@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/white"
         android:textColorHint="@color/grey_40"
-        android:hint="Search with mobile, email id"
+        android:hint="Search with mobile (10 digits)"
         android:paddingStart="@dimen/spacing_xxlarge"
         android:singleLine="true"
         android:layout_marginStart="@dimen/spacing_smlarge"

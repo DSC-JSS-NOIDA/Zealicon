@@ -1,14 +1,21 @@
 package tronku.project.zealicon.Activity
 
+import android.Manifest
 import android.animation.ObjectAnimator
+import android.content.ContentUris
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_player.*
 import tronku.project.zealicon.Database.RoomDB
@@ -16,7 +23,11 @@ import tronku.project.zealicon.Fragment.InfoBottomSheetFragment
 import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
+import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.PlayerViewModel
+import java.lang.Exception
+import java.util.*
+import kotlin.collections.ArrayList
 
 class PlayerActivity : AppCompatActivity() {
 
@@ -27,6 +38,8 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var currentTrack: EventTrackDB
     private var currentPos = 0
     private var isRegistered = false
+    private var isAdded = false
+    private val CALENDER_CODE = 101
 
     private val db by lazy { RoomDB(this) }
     private val viewModel by lazy { PlayerViewModel(db) }
@@ -70,6 +83,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun setObservers() {
         viewModel.isAdded.observe(this, Observer {
             addRemoveButton.setImageResource(if (it) R.drawable.ic_playlist_added else R.drawable.ic_playlist_add)
+            isAdded = it
         })
 
         viewModel.isRegistered.observe(this, Observer {
@@ -131,15 +145,14 @@ class PlayerActivity : AppCompatActivity() {
             AnimUtils.setClickAnimation(addRemoveButton)
             when {
                 isRegistered -> {
-                    Toast.makeText(this@PlayerActivity, "You have registered for this event!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PlayerActivity, "You have registered for this event!",
+                        Toast.LENGTH_SHORT).show()
                 }
-                viewModel.isAdded.value == true -> {
-                    viewModel.removeFromPlaylist(currentTrack.id)
-                    Toast.makeText(this@PlayerActivity, "Removed from Playlist", Toast.LENGTH_SHORT).show()
+                isAdded -> {
+                    getPermission()
                 }
                 else -> {
-                    viewModel.addToPlaylist(currentTrack.id)
-                    Toast.makeText(this@PlayerActivity, "Added to Playlist", Toast.LENGTH_SHORT).show()
+                    getPermission()
                 }
             }
         }
@@ -164,9 +177,79 @@ class PlayerActivity : AppCompatActivity() {
 
         buttonShare.setOnClickListener {
             AnimUtils.setClickAnimation(it)
+            Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show()
             shareEvent()
         }
     }
+
+    private fun getPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) !=
+            PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) !=
+            PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(
+                    Manifest.permission.READ_CALENDAR,
+                    Manifest.permission.WRITE_CALENDAR
+                ),
+                CALENDER_CODE
+            )
+        } else {
+            addReminderInCalendar()
+        }
+    }
+
+    private fun addReminderInCalendar() {
+        if (!isAdded) {
+            val cr = contentResolver
+            val timeZone = TimeZone.getTimeZone("Asia/Kolkata")
+            val baseStartDate = Date(1585040400000)
+            val baseEndDate = Date(1585083600000)
+            var values = ContentValues()
+            values.put(CalendarContract.Events.CALENDAR_ID, 1)
+            values.put(CalendarContract.Events.TITLE, currentTrack.name)
+            values.put(CalendarContract.Events.DESCRIPTION, currentTrack.description)
+            values.put(CalendarContract.Events.ALL_DAY, 1)
+            values.put(CalendarContract.Events.DTSTART, baseStartDate.time * currentTrack.day)
+            values.put(CalendarContract.Events.DTEND, baseEndDate.time * currentTrack.day)
+            values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.id)
+            values.put(CalendarContract.Events.HAS_ALARM, true)
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) !=
+                PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(
+                        Manifest.permission.READ_CALENDAR,
+                        Manifest.permission.WRITE_CALENDAR
+                    ), CALENDER_CODE
+                )
+            }
+            val eventUri = cr.insert(CalendarContract.Events.CONTENT_URI, values)
+            val eventId = eventUri!!.lastPathSegment!!.toLong()
+            ExtraUtils.saveToPrefs(this, currentTrack.id.toString(), eventId.toString())
+            viewModel.addToPlaylist(currentTrack.id)
+            Toast.makeText(this, "Event reminder has been added!", Toast.LENGTH_SHORT).show()
+
+            values = ContentValues()
+            values.put(CalendarContract.Reminders.EVENT_ID, eventId)
+            values.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
+            values.put(CalendarContract.Reminders.MINUTES, 30)
+            cr.insert(CalendarContract.Reminders.CONTENT_URI, values)
+        } else if (isAdded && !isRegistered) {
+            val calenderEventId: String = ExtraUtils.getFromPrefs(this, currentTrack.id.toString())
+            try {
+                val uri = ContentUris.withAppendedId(
+                    CalendarContract.Events.CONTENT_URI,
+                    calenderEventId.toLong()
+                )
+                contentResolver.delete(uri, null, null)
+                Toast.makeText(this, "Event reminder has been removed!", Toast.LENGTH_SHORT).show()
+                viewModel.removeFromPlaylist(currentTrack.id)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun shareEvent() {
         val message = "Hey! I just explored *${currentTrack.name}* on Zealicon app. It's going to be" +
@@ -186,6 +269,21 @@ class PlayerActivity : AppCompatActivity() {
             media.start()
         else
             media.pause()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            CALENDER_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
+                addReminderInCalendar()
+            } else {
+                Toast.makeText(this@PlayerActivity, "Permission denied!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onPause() {

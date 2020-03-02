@@ -10,6 +10,9 @@ interface EventDao {
     @Query("SELECT * from event_tracks")
     suspend fun getAll(): List<EventTrackDB>
 
+    @Query("SELECT COUNT(*) from event_tracks")
+    suspend fun getEventsCount(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEvent(event: EventTrackDB)
 

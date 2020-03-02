@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "event_tracks")
 data class EventTrackDB (
@@ -51,10 +52,6 @@ data class EventTrackDB (
         parcel.writeInt(societyId)
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
-
     companion object CREATOR : Parcelable.Creator<EventTrackDB> {
         override fun createFromParcel(parcel: Parcel): EventTrackDB {
             return EventTrackDB(parcel)
@@ -63,5 +60,9 @@ data class EventTrackDB (
         override fun newArray(size: Int): Array<EventTrackDB?> {
             return arrayOfNulls(size)
         }
+    }
+
+    override fun describeContents(): Int {
+        return 0
     }
 }

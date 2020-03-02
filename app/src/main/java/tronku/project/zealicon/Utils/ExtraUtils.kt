@@ -18,10 +18,10 @@ object ExtraUtils {
         return networkInfo != null && networkInfo.isConnected
     }
 
-    fun saveToPrefs(context: Context, data: String) {
+    fun saveToPrefs(context: Context, key: String, data: String) {
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = pref.edit()
-        editor.putString("user", data)
+        editor.putString(key, data)
         editor.apply()
     }
 

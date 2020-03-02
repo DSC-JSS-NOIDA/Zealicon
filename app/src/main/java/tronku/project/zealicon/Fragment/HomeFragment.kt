@@ -1,12 +1,14 @@
 package tronku.project.zealicon.Fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.home_fragment.*
 import tronku.project.zealicon.Adapter.PlayerTarget
 import tronku.project.zealicon.Adapter.TracksAdapter
@@ -15,6 +17,7 @@ import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
 import tronku.project.zealicon.Viewmodel.HomeViewModel
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -37,8 +40,17 @@ class HomeFragment : Fragment() {
 
         setClickListeners()
         setObserver()
-        //TODO SET DYNAMIC DAY
-        viewModel.getUpcomingHits(db, 1)
+        viewModel.getUpcomingHits(db, getUpcomingDay())
+    }
+
+    private fun getUpcomingDay(): Int {
+        val currentDate = Date(System.currentTimeMillis())
+        return when (currentDate.date) {
+            25 -> 2
+            26 -> 3
+            27 -> 4
+            else -> 1
+        }
     }
 
     private fun setClickListeners() {
