@@ -79,6 +79,7 @@
                 android:layout_marginTop="@dimen/spacing_middle"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="10"
+                android:scrollbars="none"
                 tools:listitem="@layout/item_search"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

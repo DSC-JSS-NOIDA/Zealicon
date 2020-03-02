@@ -3,13 +3,14 @@
     package="tronku.project.zealicon">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
+        android:name=".Utils.ZealiconApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/zealicon_icon"
@@ -17,11 +18,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:largeHeap="true"
-        android:name=".Utils.ZealiconApp">
+        android:largeHeap="true">
         <activity android:name=".Activity.PlayerActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Activity.IntroSliderActivity"></activity>
+<!--        <activity-->
+<!--            android:name=".Activity.PlayerActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:theme="@style/AppTheme" />-->
         <activity
             android:name=".Activity.SplashScreenActivity"
             android:screenOrientation="portrait">
