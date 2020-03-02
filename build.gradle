@@ -14,6 +14,8 @@ buildscript {
     ext.duo_drawer_version = '3.0.0'
     ext.half_modal_version = '0.0.4'
     ext.gson_version = '2.8.6'
+    ext.firebase_analytics_version = '17.2.3'
+    ext.firestore_version = '21.4.1'
 
 
     repositories {
@@ -23,9 +25,10 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath 'com.google.gms:google-services:4.3.3'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

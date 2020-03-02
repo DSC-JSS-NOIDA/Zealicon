@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface EventsApi {
 
     @GET("http://backoffice.zealicon.in/api/event")
-    suspend fun getEventsAsync(@Query("id") id: Int): Response<JsonObject>
+    suspend fun getEventsAsync(): Response<JsonObject>
 
     @Headers("device:android")
     @POST("api/v1/reg")
@@ -15,4 +15,9 @@ interface EventsApi {
 
     @GET("api/v1/reg/search")
     suspend fun searchUser(@Query("tag") query: String): Response<JsonObject>
+
+    @GET("http://backoffice.zealicon.in/api/event/participate")
+    suspend fun registerForEvent(@Query("name") name: String, @Query("email") email: String,
+                                 @Query("event_id") id: Int, @Query("zeal_id") zealId: String,
+                                 @Query("contact_no") contactNo: String): Response<JsonObject>
 }

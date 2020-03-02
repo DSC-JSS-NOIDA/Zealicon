@@ -100,10 +100,10 @@ class TeamFragment : Fragment() {
              "Kumar Rohit",
             "Design Lead"))
         techCommitee.add(TeamModel ("https://i.ibb.co/XJxBLD7/p17.png", "Shubham Pathak", "App Developer"))
-        techCommitee.add(TeamModel("https://i.ibb.co/6mMf4SX/p22.png", "Dheeraj Kotwani", "App Developer"))
         techCommitee.add(TeamModel( "https://i.ibb.co/82K4TW7/p9.png",
             "Sourabh Singh",
             "Developer"))
+        techCommitee.add(TeamModel("https://i.ibb.co/6mMf4SX/p22.png", "Dheeraj Kotwani", "App Developer"))
         techCommitee.add(TeamModel( "https://i.ibb.co/sKQgjgj/p35.png",
             "Sarthak Chauhan",
             "Designer"))

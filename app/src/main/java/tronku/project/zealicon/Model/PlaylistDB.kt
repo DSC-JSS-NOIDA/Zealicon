@@ -5,5 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "playlist")
 data class PlaylistDB (
-    @PrimaryKey val eventId: Int
+    @PrimaryKey val eventId: Int,
+    var isRegistered: Boolean
 )

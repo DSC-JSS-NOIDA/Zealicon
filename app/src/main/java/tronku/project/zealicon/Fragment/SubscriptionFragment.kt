@@ -1,5 +1,7 @@
 package tronku.project.zealicon.Fragment
 
+import android.app.Activity
+import android.app.Dialog
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,7 +10,9 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.gms.common.api.ApiException
@@ -17,7 +21,11 @@ import com.google.android.gms.safetynet.SafetyNet
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.search_dialog_layout.*
 import kotlinx.android.synthetic.main.subscription_fragment.*
+import kotlinx.android.synthetic.main.subscription_fragment.regLoader
+import kotlinx.android.synthetic.main.subscription_fragment.regText
+import org.json.JSONObject
 import tronku.project.zealicon.BuildConfig
 import tronku.project.zealicon.Model.Status
 import tronku.project.zealicon.Model.User
@@ -36,6 +44,7 @@ class SubscriptionFragment : Fragment() {
     private val viewModel by lazy { SubscriptionViewModel() }
     private var isVerified = false
     private var token = ""
+    private var currentUser: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +63,12 @@ class SubscriptionFragment : Fragment() {
     private fun setUI() {
         areYouHumanBg.background.setColorFilter(resources.getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN)
         verifiedBg.background.setColorFilter(resources.getColor(R.color.green_700), PorterDuff.Mode.SRC_IN)
+
+        if (ExtraUtils.getUser(context!!) != null) {
+            afterRegLayout.visibility = View.VISIBLE
+            registrationLayout.visibility = View.GONE
+            showUserDetails()
+        }
     }
 
     private fun setListeners() {
@@ -65,7 +80,70 @@ class SubscriptionFragment : Fragment() {
 
         registerBtn.setOnClickListener {
             AnimUtils.setClickAnimation(it)
-            validateData() }
+            ExtraUtils.hideKeyboard(context as Activity)
+            validateData()
+        }
+
+        regNewUserBtn.setOnClickListener {
+            AnimUtils.setClickAnimation(it)
+            showTransition(afterRegLayout, registrationLayout)
+        }
+
+        alreadyRegUser.setOnClickListener {
+            ExtraUtils.hideKeyboard(context as Activity)
+            showSearchDialog()
+        }
+    }
+
+    private fun showSearchDialog() {
+        val dialog = Dialog(context!!)
+        dialog.setContentView(R.layout.search_dialog_layout)
+        val window = dialog.window
+        window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        dialog.searchBtn.setOnClickListener {
+            val queryStr = dialog.searchEditText.text.toString()
+            when {
+                queryStr.isEmpty() -> {
+                    dialog.searchEditText.error = "Enter your number"
+                }
+                queryStr.length != 10 -> {
+                    dialog.searchEditText.error = "Enter a valid number"
+                }
+                else -> {
+                    AnimUtils.setClickAnimation(it)
+                    searchUser(queryStr, dialog)
+                }
+            }
+        }
+        dialog.show()
+    }
+
+    private fun searchUser(query: String, dialog: Dialog) {
+        viewModel.searchUser(query).observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    dialog.regLoader.visibility = View.VISIBLE
+                    dialog.regText.visibility = View.GONE
+                    dialog.searchEditText.isEnabled = false
+                }
+                Status.ERROR -> {
+                    Toast.makeText(context, it.msg, Toast.LENGTH_SHORT).show()
+                    dialog.regLoader.visibility = View.GONE
+                    dialog.regText.visibility = View.VISIBLE
+                    dialog.searchEditText.isEnabled = true
+                    dialog.searchEditText.text.clear()
+                }
+                Status.SUCCESS -> {
+                    Log.e("SEARCH_SUCCESS", it.data.toString())
+                    dialog.regLoader.visibility = View.GONE
+                    dialog.regText.visibility = View.VISIBLE
+                    dialog.searchEditText.isEnabled = true
+                    dialog.searchEditText.text.clear()
+                    parse(it.data, true, query)
+                    dialog.dismiss()
+                }
+            }
+        })
     }
 
     private fun validateData() {
@@ -91,9 +169,46 @@ class SubscriptionFragment : Fragment() {
             areYouHumanBtn.requestFocus()
             Toast.makeText(context, "Please verify yourself!", Toast.LENGTH_SHORT).show()
         } else {
-            // validated data
-            registerUser(nameEditText.text.toString(), emailEditText.text.toString(), phoneEditText.text.toString(), admnoEditText.text.toString(), token)
+            registerUser(nameEditText.text.toString(), emailEditText.text.toString(),
+                phoneEditText.text.toString(), admnoEditText.text.toString(), token)
         }
+    }
+
+    private fun resetData() {
+        nameEditText.text.clear()
+        emailEditText.text.clear()
+        phoneEditText.text.clear()
+        admnoEditText.text.clear()
+        areYouHumanBtn.visibility = View.VISIBLE
+        isVerified = false
+        token = ""
+        changeVerifyBtn(ButtonState.RESET)
+    }
+
+    private fun showUserDetails() {
+        showTransition(registrationLayout, afterRegLayout)
+        currentUser = ExtraUtils.getUser(context!!)
+        if (currentUser != null) {
+            userName.text = currentUser!!.name
+            userAdmNo.text = currentUser!!.admissionNo
+            userId.text = if (currentUser!!.isPaid) currentUser!!.zealID else currentUser!!.tempID
+            paymentText.visibility = if (currentUser!!.isPaid) View.GONE else View.VISIBLE
+        }
+    }
+
+    private fun showTransition(layout1: View, layout2: View) {
+        // layout1 to layout2
+        layout2.visibility = View.VISIBLE
+        val alphaGoneAnim = AlphaAnimation(1f, 0f)
+        val alphaShowAnim = AlphaAnimation(0f, 1f)
+        alphaShowAnim.duration = 1000
+        alphaGoneAnim.duration = 1000
+        alphaShowAnim.fillAfter = true
+        alphaGoneAnim.fillAfter = true
+        layout1.startAnimation(alphaGoneAnim)
+        layout2.startAnimation(alphaShowAnim)
+        alphaGoneAnim.start()
+        alphaShowAnim.start()
     }
 
     private fun registerUser(name: String, email: String, phone: String, admNo: String, token: String) {
@@ -114,13 +229,14 @@ class SubscriptionFragment : Fragment() {
                     regLoader.visibility = View.VISIBLE
                 }
                 Status.ERROR -> {
-                    Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.msg, Toast.LENGTH_SHORT).show()
                     registerBtn.apply {
                         isClickable = true
                         isEnabled = true
                     }
                     regText.visibility = View.VISIBLE
                     regLoader.visibility = View.GONE
+                    resetData()
                 }
                 Status.SUCCESS -> {
                     parse(it.data?.getAsJsonObject("data"))
@@ -128,7 +244,7 @@ class SubscriptionFragment : Fragment() {
                         isClickable = true
                         isEnabled = true
                     }
-
+                    resetData()
                     regText.visibility = View.VISIBLE
                     regLoader.visibility = View.GONE
                 }
@@ -136,14 +252,28 @@ class SubscriptionFragment : Fragment() {
         })
     }
 
-    private fun parse(data: JsonObject?) {
+    private fun parse(data: JsonObject?, isSearch: Boolean = false, query: String? = null) {
         if (data == null) {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
         } else {
-            val user: User = Gson().fromJson(data.get("data").toString(),
-                object : TypeToken<User>() {}.type)
-            ExtraUtils.saveToPrefs(context!!, user.mobile,
-                if (user.isPaid) user.zealID.toString() else user.tempID.toString(), user.isPaid)
+            Log.e("PARSE", data.toString())
+            val user: User
+            if (!isSearch) {
+                user = Gson().fromJson(data.get("data").toString(),
+                    object : TypeToken<User>() {}.type)
+                resetData()
+            } else {
+                val resObject = data.get("data").asJsonObject.get("registraions").asJsonArray.get(0).asJsonObject
+                user = User(resObject.get("zealID").toString().isEmpty(),
+                    resObject.get("name").toString().replace("\"", ""),
+                    resObject.get("email").toString().replace("\"", ""),
+                    resObject.get("admissionNo").toString().replace("\"", ""),
+                    query.toString(),
+                    resObject.get("tempID").toString().replace("\"", ""),
+                    resObject.get("zealID").toString().replace("\"", ""))
+            }
+            ExtraUtils.saveToPrefs(context!!, "user", Gson().toJson(user))
+            showUserDetails()
         }
     }
 
@@ -154,6 +284,7 @@ class SubscriptionFragment : Fragment() {
     private fun changeVerifyBtn(state: ButtonState) {
         when(state) {
             ButtonState.LOADING -> {
+                verifiedBtn.visibility = View.INVISIBLE
                 areYouHumanBtn.apply {
                     isEnabled = false
                     isClickable = false
@@ -164,9 +295,11 @@ class SubscriptionFragment : Fragment() {
             }
 
             ButtonState.RESET -> {
+                verifiedBtn.visibility = View.INVISIBLE
                 areYouHumanBtn.apply {
                     isEnabled = true
                     isClickable = true
+                    visibility = View.VISIBLE
                 }
                 areYouHumanImg.visibility = View.VISIBLE
                 areYouHumanText.visibility = View.VISIBLE
@@ -202,6 +335,7 @@ class SubscriptionFragment : Fragment() {
                 } else {
                     Log.d("Subscription", "Error: ${it.message}")
                 }
+                Toast.makeText(context, "Please try again.", Toast.LENGTH_LONG).show()
                 changeVerifyBtn(ButtonState.RESET)
             }
     }

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -51,17 +52,24 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                 when (res.status) {
                     Status.LOADING -> {
                         loaderLayout.visibility = View.VISIBLE
-                        bottomNavigation.visibility = View.GONE
                     }
                     Status.ERROR -> {
                         loaderLayout.visibility = View.GONE
-                        errorLayout.visibility = View.GONE
                         Log.e("ERROR", res.msg.toString())
+                        checkForLocalData()
                     }
                     Status.SUCCESS -> viewModel.parse(db, res.data.toString())
                 }
             })
         }
+    }
+
+    private fun checkForLocalData() {
+        viewModel.hasLocalData.observe(this, Observer {
+            errorLayout.visibility = if (it) View.GONE else View.VISIBLE
+            if (it)
+                Toast.makeText(this, "Showing saved data...", Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun setObservers() {
@@ -88,7 +96,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     private fun handleMenu() {
         val menuOptions: ArrayList<String> = ArrayList()
         menuOptions.add("Home")
-        menuOptions.add("Route")
+        menuOptions.add("Reach us")
 //        menuOptions.add("Sponsors")
         menuOptions.add("Team")
         menuOptions.add("About")
@@ -106,6 +114,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
 
         navDrawerIcon.setOnClickListener {
             duoDrawerLayout.openDrawer()
+            ExtraUtils.hideKeyboard(this)
         }
 
         buttonFacebook.setOnClickListener {

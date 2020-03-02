@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.Model.PlaylistDB
 
-@Database(entities = [EventTrackDB::class, PlaylistDB::class], version = 4)
+@Database(entities = [EventTrackDB::class, PlaylistDB::class], version = 5)
 abstract class RoomDB: RoomDatabase() {
 
     abstract fun EventDao(): EventDao
