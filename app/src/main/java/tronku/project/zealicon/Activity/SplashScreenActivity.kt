@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import androidx.preference.PreferenceManager
 import tronku.project.zealicon.R
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        var pref = getSharedPreferences("zealiconPref", 0)
+        var pref = PreferenceManager.getDefaultSharedPreferences(this)
         val firstLaunch: Boolean = pref.getBoolean("firstLaunch", true)
 
         Handler().postDelayed({

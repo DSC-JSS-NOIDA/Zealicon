@@ -40,6 +40,8 @@ class PlayerActivity : AppCompatActivity() {
     private var isRegistered = false
     private var isAdded = false
     private val CALENDER_CODE = 101
+    private lateinit var musicList: ArrayList<Int>
+    private var create = true
 
     private val db by lazy { RoomDB(this) }
     private val viewModel by lazy { PlayerViewModel(db) }
@@ -47,6 +49,10 @@ class PlayerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
+        musicList = ArrayList()
+        musicList.add(R.raw.i_walk_alone)
+        musicList.add(R.raw.edm_drop)
+        musicList.add(R.raw.martin_edm)
 
         tracks = intent.getParcelableArrayListExtra("tracks")
         currentPos = intent.getIntExtra("position", 0)
@@ -56,7 +62,9 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun initMediaPlayer() {
-        media =  MediaPlayer.create(this, R.raw.martin_edm)
+        create = false
+        var song = musicList.get(currentPos%musicList.size)
+        media =  MediaPlayer.create(this, song)
             .apply {
                 AudioManager.STREAM_MUSIC
                 AudioManager.AUDIOFOCUS_REQUEST_GRANTED
@@ -67,7 +75,10 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        initMediaPlayer()
+        if (create)
+            initMediaPlayer()
+        else
+            playPauseMusic()
     }
 
     private fun inflateUI() {
@@ -120,6 +131,8 @@ class PlayerActivity : AppCompatActivity() {
                 Toast.makeText(this@PlayerActivity, "No tracks available", Toast.LENGTH_SHORT).show()
             } else {
                 currentPos--
+                media.release()
+                initMediaPlayer()
                 inflateUI()
             }
         }
@@ -131,6 +144,8 @@ class PlayerActivity : AppCompatActivity() {
                     .show()
             } else {
                 currentPos++
+                media.release()
+                initMediaPlayer()
                 inflateUI()
             }
         }
@@ -266,7 +281,7 @@ class PlayerActivity : AppCompatActivity() {
     private fun playPauseMusic(){
         if (!isMute and isPlaying)
             media.start()
-        else
+        else if (media.isPlaying)
             media.pause()
     }
 
@@ -287,7 +302,12 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        media.stop()
+        media.pause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        media.pause()
     }
 
 }

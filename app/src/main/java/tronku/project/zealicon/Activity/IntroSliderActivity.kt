@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import kotlinx.android.synthetic.main.activity_intro_slider.*
 import tronku.project.zealicon.Adapter.ViewPagerIntroAdapter
@@ -18,7 +19,7 @@ class IntroSliderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro_slider)
 
-        var pref = applicationContext.getSharedPreferences("zealiconPref", 0)
+        var pref = PreferenceManager.getDefaultSharedPreferences(this)
         var editor: SharedPreferences.Editor = pref.edit()
 
 
