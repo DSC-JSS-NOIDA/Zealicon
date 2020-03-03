@@ -1,6 +1,7 @@
 package tronku.project.zealicon.Activity
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,11 @@ import tronku.project.zealicon.R
 
 
 class IntroSliderActivity : AppCompatActivity() {
+
+//    var pref =
+//        applicationContext.getSharedPreferences("zealiconPref", 0)
+//
+//    var editor: SharedPreferences.Editor = pref.edit()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +35,10 @@ class IntroSliderActivity : AppCompatActivity() {
                     viewPagerIntro.currentItem = 2
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
+
                 2 -> {
-                    viewPagerIntro.currentItem = 3
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                }
-                3 -> {
+//                    editor.putBoolean("firstLaunch", false)
+//                    editor.apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
@@ -47,11 +52,12 @@ class IntroSliderActivity : AppCompatActivity() {
                 positionOffsetPixels: Int
             ) {
             }
+
             override fun onPageSelected(position: Int) {
-                if (position == 0 || position == 1 || position == 2) {
+                if (position == 0 || position == 1 ) {
                     fabIntro.visibility = View.VISIBLE
                     fabIntro.setImageResource(R.drawable.ic_keyboard_arrow_right_black_24dp)
-                } else if (position == 3) {
+                } else if (position == 2) {
                     fabIntro.setImageResource(R.drawable.ic_check_white_24dp)
                 }
             }

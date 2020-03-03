@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
     private val viewModel by lazy { MainViewModel() }
     private val db by lazy { RoomDB(this) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

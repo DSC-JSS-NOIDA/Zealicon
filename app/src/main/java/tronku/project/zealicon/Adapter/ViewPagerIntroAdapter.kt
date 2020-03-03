@@ -21,14 +21,14 @@ class ViewPagerIntroAdapter(fm: FragmentManager) :
             2 -> {
                 FragmentIntro3()
             }
-            3 -> {
-                FragmentIntro4()
-            }
+//            3 -> {
+//                FragmentIntro4()
+//            }
             else -> FragmentIntro1()
         }
     }
 
     override fun getCount(): Int {
-        return 4
+        return 3
     }
 }

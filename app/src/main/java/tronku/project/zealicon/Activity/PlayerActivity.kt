@@ -56,12 +56,11 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun initMediaPlayer() {
-        media =  MediaPlayer.create(this, R.raw.gurbax_boom_shankar)
+        media =  MediaPlayer.create(this, R.raw.martin_edm)
             .apply {
                 AudioManager.STREAM_MUSIC
                 AudioManager.AUDIOFOCUS_REQUEST_GRANTED
             }
-
         media.isLooping = true
         playPauseMusic()
     }

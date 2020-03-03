@@ -23,10 +23,6 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.IntroSliderActivity"></activity>
-<!--        <activity-->
-<!--            android:name=".Activity.PlayerActivity"-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:theme="@style/AppTheme" />-->
         <activity
             android:name=".Activity.SplashScreenActivity"
             android:screenOrientation="portrait">
