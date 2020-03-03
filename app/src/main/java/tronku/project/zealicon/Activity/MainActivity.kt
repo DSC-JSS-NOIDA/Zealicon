@@ -1,26 +1,27 @@
 package tronku.project.zealicon.Activity
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_footer.*
-import kotlinx.android.synthetic.main.menu_footer.view.*
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import tronku.project.zealicon.Adapter.DuoMenuAdapter
 import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.Status
+import tronku.project.zealicon.Model.User
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.MainViewModel
@@ -60,6 +61,41 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
                     Status.SUCCESS -> viewModel.parse(db, res.data.toString())
                 }
             })
+        } else {
+            checkForLocalData()
+        }
+    }
+
+    private fun searchExistingUser(number: String) {
+        viewModel.searchUser(number).observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    Toast.makeText(this, "Please wait...", Toast.LENGTH_SHORT).show()
+                }
+                Status.ERROR -> {
+                    Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
+                }
+                Status.SUCCESS -> {
+                    parse(it.data, number)
+                }
+            }
+        })
+    }
+
+    private fun parse(data: JsonObject?, query: String? = null) {
+        if (data == null) {
+            Toast.makeText(this, "Something went wrong!", Toast.LENGTH_SHORT).show()
+        } else {
+            Log.e("PARSE", data.toString())
+            val resObject = data.get("data").asJsonObject.get("registraions").asJsonArray.get(0).asJsonObject
+            val user = User(resObject.get("zealID").toString() != "null",
+                resObject.get("name").toString().replace("\"", ""),
+                resObject.get("email").toString().replace("\"", ""),
+                resObject.get("admissionNo").toString().replace("\"", ""),
+                query.toString(),
+                resObject.get("tempID").toString().replace("\"", ""),
+                resObject.get("zealID").toString().replace("\"", ""))
+            ExtraUtils.saveToPrefs(this, "user", Gson().toJson(user))
         }
     }
 
@@ -68,22 +104,25 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             errorLayout.visibility = if (it) View.GONE else View.VISIBLE
             if (it)
                 Toast.makeText(this, "Showing saved data...", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, "No internet! Restart again.", Toast.LENGTH_SHORT).show()
         })
     }
 
     private fun setObservers() {
-
         viewModel.isParsed.observe(this, Observer {
             if (!it) {
                 if (ExtraUtils.isConnected(this@MainActivity))
-//                    errorLayout.visibility = View.VISIBLE
-//                    Toast.makeText(this@MainActivity, "Error in parsing data...", Toast.LENGTH_SHORT).show()
                 loaderLayout.visibility = View.GONE
             } else {
                 loaderLayout.visibility = View.GONE
-                bottomNavigation.visibility = View.VISIBLE
+                navController.navigate(R.id.home)
             }
         })
+
+        if (ExtraUtils.getUser(this) != null) {
+            searchExistingUser(ExtraUtils.getUser(this)?.mobile ?: "")
+        }
     }
 
     private fun setupNavigation() {
@@ -159,7 +198,7 @@ class MainActivity : AppCompatActivity(), DuoMenuView.OnMenuClickListener {
             "fragment_sponsor" -> navController.navigate(R.id.action_fragmentSponsor_to_home)
             "fragment_route" -> navController.navigate(R.id.action_fragmentRoute_to_home)
             "home_fragment" -> {
-                val snackbar = Snackbar.make(duoDrawerLayout, "Do you want to exit?", Snackbar.LENGTH_SHORT)
+                val snackbar = Snackbar.make(duoDrawerLayout, "Do you want to exit?", Snackbar.LENGTH_LONG)
                 snackbar.setAction("Yes", View.OnClickListener {
                     finishAffinity()
                 }).show()

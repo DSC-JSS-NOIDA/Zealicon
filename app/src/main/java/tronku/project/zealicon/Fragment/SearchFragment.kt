@@ -1,5 +1,6 @@
 package tronku.project.zealicon.Fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import tronku.project.zealicon.Adapter.*
 import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.CategoryModel
 import tronku.project.zealicon.R
+import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.SearchViewModel
 import kotlin.collections.ArrayList
 
@@ -37,9 +39,10 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
         return inflater.inflate(R.layout.search_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        ExtraUtils.hideKeyboard(context as Activity)
         addCategoryCards()
         searchTextChangeListner()
 
@@ -56,7 +59,6 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
 
         setObserver()
         viewModel.getPlaylist(db)
-
     }
 
     private fun setObserver() {

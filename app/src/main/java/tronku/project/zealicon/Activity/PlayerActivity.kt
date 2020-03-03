@@ -10,10 +10,10 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
@@ -25,8 +25,8 @@ import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
 import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.PlayerViewModel
-import java.lang.Exception
 import java.util.*
+import kotlin.Exception
 import kotlin.collections.ArrayList
 
 class PlayerActivity : AppCompatActivity() {
@@ -219,15 +219,21 @@ class PlayerActivity : AppCompatActivity() {
             val timeZone = TimeZone.getTimeZone("Asia/Kolkata")
             val baseStartDate = Date(1585040400000)
             val baseEndDate = Date(1585083600000)
-            var values = ContentValues()
-            values.put(CalendarContract.Events.CALENDAR_ID, 1)
-            values.put(CalendarContract.Events.TITLE, currentTrack.name)
-            values.put(CalendarContract.Events.DESCRIPTION, currentTrack.description)
-            values.put(CalendarContract.Events.ALL_DAY, 1)
-            values.put(CalendarContract.Events.DTSTART, baseStartDate.time * currentTrack.day)
-            values.put(CalendarContract.Events.DTEND, baseEndDate.time * currentTrack.day)
-            values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.id)
-            values.put(CalendarContract.Events.HAS_ALARM, true)
+            val name = currentTrack.name
+            val description = currentTrack.description
+            val day = currentTrack.day
+
+            var values = ContentValues().apply {
+                put(CalendarContract.Events.CALENDAR_ID, 1)
+                put(CalendarContract.Events.TITLE, name)
+                put(CalendarContract.Events.DESCRIPTION, description)
+                put(CalendarContract.Events.ALL_DAY, 1)
+                put(CalendarContract.Events.DTSTART, baseStartDate.time * day)
+                put(CalendarContract.Events.DTEND, baseEndDate.time * day)
+                put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.id)
+                put(CalendarContract.Events.HAS_ALARM, true)
+            }
+
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) !=
                 PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this,
@@ -237,17 +243,25 @@ class PlayerActivity : AppCompatActivity() {
                     ), CALENDER_CODE
                 )
             }
+
             val eventUri = cr.insert(CalendarContract.Events.CONTENT_URI, values)
             val eventId = eventUri!!.lastPathSegment!!.toLong()
             ExtraUtils.saveToPrefs(this, currentTrack.id.toString(), eventId.toString())
             viewModel.addToPlaylist(currentTrack.id)
-            Toast.makeText(this, "Event reminder has been added!", Toast.LENGTH_SHORT).show()
 
-            values = ContentValues()
-            values.put(CalendarContract.Reminders.EVENT_ID, eventId)
-            values.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
-            values.put(CalendarContract.Reminders.MINUTES, 30)
-            cr.insert(CalendarContract.Reminders.CONTENT_URI, values)
+            values = ContentValues().apply {
+                put(CalendarContract.Reminders.EVENT_ID, eventId)
+                put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT)
+                put(CalendarContract.Reminders.MINUTES, 30)
+            }
+            try {
+                cr.insert(CalendarContract.Reminders.CONTENT_URI, values)
+                Toast.makeText(this, "Event reminder has been added!", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Log.e("REMINDER ERROR", e.message.toString())
+                Toast.makeText(this, "Event added to the playlist!", Toast.LENGTH_SHORT).show()
+            }
+
         } else if (isAdded && !isRegistered) {
             val calenderEventId: String = ExtraUtils.getFromPrefs(this, currentTrack.id.toString())
             try {
@@ -291,8 +305,7 @@ class PlayerActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         when (requestCode) {
-            CALENDER_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
-            ) {
+            CALENDER_CODE -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 addReminderInCalendar()
             } else {
                 Toast.makeText(this@PlayerActivity, "Permission denied!", Toast.LENGTH_SHORT).show()

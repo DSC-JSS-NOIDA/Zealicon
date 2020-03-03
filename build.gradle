@@ -15,9 +15,7 @@ buildscript {
     ext.half_modal_version = '0.0.4'
     ext.gson_version = '2.8.6'
     ext.firebase_analytics_version = '17.2.3'
-    ext.firestore_version = '21.4.1'
     ext.dot_indicator_version = '1.0.4'
-
 
     repositories {
         google()

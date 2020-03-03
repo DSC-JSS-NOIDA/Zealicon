@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.search_dialog_layout.*
 import kotlinx.android.synthetic.main.subscription_fragment.*
 import kotlinx.android.synthetic.main.subscription_fragment.regLoader
 import kotlinx.android.synthetic.main.subscription_fragment.regText
-import org.json.JSONObject
 import tronku.project.zealicon.BuildConfig
 import tronku.project.zealicon.Model.Status
 import tronku.project.zealicon.Model.User
@@ -53,9 +52,10 @@ class SubscriptionFragment : Fragment() {
         return inflater.inflate(R.layout.subscription_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        ExtraUtils.hideKeyboard(context as Activity)
         setUI()
         setListeners()
     }
@@ -264,7 +264,7 @@ class SubscriptionFragment : Fragment() {
                 resetData()
             } else {
                 val resObject = data.get("data").asJsonObject.get("registraions").asJsonArray.get(0).asJsonObject
-                user = User(resObject.get("zealID").toString().isEmpty(),
+                user = User(resObject.get("zealID").toString() != "null",
                     resObject.get("name").toString().replace("\"", ""),
                     resObject.get("email").toString().replace("\"", ""),
                     resObject.get("admissionNo").toString().replace("\"", ""),

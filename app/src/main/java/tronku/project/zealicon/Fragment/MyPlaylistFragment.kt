@@ -1,5 +1,6 @@
 package tronku.project.zealicon.Fragment
 
+import android.app.Activity
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import tronku.project.zealicon.Adapter.TracksAdapter
 import tronku.project.zealicon.Database.RoomDB
 import tronku.project.zealicon.Model.EventTrackDB
 import tronku.project.zealicon.R
+import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.MyPlaylistViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,6 +41,7 @@ class MyPlaylistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setObservers()
+        ExtraUtils.hideKeyboard(context as Activity)
     }
 
     private fun setObservers() {

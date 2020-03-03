@@ -100,8 +100,8 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
     private fun regEvent(v: View) {
         if (ExtraUtils.getUser(context!!) != null) {
             ExtraUtils.getUser(context!!)?.let {
-                if (it.zealID == null) {
-                    Toast.makeText(context, "Please submit the registration amount first!", Toast.LENGTH_SHORT).show()
+                if (!it.isPaid) {
+                    Toast.makeText(context, "Please submit the registration amount first!", Toast.LENGTH_LONG).show()
                 } else {
                     viewModel.registerForEvent(it, currentTrack.id).observe(this, Observer { res ->
                         when (res.status) {
@@ -130,11 +130,11 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
                 }
             }
         } else {
-            showSearchDialog()
+            showSearchDialog(v)
         }
     }
 
-    private fun showSearchDialog() {
+    private fun showSearchDialog(v: View) {
         val dialog = Dialog(context!!)
         dialog.setContentView(R.layout.search_dialog_layout)
         val window = dialog.window
@@ -145,13 +145,13 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
                 dialog.searchEditText.error = "Enter a query"
             } else {
                 AnimUtils.setClickAnimation(it)
-                searchUser(queryStr, dialog)
+                searchUser(queryStr, dialog, v)
             }
         }
         dialog.show()
     }
 
-    private fun searchUser(query: String, dialog: Dialog) {
+    private fun searchUser(query: String, dialog: Dialog, v: View) {
         viewModel.searchUser(query).observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {
@@ -173,8 +173,29 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
                     dialog.searchEditText.isEnabled = true
                     dialog.searchEditText.text.clear()
                     dialog.dismiss()
+                    parse(it.data, query, v)
+
                 }
             }
         })
+    }
+
+    private fun parse(data: JsonObject?, query: String? = null, v: View) {
+        if (data == null) {
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
+        } else {
+            Log.e("PARSE", data.toString())
+            val resObject = data.get("data").asJsonObject.get("registraions").asJsonArray.get(0).asJsonObject
+            val user = User(resObject.get("zealID").toString() != "null",
+                resObject.get("name").toString().replace("\"", ""),
+                resObject.get("email").toString().replace("\"", ""),
+                resObject.get("admissionNo").toString().replace("\"", ""),
+                query.toString(),
+                resObject.get("tempID").toString().replace("\"", ""),
+                resObject.get("zealID").toString().replace("\"", ""))
+
+            ExtraUtils.saveToPrefs(context!!, "user", Gson().toJson(user))
+            regEvent(v)
+        }
     }
 }

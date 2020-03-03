@@ -1,14 +1,13 @@
 package tronku.project.zealicon.Fragment
 
+import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.home_fragment.*
 import tronku.project.zealicon.Adapter.PlayerTarget
 import tronku.project.zealicon.Adapter.TracksAdapter
@@ -16,6 +15,7 @@ import tronku.project.zealicon.Database.RoomDB
 
 import tronku.project.zealicon.R
 import tronku.project.zealicon.Utils.AnimUtils
+import tronku.project.zealicon.Utils.ExtraUtils
 import tronku.project.zealicon.Viewmodel.HomeViewModel
 import java.util.*
 
@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
 
         setClickListeners()
         setObserver()
+        ExtraUtils.hideKeyboard(context as Activity)
         viewModel.getUpcomingHits(db, getUpcomingDay())
     }
 
@@ -76,7 +77,6 @@ class HomeFragment : Fragment() {
         val adapter = TracksAdapter(PlayerTarget.HOME)
         upcomingHitsRecycler.adapter = adapter
 
-        //TODO ADD DYNAMIC DAY
         viewModel.upcomingList.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
                 Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show()
