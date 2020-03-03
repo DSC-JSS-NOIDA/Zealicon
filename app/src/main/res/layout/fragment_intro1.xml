@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/final001"
-        android:layout_margin="20dp"/>
+        android:layout_margin="16dp"/>
 
 </RelativeLayout>

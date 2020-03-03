@@ -13,14 +13,14 @@ import tronku.project.zealicon.R
 
 class IntroSliderActivity : AppCompatActivity() {
 
-//    var pref =
-//        applicationContext.getSharedPreferences("zealiconPref", 0)
-//
-//    var editor: SharedPreferences.Editor = pref.edit()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro_slider)
+
+        var pref = applicationContext.getSharedPreferences("zealiconPref", 0)
+        var editor: SharedPreferences.Editor = pref.edit()
+
 
         val viewPagerIntroAdapter = ViewPagerIntroAdapter(supportFragmentManager)
         viewPagerIntro.adapter = viewPagerIntroAdapter
@@ -37,8 +37,8 @@ class IntroSliderActivity : AppCompatActivity() {
                 }
 
                 2 -> {
-//                    editor.putBoolean("firstLaunch", false)
-//                    editor.apply()
+                    editor.putBoolean("firstLaunch", false)
+                    editor.apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
