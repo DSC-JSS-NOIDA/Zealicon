@@ -47,16 +47,44 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
         searchTextChangeListner()
 
         cancelFilter.setOnClickListener {
+            if (!searchEditText.text.toString().isNotEmpty())
+                searchRecyclerView.visibility = View.GONE
             filterCategoryText.text = ""
             clipLinearLayout.visibility = View.GONE
             categoryLayout.visibility = View.VISIBLE
             eventCategory = null
+            viewModel.playlist.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                if (it.isNullOrEmpty()) {
+                    Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (searchEditText.text.toString().isNotEmpty())
+                        adapter.submitList(it
+                            .filter{(EventTrackDB, name,a,b,c, category) ->
+                                name!!.contains(searchEditText.text.toString(), ignoreCase = true)})
+                    else
+                        adapter.submitList(it)
+                    adapter.notifyDataSetChanged()
+                }
+            })
         }
 
         cancelSearch.setOnClickListener {
             searchEditText.setText("")
+            if (clipLinearLayout.visibility == View.GONE)
+                    searchRecyclerView.visibility = View.GONE
+            else{
+                viewModel.playlist.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                    if (it.isNullOrEmpty()) {
+                        Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        adapter.submitList(it
+                            .filter{(EventTrackDB, name,a,b,c, category) ->
+                                        category!!.contains(eventCategory.toString(), ignoreCase = true)})
+                        adapter.notifyDataSetChanged()
+                    }
+                })
+            }
         }
-
         setObserver()
         viewModel.getPlaylist(db)
     }
@@ -107,17 +135,14 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
                                 adapter.submitList(it
                                     .filter{(EventTrackDB, name,a,b,c, category) ->
                                         name!!.contains(editable.toString(), ignoreCase = true) &&
-                                            category!!.contains(eventCategory.toString(), ignoreCase = true)}
-//                                .filter { (EventTrackDB, category) ->
-//                                    category!!.contains(eventCategory.toString(), ignoreCase = true) }
-//
-                                    )
+                                            category!!.contains(eventCategory.toString(), ignoreCase = true)})
                             adapter.notifyDataSetChanged()
                         }
                     })
 
                 } else {
-                    searchRecyclerView.visibility = View.GONE
+                    if (clipLinearLayout.visibility == View.GONE)
+                        searchRecyclerView.visibility = View.GONE
                     cancelSearch.visibility = View.GONE
                 }
             }
@@ -189,8 +214,20 @@ class SearchFragment : Fragment(), CategoryViewHolder.OnClickListener {
     override fun onClick(category: String?) {
         eventCategory = category
         filterCategoryText.text = eventCategory
+        searchRecyclerView.visibility = View.VISIBLE
         clipLinearLayout.visibility = View.VISIBLE
         searchEditText.requestFocus()
+        viewModel.playlist.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (it.isNullOrEmpty()) {
+                Toast.makeText(context, "Something went wrong! Try again.", Toast.LENGTH_SHORT).show()
+            } else {
+                    adapter.submitList(it
+                        .filter{(EventTrackDB, name,a,b,c, category) ->
+                            name!!.contains(searchEditText.text.toString(), ignoreCase = true) &&
+                                    category!!.contains(eventCategory.toString(), ignoreCase = true)})
+                adapter.notifyDataSetChanged()
+            }
+        })
     }
 
 }
