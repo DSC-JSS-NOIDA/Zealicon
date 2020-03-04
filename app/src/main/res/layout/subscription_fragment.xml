@@ -382,6 +382,18 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <ImageView
+                    android:layout_width="184dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/zealicon_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1.3"
+                    android:tint="@color/blue_black"
+                    android:rotation="-90"/>
+
                 <TextView
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"
@@ -414,18 +426,6 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginStart="16dp"
                     android:textSize="16dp"/>
-
-                <ImageView
-                    android:layout_width="184dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/zealicon_name"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="1.3"
-                    android:tint="@color/blue_black"
-                    android:rotation="-90"/>
 
                 <TextView
                     android:id="@+id/userId"
