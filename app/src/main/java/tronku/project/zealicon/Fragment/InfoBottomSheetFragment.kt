@@ -2,7 +2,9 @@ package tronku.project.zealicon.Fragment
 
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -12,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -94,6 +97,12 @@ class InfoBottomSheetFragment(private val currentTrack: EventTrackDB) : BottomSh
         v.registerButton.setOnClickListener {
             AnimUtils.setClickAnimation(it)
             regEvent(v)
+        }
+
+        v.contactLayout.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${currentTrack.contactNo}")
+            ContextCompat.startActivity(context!!, intent, null)
         }
     }
 
