@@ -27,3 +27,9 @@ The official android app of the annual fest of JSSATEN, Zealicon 2020. The theme
 ![5](https://lh3.googleusercontent.com/BCklusRvSrnMuMPkWTDDvW2poj2TBdPz201MM9MGAyhGRwpJwYr5Cr6S92E6WBUbng=w720-h310-rw)
 ![6](https://lh3.googleusercontent.com/fidX9THECWzevGSGYoRxyWNmu6OQZ64mpJs0ZXXBM33kzpKc8B_Z5M65Ax16UyLsEw=w720-h310-rw)
 ![7](https://lh3.googleusercontent.com/sg6HqfWBmh1e44oD_n7iR4GPBcj9Xe2CopKkFVPJSBFHw6TS1HDE43kQtJT6xXkxNSM=w720-h310-rw)
+
+
+## Achievement
+The app was trending among top 5 apps in Events category on Play Store.
+
+<img src="https://i.ibb.co/D96pP2C/Whats-App-Image-2020-03-06-at-7-14-29-AM.jpg" border="0" width="220" height="450">
