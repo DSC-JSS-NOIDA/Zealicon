@@ -6,12 +6,11 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import tronku.project.zealicon.BuildConfig
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    private var BASE_URL: String = "http://foyer.zealicon.in/"
+    private var BASE_URL: String = "https://dheerajkotwani.github.io/custom-apis/zealicon/"
     private val okHttpClient by lazy { OkHttpClient() }
 
     private val retrofit: Retrofit by lazy {

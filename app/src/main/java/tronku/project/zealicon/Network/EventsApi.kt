@@ -6,7 +6,7 @@ import retrofit2.http.*
 
 interface EventsApi {
 
-    @GET("http://backoffice.zealicon.in/api/event")
+    @GET("https://dheerajkotwani.github.io/custom-apis/zealicon/api/events.json")
     suspend fun getEventsAsync(): Response<JsonObject>
 
     @Headers("device:android")
